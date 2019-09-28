@@ -1,12 +1,30 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
+nav {
+  background-color: #72BB53
+}
+
+ul.dropdown-menu {
+  position: static;
+  float: none;
+  width: 150px;
+}
+
+button {
+  background-color: #72BB53
+}
+
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
