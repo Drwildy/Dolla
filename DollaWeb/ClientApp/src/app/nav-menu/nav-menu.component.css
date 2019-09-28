@@ -5,11 +5,26 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color:white;
+  font-weight: bold;
 }
 
 nav {
   background-color: #72BB53
 }
+.fa-plus{
+  color: white;
+}
+
+.dropdown-toggle{
+  color:white; 
+}
+
+.fa-cog{
+  color: white;
+}
+
+
 
 ul.dropdown-menu {
   position: static;
@@ -17,7 +32,7 @@ ul.dropdown-menu {
   width: 150px;
 }
 
-button {
+btn {
   background-color: #72BB53
 }
 

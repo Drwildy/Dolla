@@ -1,46 +1,47 @@
 <header>
   <!-- Navbar start-->
-  <nav class="navbar navbar-expand-sm navbar-light">
+  <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" [routerLink]='["/home"]'>DollaWeb</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
+      <a class="navbar-brand text-white text-left" [routerLink]='["/home"]'>$Dolla</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-label="Toggle navigation"
               [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
-        <ul class="navbar-nav flex-grow">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+            <a class="nav-link text-white" [routerLink]='["/"]'>Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/budget"]'>Budget</a>
+            <a class="nav-link text-white" [routerLink]='["/budget"]'>Budget</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>
-            <a class="nav-link text-dark" [routerLink]='["/transactions"]'>Transactions</a>
+            <a class="nav-link text-white" [routerLink]='["/transactions"]'>Transactions</a>
+          </li>
+          <li class="nav-item dropdown">
+            <!-- + Dropdown menu-->
+            <div class="btn-group">
+              <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-plus"></i>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="#">Separated link</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <!-- Gear Button-->
+            <div class="btn-group">
+              <button type="button" class="btn" [routerLink]='["/settings"]' aria-haspopup="true" aria-expanded="false"> <i class="fas fa-cog"></i> </button>
+            </div>
           </li>
         </ul>
       </div>
-
-
-      <!-- + Dropdown menu-->
-      <div class="btn-group">
-        <button type="button" class="btn btn-danger"> <i class="fas fa-plus"></i></button>
-        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-          <a class="dropdown-item" href="#">Separated link</a>
-        </div>
-      </div>
-
-      <!-- Gear Button-->
-      <div class="btn-group">
-        <button type="button" class="btn btn-danger" [routerLink]='["/transactions"]' aria-haspopup="true" aria-expanded="false"> <i class="fas fa-cog"></i> </button>
-      </div>
-
     </div>
   </nav>
 </header>
