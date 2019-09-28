@@ -34,8 +34,7 @@ import { LoginComponent } from './login/login.component';
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'budget', component: BudgetComponent },
         { path: 'transactions', component: TransactionsComponent },
-
-
+        { path: 'settings', component: SettingsComponent },
     ])
   ],
   providers: [],
