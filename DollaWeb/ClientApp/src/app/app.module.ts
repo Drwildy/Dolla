@@ -13,6 +13,11 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { BudgetComponent } from './budget/budget.component';
 import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
+import { HomeOverviewComponent } from './home-overview/home-overview.component';
+import { HomeEnvelopesComponent } from './home-envelopes/home-envelopes.component';
+import { HomeBillsComponent } from './home-bills/home-bills.component';
+import { HomeBanksComponent } from './home-banks/home-banks.component';
+import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { LoginComponent } from './login/login.component';
     TransactionsComponent,
     BudgetComponent,
     SettingsComponent,
-    LoginComponent
+    LoginComponent,
+    HomeOverviewComponent,
+    HomeEnvelopesComponent,
+    HomeBillsComponent,
+    HomeBanksComponent,
+    HomeEnvelopeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
