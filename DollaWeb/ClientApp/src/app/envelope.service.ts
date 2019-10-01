@@ -15,7 +15,7 @@ export class EnvelopeService {
       id: 1,
       name: "Fast Food",
       createdDate: new Date(),
-      amount: 50.12,
+      amount: 75.12,
       setAmount: 100
     });
     list.push(<Envelope> {
