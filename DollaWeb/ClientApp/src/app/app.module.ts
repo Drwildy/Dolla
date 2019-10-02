@@ -18,6 +18,7 @@ import { HomeEnvelopesComponent } from './home-envelopes/home-envelopes.componen
 import { HomeBillsComponent } from './home-bills/home-bills.component';
 import { HomeBanksComponent } from './home-banks/home-banks.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
+import { HomeBillComponent } from './home-bill/home-bill.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
     HomeEnvelopesComponent,
     HomeBillsComponent,
     HomeBanksComponent,
-    HomeEnvelopeComponent
+    HomeEnvelopeComponent,
+    HomeBillComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

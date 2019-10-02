@@ -3,4 +3,5 @@ export class Moneybox {
   name: string;
   createdDate: Date;
   icon: string;
+  amount: number;
 }

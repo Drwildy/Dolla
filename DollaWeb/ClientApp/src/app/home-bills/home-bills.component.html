@@ -1,3 +1,4 @@
-<p>
-  home-bills works!
-</p>
+<div class="d-flex flex-wrap">
+  <app-home-bill *ngFor="let bill of bills" [bill]="bill"></app-home-bill>
+</div>
+

@@ -1,0 +1,10 @@
+.entry {
+  height: 50px;
+}
+
+.square {
+  height: 150px;
+  width: 150px;
+  background-color: red;
+  border-radius: 25px;
+}
