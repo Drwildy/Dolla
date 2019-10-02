@@ -8,7 +8,15 @@ a.navbar-brand {
   color:white;
   font-weight: bold;
 }
-
+.btn-primary {
+  background-color: #72BB53;
+  border-color: #72BB53;
+}
+.btn-primary:hover {
+  background-color: #72BB34; /* Green */
+  border-color: #72BB53;
+  color: white;
+}
 nav {
   background-color: #72BB53
 }

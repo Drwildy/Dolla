@@ -3,4 +3,9 @@
   .body-content {
     padding-top: 50px;
   }
+  
+}
+
+.btn-primary {
+  background-color: #72BB53 !important;
 }

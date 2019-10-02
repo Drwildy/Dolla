@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DollaWeb.Models
 {
-    public class Envelope : Moneybox
+    public class Bill : Envelope
     {
-        
-        public double SetAmount { get; set; }
+        public int DayDue { get; set; }
+
     }
 }
