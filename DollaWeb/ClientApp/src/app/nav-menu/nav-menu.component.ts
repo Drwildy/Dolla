@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Envelope } from '../envelope';
 import { EnvelopeService } from '../envelope.service';
 import { User } from '../User';
+import { NavbarService } from '../navbar.service';
+
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,9 +12,12 @@ import { User } from '../User';
 })
 export class NavMenuComponent {
   isExpanded = false;
+
   public envName: string;
   public setAmount: number;
   constructor(private envelopeService: EnvelopeService) { }
+  constructor( public nav: NavbarService ) {}
+
 
   collapse() {
     this.isExpanded = false;
@@ -21,6 +26,7 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
   addEnvelope() {
 
     let myEnvelope: Envelope =
@@ -36,3 +42,4 @@ export class NavMenuComponent {
     this.envelopeService.addItemTest(myEnvelope);
   }
 }
+

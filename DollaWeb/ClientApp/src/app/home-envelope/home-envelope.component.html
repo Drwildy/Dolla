@@ -1,3 +1,11 @@
-<div *ngIf="envelope">
-  {{envelope.name}} - {{envelope.amount}} / {{envelope.setAmount}}
+<div *ngIf="envelope" class="container-fluid my-3">
+  <div class="progress position-relative row">
+    <div class="progress-bar position-absolute" [style.width]="percentage + '%'" [style.backgroundColor]="color" role="progressbar"></div>
+    <div class="col-9 h6 my-auto">
+      {{envelope.name}}
+    </div>
+    <div class="col-3 text-right h6  my-auto">
+      {{envelope.amount | currency}} / {{envelope.setAmount | currency}}
+    </div>
+  </div>
 </div>
