@@ -7,7 +7,7 @@ import { EnvelopeService } from '../envelope.service';
 @Component({
   selector: 'app-home-envelopes',
   templateUrl: './home-envelopes.component.html',
-  styleUrls: ['./home-envelopes.component.css']
+  styleUrls: ['./home-envelopes.component.css', '../app.component.css']
 })
 export class HomeEnvelopesComponent implements OnInit {
 
@@ -21,9 +21,10 @@ export class HomeEnvelopesComponent implements OnInit {
   }
 
   refresh() {
-    //this.envelopeService.getEnvelopes()
-      //.subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
+    this.envelopeService.getEnvelopes()
+      .subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
   }
+
   addEnvelope() {
     let user: User = {
       firstName: "Tyler",
