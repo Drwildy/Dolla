@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavbarService } from '../navbar.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class NavMenuComponent {
   isExpanded = false;
 
-    
+  constructor( public nav: NavbarService ) {}
 
   collapse() {
     this.isExpanded = false;
@@ -17,4 +18,5 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+  
 }
