@@ -18,6 +18,8 @@ import { HomeEnvelopesComponent } from './home-envelopes/home-envelopes.componen
 import { HomeBillsComponent } from './home-bills/home-bills.component';
 import { HomeBanksComponent } from './home-banks/home-banks.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
     HomeEnvelopesComponent,
     HomeBillsComponent,
     HomeBanksComponent,
-    HomeEnvelopeComponent
+    HomeEnvelopeComponent,
+    ForgotComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -45,6 +49,9 @@ import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
         { path: 'budget', component: BudgetComponent },
         { path: 'transactions', component: TransactionsComponent },
         { path: 'settings', component: SettingsComponent },
+        { path: 'login', component: LoginComponent},
+        { path: 'forgot', component: ForgotComponent},
+        { path: 'register', component: RegisterComponent}
     ])
   ],
   providers: [],
