@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Bill } from './bill';
+import { Piggybank } from './piggybank';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BillService {
+export class PiggybankService {
 
   constructor(private http: HttpClient) { }
-  addItemTest(bill: Bill) {
-    console.log(bill);
-    this.http.post('/api/Bills', bill)
+  addItemTest(piggybank: Piggybank) {
+    console.log(piggybank);
+    this.http.post('/api/Piggybanks', piggybank)
       .subscribe();
-    console.log("Added Bill");
+    console.log("Added Piggybank");
   }
 
 

@@ -3,6 +3,8 @@ import { Envelope } from '../envelope';
 import { Bill } from '../bill';
 import { EnvelopeService } from '../envelope.service';
 import { BillService } from '../bill.service';
+import { PiggybankService } from '../piggybank.service'
+import { Piggybank } from '../piggybank';
 
 @Component({
   selector: 'app-nav-menu',
@@ -16,7 +18,11 @@ export class NavMenuComponent {
   public billName: string;
   public dayDue: number;
   public billAmount: number;
-  constructor(private envelopeService: EnvelopeService, private billService: BillService) { }
+  public piggyName: string;
+  public selIconPiggy: string;
+  public selIconBill: string;
+  public selIconEnvelope: string;
+  constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService) { }
 
   collapse() {
     this.isExpanded = false;
@@ -34,7 +40,7 @@ export class NavMenuComponent {
       name: this.envName,
       amount: 0,
       createdDate: new Date(),
-      icon: "empty",
+      icon: this.selIconEnvelope,
       setAmount: this.setAmount
     };
     this.envelopeService.addItemTest(myEnvelope);
@@ -45,10 +51,23 @@ export class NavMenuComponent {
       username: "tstewart11",
       name: this.billName,
       createdDate: new Date(),
-      icon: "empty",
+      icon: this.selIconBill,
       amount: this.billAmount,
       dayDue: this.dayDue
     }
     this.billService.addItemTest(myBill);
+  }
+  addPiggybank() {
+    console.log(this.selIconPiggy);
+    let myPiggyBank: Piggybank = {
+      id: 0,
+      username: "tstewart11",
+      name: this.piggyName,
+      createdDate: new Date(),
+      icon: this.selIconPiggy,
+      amount: 0,
+      test: null
+    }
+    this.piggybankService.addItemTest(myPiggyBank);
   }
 }
