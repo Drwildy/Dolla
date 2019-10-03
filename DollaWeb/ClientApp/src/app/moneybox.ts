@@ -6,5 +6,4 @@ export class Moneybox {
   amount: number;
   createdDate: Date;
   icon: string;
-  amount: number;
 }

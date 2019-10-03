@@ -21,9 +21,10 @@ export class HomeEnvelopesComponent implements OnInit {
   }
 
   refresh() {
-    //this.envelopeService.getEnvelopes()
-      //.subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
+    this.envelopeService.getEnvelopes()
+      .subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
   }
+
   addEnvelope() {
     let user: User = {
       firstName: "Tyler",
