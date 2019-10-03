@@ -80,7 +80,7 @@ namespace DollaWeb.Controllers
 
         // POST: api/Envelopes
         [HttpPost]
-        public async Task<ActionResult<Envelope>> PostEnvelope([FromBody]Envelope envelope)
+        public async Task<ActionResult<Envelope>> PostEnvelope(Envelope envelope)
         {
             try
             {

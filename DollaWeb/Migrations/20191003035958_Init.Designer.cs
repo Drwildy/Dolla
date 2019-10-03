@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DollaWeb.Migrations
 {
     [DbContext(typeof(DollaWebContext))]
-    [Migration("20191001233227_Init")]
+    [Migration("20191003035958_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,8 +97,8 @@ namespace DollaWeb.Migrations
 
             modelBuilder.Entity("DollaWeb.Models.Moneybox", b =>
                 {
-                    b.HasOne("DollaWeb.Models.User", "User")
-                        .WithMany()
+                    b.HasOne("DollaWeb.Models.User")
+                        .WithMany("moneyBoxID")
                         .HasForeignKey("Username");
                 });
 #pragma warning restore 612, 618

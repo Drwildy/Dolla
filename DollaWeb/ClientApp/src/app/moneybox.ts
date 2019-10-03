@@ -1,7 +1,7 @@
-import { User} from "./user";
+
 export class Moneybox {
   id: number;
-  user: User;
+  username: string;
   name: string;
   amount: number;
   createdDate: Date;
