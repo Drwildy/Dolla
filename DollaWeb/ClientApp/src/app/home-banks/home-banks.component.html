@@ -1,3 +1,7 @@
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap"  *ngIf="banks.length > 0">
   <app-home-bank *ngFor="let bank of banks" [bank]="bank"></app-home-bank>
+</div>
+
+<div *ngIf="banks.length === 0" class="no-data-message text-center">
+  No piggy banks found.  You can create some from the budget page
 </div>

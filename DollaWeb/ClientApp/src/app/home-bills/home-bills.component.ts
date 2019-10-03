@@ -5,7 +5,7 @@ import { BillService } from '../bill.service';
 @Component({
   selector: 'app-home-bills',
   templateUrl: './home-bills.component.html',
-  styleUrls: ['./home-bills.component.css']
+  styleUrls: ['./home-bills.component.css', '../app.component.css']
 })
 export class HomeBillsComponent implements OnInit {
 

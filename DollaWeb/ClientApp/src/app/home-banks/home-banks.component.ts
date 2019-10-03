@@ -5,7 +5,7 @@ import { BankService } from '../bank.service';
 @Component({
   selector: 'app-home-banks',
   templateUrl: './home-banks.component.html',
-  styleUrls: ['./home-banks.component.css']
+  styleUrls: ['./home-banks.component.css', '../app.component.css']
 })
 export class HomeBanksComponent implements OnInit {
 
