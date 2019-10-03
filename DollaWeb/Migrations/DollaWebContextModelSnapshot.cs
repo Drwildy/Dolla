@@ -95,8 +95,8 @@ namespace DollaWeb.Migrations
 
             modelBuilder.Entity("DollaWeb.Models.Moneybox", b =>
                 {
-                    b.HasOne("DollaWeb.Models.User", "User")
-                        .WithMany()
+                    b.HasOne("DollaWeb.Models.User")
+                        .WithMany("moneyBoxID")
                         .HasForeignKey("Username");
                 });
 #pragma warning restore 612, 618

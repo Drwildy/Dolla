@@ -9,19 +9,19 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Name of Envelope" name="txtName" />
+          <input type="text" class="form-control" placeholder="Name of Envelope" [(ngModel)]="envName" name="nameInput" #nameInput="ngModel" />
           <br />
-          <input type="number" class="form-control" placeholder="Set Amount" name="txtSetAmount" />
+          <input type="number" class="form-control" placeholder="Set Amount" [(ngModel)]="setAmount" name="setAmountInput" #setAmountInput="ngModel" />
           <br />
           <select name="selIcon" class="form-control">
             <option>--Select an icon--</option>
-            <option><i class="fas fa-apple-alt"></i> Apple</option>
+            <option><span class="fas fa-apple-alt"><i class="fas fa-check-square"></i></span></option>
           </select>
           
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary">Add</button>
+          <button type="button" class="btn btn-primary" (click)="addEnvelope()">Add</button>
         </div>
       </div>
     </div>

@@ -26,18 +26,10 @@ export class HomeEnvelopesComponent implements OnInit {
   }
 
   addEnvelope() {
-    let user: User = {
-      firstName: "Tyler",
-      lastName: "Stewart",
-      username: "tstewart11",
-      password: "Testing",
-      createdDate: new Date(),
-      email: "tstewart11@uco.edu"
-
-    };
+   
 
 
-    let myEnvelope: Envelope = { id: 0, user: user, name: "Testing", amount: 12, createdDate: new Date(), icon: "empty", setAmount: 25 };
+    let myEnvelope: Envelope = { id: 0, username: "tstewart11", name: "Testing", amount: 12, createdDate: new Date(), icon: "empty", setAmount: 25 };
     this.envelopeService.addItemTest(myEnvelope);
   }
 }

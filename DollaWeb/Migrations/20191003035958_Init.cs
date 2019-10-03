@@ -30,12 +30,12 @@ namespace DollaWeb.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Username = table.Column<string>(nullable: true),
                     MoneyBoxType = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Amount = table.Column<double>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     Icon = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
                     SetAmount = table.Column<double>(nullable: true),
                     DayDue = table.Column<int>(nullable: true),
                     test = table.Column<string>(nullable: true)
