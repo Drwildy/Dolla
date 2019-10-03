@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Bank } from '../bank';
+import { BankService } from '../bank.service';
 
 @Component({
   selector: 'app-home-banks',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeBanksComponent implements OnInit {
 
-  constructor() { }
+  banks: Bank[];
+
+  constructor(private bankService: BankService) { }
 
   ngOnInit() {
+    this.refresh();
   }
 
+  refresh() {
+    this.bankService.getBanks()
+      .subscribe((banks: Bank[]) => { this.banks = banks });
+  }
 }

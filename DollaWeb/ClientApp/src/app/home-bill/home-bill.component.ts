@@ -15,5 +15,4 @@ export class HomeBillComponent implements OnInit {
   ngOnInit() {
 
   }
-
 }

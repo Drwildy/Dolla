@@ -5,6 +5,17 @@
 .square {
   height: 150px;
   width: 150px;
-  background-color: red;
   border-radius: 25px;
+}
+
+.paid {
+  background-color: green;
+}
+
+.unpaid {
+  background-color: darkorange;
+}
+
+.past-due {
+  background-color: red;
 }

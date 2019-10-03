@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -19,6 +20,7 @@ import { HomeBillsComponent } from './home-bills/home-bills.component';
 import { HomeBanksComponent } from './home-banks/home-banks.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
 import { HomeBillComponent } from './home-bill/home-bill.component';
+import { HomeBankComponent } from './home-bank/home-bank.component';
 
 @NgModule({
   declarations: [
@@ -36,12 +38,14 @@ import { HomeBillComponent } from './home-bill/home-bill.component';
     HomeBillsComponent,
     HomeBanksComponent,
     HomeEnvelopeComponent,
-    HomeBillComponent
+    HomeBillComponent,
+    HomeBankComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'budget', component: BudgetComponent },
