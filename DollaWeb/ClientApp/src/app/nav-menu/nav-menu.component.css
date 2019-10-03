@@ -32,7 +32,9 @@ nav {
   color: white;
 }
 
-
+.fa-apple-alt {
+  color: black;
+}
 
 ul.dropdown-menu {
   position: static;

@@ -1,14 +1,22 @@
 <header>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addEnvelopeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add a Transaction</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add a Envelope</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
+          <input type="text" class="form-control" placeholder="Name of Envelope" name="txtName" />
+          <br />
+          <input type="number" class="form-control" placeholder="Set Amount" name="txtSetAmount" />
+          <br />
+          <select name="selIcon" class="form-control">
+            <option>--Select an icon--</option>
+            <option><i class="fas fa-apple-alt"></i> Apple</option>
+          </select>
           
         </div>
         <div class="modal-footer">
@@ -46,8 +54,8 @@
                 <i class="fas fa-plus"></i>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">Add Transaction</a>
-                <a class="dropdown-item" href="#">Add Envelope</a>
+                <a class="dropdown-item" href="#">Add Transaction</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addEnvelopeModal">Add Envelope</a>
                 <a class="dropdown-item" href="#">Add Bill</a>
                 <a class="dropdown-item" href="#">Add Piggy Bank</a>
               </div>

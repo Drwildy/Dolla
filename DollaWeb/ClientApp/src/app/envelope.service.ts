@@ -10,9 +10,10 @@ import { filter, map } from 'rxjs/operators';
 export class EnvelopeService {
 
   constructor(private http: HttpClient) { }
-  addItemTest(envelope: Envelope){
-
-    this.http.post('/api/Envelopes', envelope);
+  addItemTest(envelope: Envelope) {
+    console.log(envelope);
+    console.log(this.http.post('/api/Envelopes', envelope)
+      .subscribe());
     console.log("Added Envelope");
   }
   getEnvelopes(): Observable<Envelope[]> {

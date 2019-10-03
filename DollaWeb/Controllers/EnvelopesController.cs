@@ -80,12 +80,19 @@ namespace DollaWeb.Controllers
 
         // POST: api/Envelopes
         [HttpPost]
-        public async Task<ActionResult<Envelope>> PostEnvelope(Envelope envelope)
+        public async Task<ActionResult<Envelope>> PostEnvelope([FromBody]Envelope envelope)
         {
-            _context.Envelope.Add(envelope);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Envelope.Add(envelope);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEnvelope", new { id = envelope.Id }, envelope);
+                return CreatedAtAction("GetEnvelope", new { id = envelope.Id }, envelope);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         // DELETE: api/Envelopes/5
