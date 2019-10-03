@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Envelope } from '../envelope';
+import { Bill } from '../bill';
 import { EnvelopeService } from '../envelope.service';
-import { User } from '../User';
+import { BillService } from '../bill.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -12,7 +13,10 @@ export class NavMenuComponent {
   isExpanded = false;
   public envName: string;
   public setAmount: number;
-  constructor(private envelopeService: EnvelopeService) { }
+  public billName: string;
+  public dayDue: number;
+  public billAmount: number;
+  constructor(private envelopeService: EnvelopeService, private billService: BillService) { }
 
   collapse() {
     this.isExpanded = false;
@@ -34,5 +38,17 @@ export class NavMenuComponent {
       setAmount: this.setAmount
     };
     this.envelopeService.addItemTest(myEnvelope);
+  }
+  addBill() {
+    let myBill: Bill = {
+      id: 0,
+      username: "tstewart11",
+      name: this.billName,
+      createdDate: new Date(),
+      icon: "empty",
+      amount: this.billAmount,
+      dayDue: this.dayDue
+    }
+    this.billService.addItemTest(myBill);
   }
 }

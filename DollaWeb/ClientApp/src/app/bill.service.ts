@@ -1,0 +1,21 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Bill } from './bill';
+import { filter, map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BillService {
+
+  constructor(private http: HttpClient) { }
+  addItemTest(bill: Bill) {
+    console.log(bill);
+    this.http.post('/api/Bills', bill)
+      .subscribe();
+    console.log("Added Envelope");
+  }
+
+
+}
