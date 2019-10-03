@@ -15,8 +15,8 @@ export class NavMenuComponent {
 
   public envName: string;
   public setAmount: number;
-  constructor(private envelopeService: EnvelopeService) { }
-  constructor( public nav: NavbarService ) {}
+  constructor(private envelopeService: EnvelopeService, public nav: NavbarService) { }
+  //constructor(public nav: NavbarService ) {}
 
 
   collapse() {

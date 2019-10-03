@@ -17,7 +17,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeOverviewComponent } from './home-overview/home-overview.component';
 import { HomeEnvelopesComponent } from './home-envelopes/home-envelopes.component';
 import { HomeBillsComponent } from './home-bills/home-bills.component';
+import { HomeBillComponent } from './home-bill/home-bill.component';
 import { HomeBanksComponent } from './home-banks/home-banks.component';
+import { HomeBankComponent } from './home-bank/home-bank.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { RegisterComponent } from './register/register.component';
@@ -36,7 +38,9 @@ import { RegisterComponent } from './register/register.component';
     HomeOverviewComponent,
     HomeEnvelopesComponent,
     HomeBillsComponent,
+    HomeBillComponent,
     HomeBanksComponent,
+    HomeBankComponent,
     HomeEnvelopeComponent,
     ForgotComponent,
     RegisterComponent
