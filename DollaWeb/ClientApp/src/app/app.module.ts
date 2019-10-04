@@ -21,6 +21,12 @@ import { HomeBanksComponent } from './home-banks/home-banks.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { RegisterComponent } from './register/register.component';
+import { HomeBillComponent } from './home-bill/home-bill.component';
+import { HomeBankComponent } from './home-bank/home-bank.component';
+import { TransactionComponent } from './transaction/transaction.component';
+import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
+import { AddpaymentmethodDialogComponent } from './addpaymentmethod-dialog/addpaymentmethod-dialog.component';
+import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +45,12 @@ import { RegisterComponent } from './register/register.component';
     HomeBanksComponent,
     HomeEnvelopeComponent,
     ForgotComponent,
+    HomeBillComponent,
+    HomeBankComponent,
+    AddPaymentMethodsComponent,
+    AddpaymentmethodDialogComponent,
+    TransactionComponent,
+    AddPaymentMethodComponent,
     RegisterComponent
   ],
   imports: [

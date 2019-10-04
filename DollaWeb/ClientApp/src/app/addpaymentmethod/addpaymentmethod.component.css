@@ -1,0 +1,50 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+tr{
+  width:100%;
+}
+.styled {
+  font-size: 15px;
+  width: 100%;
+  font-style: italic;
+}
+.border {
+  border: double;
+  width:100%;
+  display:table;
+}
+table{
+  margin: 5px;
+  table-layout:fixed; 
+}
+td{
+  padding:4px;
+  text-align:left; 
+}
+.long{
+  width:40%;
+}.short{
+   width:20%;
+}
+.Red{
+  color:red;
+}
+.Green{
+  color:forestgreen;
+}
+.Black{
+  color:black;
+}
+.Orange{
+  color:orange;
+}
+.Blue{
+  color:blue;
+}
+.background{
+  background-color:aliceblue;
+}
+.transparentbutton{
+  background:transparent;
+}

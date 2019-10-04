@@ -12,12 +12,10 @@ import { NavbarService } from '../navbar.service';
 })
 export class NavMenuComponent {
   isExpanded = false;
-
   public envName: string;
   public setAmount: number;
-  constructor(private envelopeService: EnvelopeService) { }
-  constructor( public nav: NavbarService ) {}
-
+  constructor(private envelopeService: EnvelopeService,  public nav: NavbarService ) { }
+  
 
   collapse() {
     this.isExpanded = false;
