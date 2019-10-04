@@ -1,7 +1,7 @@
-<div class="d-flex flex-wrap"  *ngIf="bills.length > 0">
+<div class="d-flex flex-wrap"  *ngIf="bills && bills.length > 0">
   <app-home-bill *ngFor="let bill of bills" [bill]="bill"></app-home-bill>
 </div>
 
-<div *ngIf="bills.length === 0" class="no-data-message text-center">
+<div *ngIf="!bills || bills.length === 0" class="no-data-message text-center">
   No bills found.  You can create some from the budget page
 </div>
