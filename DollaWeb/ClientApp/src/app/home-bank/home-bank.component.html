@@ -1,0 +1,11 @@
+<div class="d-flex flex-column align-items-center justify-content-center m-4 bank">
+  <div class="d-flex align-items-start text-light h5">
+    <fa-icon [icon]="icon" class="fa-lg"></fa-icon>
+  </div>
+  <div class="d-flex align-items-center text-light h5">
+    {{bank.name}}
+  </div>
+  <div class="d-flex align-items-end text-light h5">
+    {{bank.amount | currency}}
+  </div>
+</div>

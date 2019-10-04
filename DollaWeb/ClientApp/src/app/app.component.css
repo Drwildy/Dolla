@@ -9,3 +9,7 @@
 .btn-primary {
   background-color: #72BB53 !important;
 }
+
+.no-data-message {
+  color: lightgray;
+}

@@ -10,19 +10,21 @@ import { filter, map } from 'rxjs/operators';
 export class EnvelopeService {
 
   constructor(private http: HttpClient) { }
+
   addItemTest(envelope: Envelope) {
     console.log(envelope);
     console.log(this.http.post('/api/Envelopes', envelope)
       .subscribe());
     console.log("Added Envelope");
   }
+
   getEnvelopes(): Observable<Envelope[]> {
     let list: Array<Envelope> = [];
     list.push(<Envelope> {
       id: 1,
       name: "Fast Food",
       createdDate: new Date(),
-      amount: 50.12,
+      amount: 75.12,
       setAmount: 100
     });
     list.push(<Envelope> {

@@ -3,11 +3,6 @@ h1 {
     font-weight: bold;
 }
 
-h4 {
-    color: white;
-    font-weight: lighter;
-}
-
 .btn-primary.custom-btn {
 	background-color: #72BB53;
     border-color: #000;

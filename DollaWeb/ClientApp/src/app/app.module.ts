@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -16,8 +17,12 @@ import { LoginComponent } from './login/login.component';
 import { HomeOverviewComponent } from './home-overview/home-overview.component';
 import { HomeEnvelopesComponent } from './home-envelopes/home-envelopes.component';
 import { HomeBillsComponent } from './home-bills/home-bills.component';
+import { HomeBillComponent } from './home-bill/home-bill.component';
 import { HomeBanksComponent } from './home-banks/home-banks.component';
+import { HomeBankComponent } from './home-bank/home-bank.component';
 import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
+import { ForgotComponent } from './forgot/forgot.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -33,18 +38,26 @@ import { HomeEnvelopeComponent } from './home-envelope/home-envelope.component';
     HomeOverviewComponent,
     HomeEnvelopesComponent,
     HomeBillsComponent,
+    HomeBillComponent,
     HomeBanksComponent,
-    HomeEnvelopeComponent
+    HomeBankComponent,
+    HomeEnvelopeComponent,
+    ForgotComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    FontAwesomeModule,
     RouterModule.forRoot([
         { path: '', component: HomeComponent, pathMatch: 'full' },
         { path: 'budget', component: BudgetComponent },
         { path: 'transactions', component: TransactionsComponent },
         { path: 'settings', component: SettingsComponent },
+        { path: 'login', component: LoginComponent},
+        { path: 'forgot', component: ForgotComponent},
+        { path: 'register', component: RegisterComponent}
     ])
   ],
   providers: [],

@@ -5,6 +5,9 @@ import { EnvelopeService } from '../envelope.service';
 import { BillService } from '../bill.service';
 import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
+import { User } from '../User';
+import { NavbarService } from '../navbar.service';
+
 
 @Component({
   selector: 'app-nav-menu',
@@ -13,6 +16,7 @@ import { Piggybank } from '../piggybank';
 })
 export class NavMenuComponent {
   isExpanded = false;
+
   public envName: string;
   public setAmount: number;
   public billName: string;
@@ -22,7 +26,8 @@ export class NavMenuComponent {
   public selIconPiggy: string;
   public selIconBill: string;
   public selIconEnvelope: string;
-  constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService) { }
+    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService,
+        public nav: NavbarServic) { }
 
   collapse() {
     this.isExpanded = false;
@@ -31,6 +36,7 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
   addEnvelope() {
 
     let myEnvelope: Envelope =
@@ -71,3 +77,4 @@ export class NavMenuComponent {
     this.piggybankService.addItemTest(myPiggyBank);
   }
 }
+

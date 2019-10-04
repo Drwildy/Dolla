@@ -1,2 +1,9 @@
-<app-home-envelope *ngFor="let envelope of envelopes" [envelope]="envelope"></app-home-envelope>
+<div *ngIf="envelopes.length > 0">
+  <app-home-envelope *ngFor="let envelope of envelopes" [envelope]="envelope"></app-home-envelope>
+</div>
+
+<div *ngIf="envelopes.length === 0" class="no-data-message text-center">
+  No envelopes found.  You can create some from the budget page
+</div>
+
 <button (click)="addEnvelope()">TestAddEnvelope</button>
