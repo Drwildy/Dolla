@@ -26,8 +26,7 @@ export class NavMenuComponent {
   public selIconPiggy: string;
   public selIconBill: string;
   public selIconEnvelope: string;
-    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService,
-        public nav: NavbarServic) { }
+    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService) { }
 
   collapse() {
     this.isExpanded = false;
@@ -59,7 +58,8 @@ export class NavMenuComponent {
       createdDate: new Date(),
       icon: this.selIconBill,
       amount: this.billAmount,
-      dayDue: this.dayDue
+      dayDue: this.dayDue,
+      paid: false
     }
     this.billService.addItemTest(myBill);
   }
