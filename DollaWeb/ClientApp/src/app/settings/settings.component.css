@@ -1,0 +1,9 @@
+.styled{
+  font-size:20px;
+  width:100%;
+  font-style:italic;
+}
+.border{
+  border:double;
+  color:red;
+}

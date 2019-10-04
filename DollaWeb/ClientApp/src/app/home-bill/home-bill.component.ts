@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Bill } from '../bill';
 
+
 @Component({
   selector: 'app-home-bill',
   templateUrl: './home-bill.component.html',
