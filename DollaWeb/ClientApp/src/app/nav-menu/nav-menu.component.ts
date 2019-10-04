@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Envelope } from '../envelope';
+import { Bill } from '../bill';
 import { EnvelopeService } from '../envelope.service';
+import { BillService } from '../bill.service';
+import { PiggybankService } from '../piggybank.service'
+import { Piggybank } from '../piggybank';
 import { User } from '../User';
 import { NavbarService } from '../navbar.service';
 
@@ -12,10 +16,17 @@ import { NavbarService } from '../navbar.service';
 })
 export class NavMenuComponent {
   isExpanded = false;
+
   public envName: string;
   public setAmount: number;
-  constructor(private envelopeService: EnvelopeService,  public nav: NavbarService ) { }
-  
+  public billName: string;
+  public dayDue: number;
+  public billAmount: number;
+  public piggyName: string;
+  public selIconPiggy: string;
+  public selIconBill: string;
+  public selIconEnvelope: string;
+    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService) { }
 
   collapse() {
     this.isExpanded = false;
@@ -34,10 +45,36 @@ export class NavMenuComponent {
       name: this.envName,
       amount: 0,
       createdDate: new Date(),
-      icon: "empty",
+      icon: this.selIconEnvelope,
       setAmount: this.setAmount
     };
     this.envelopeService.addItemTest(myEnvelope);
+  }
+  addBill() {
+    let myBill: Bill = {
+      id: 0,
+      username: "tstewart11",
+      name: this.billName,
+      createdDate: new Date(),
+      icon: this.selIconBill,
+      amount: this.billAmount,
+      dayDue: this.dayDue,
+      paid: false
+    }
+    this.billService.addItemTest(myBill);
+  }
+  addPiggybank() {
+    console.log(this.selIconPiggy);
+    let myPiggyBank: Piggybank = {
+      id: 0,
+      username: "tstewart11",
+      name: this.piggyName,
+      createdDate: new Date(),
+      icon: this.selIconPiggy,
+      amount: 0,
+      test: null
+    }
+    this.piggybankService.addItemTest(myPiggyBank);
   }
 }
 
