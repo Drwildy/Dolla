@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { Envelope } from '../envelope';
 import { Bill } from '../bill';
+import { LoginService } from '../login/login.service';
 import { EnvelopeService } from '../envelope.service';
 import { BillService } from '../bill.service';
 import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
 import { User } from '../User';
 import { NavbarService } from '../navbar.service';
+
+
 
 
 @Component({
@@ -75,6 +78,11 @@ export class NavMenuComponent {
       test: null
     }
     this.piggybankService.addItemTest(myPiggyBank);
-  }
+    }
+
+    signOut() {
+
+
+    }
 }
 

@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     public Password: string;
     public err: ErrorLInterface;
     public succeeded: string;
+    public rememberMe: boolean;
 
     constructor(public nav: NavbarService, private activeRoute: ActivatedRoute, private loginService: LoginService, private router: Router ) { }
 
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
 
     public signIn(): void {
 
-        let myUser = { UserName: this.UserName, Password: this.Password };
+        let myUser = { UserName: this.UserName, Password: this.Password, rememberMe: this.rememberMe };
         console.log(myUser);
         this.loginService.signIn(myUser);
     }

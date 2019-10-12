@@ -12,7 +12,7 @@ using DollaWeb.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 using System;
-
+using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace DollaWeb
 {
@@ -77,7 +77,7 @@ namespace DollaWeb
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
                 // If the LoginPath isn't set, ASP.NET Core defaults 
                 // the path to /Account/Login.
-                options.LoginPath = "/Login";
+                options.LoginPath = "/";
                 // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
                 // the path to /Account/AccessDenied.
                 options.AccessDeniedPath = "/Login";

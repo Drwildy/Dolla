@@ -15,8 +15,8 @@
       
       <div class="d-flex justify-content-between">
         <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
-            <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+            <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember" [(ngModel)] ="rememberMe" name="rememberMeInput" #rememberMeInput="ngModel">
+            <label class="custom-control-label" for="defaultLoginFormRemember"  >Remember me</label>
         </div>
         <div>
           <a href="./forgot">Forgot password?</a>

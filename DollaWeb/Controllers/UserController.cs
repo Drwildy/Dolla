@@ -51,15 +51,18 @@ namespace DollaWeb.Controllers
 
             //ApplicationUser signedUser = userManager.FindByEmailAsync(loginViewModel.Email);
             //var user = signInManager.UserManager.FindByNameAsync(loginViewModel.UserName);
-            //var verif = signInManager.UserManager.CheckPasswordAsync( user , loginViewModel.Password);
+            //var password = userManager.CheckPasswordAsync(user, loginViewModel.Password);
 
 
-            var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, true, false).GetAwaiter().GetResult();
-            return new ObjectResult(result);
 
+            var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.rememberMe, false).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
-                
+                return new ObjectResult(result);
+            }
+            else
+            {
+                return new ObjectResult(result);
             }
             
 
