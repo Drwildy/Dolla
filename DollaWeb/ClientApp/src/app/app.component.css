@@ -13,3 +13,7 @@
 .no-data-message {
   color: lightgray;
 }
+
+.break-word {
+  word-break: break-word;
+}
