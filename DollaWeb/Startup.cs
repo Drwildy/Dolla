@@ -28,12 +28,12 @@ namespace DollaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            /*
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            });*/
 
             //Connect DB
             services.AddDbContext<DollaWebContext>(options =>
@@ -62,7 +62,6 @@ namespace DollaWeb
 
                 // User settings
                 options.User.RequireUniqueEmail = false;
-
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
 
@@ -75,12 +74,11 @@ namespace DollaWeb
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                // If the LoginPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/Login.
-                options.LoginPath = "/";
-                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/AccessDenied.
-                options.AccessDeniedPath = "/Login";
+
+                options.LoginPath = new PathString("/register");
+                options.LogoutPath = new PathString("/login");
+                options.AccessDeniedPath = new PathString("/login");
+
                 options.SlidingExpiration = true;
             });
 
@@ -123,7 +121,7 @@ namespace DollaWeb
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dolla Api V1");
             });
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

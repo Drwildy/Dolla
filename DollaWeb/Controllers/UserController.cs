@@ -49,23 +49,50 @@ namespace DollaWeb.Controllers
         public IActionResult Login([FromBody]LoginViewModel loginViewModel)
         {
 
-            //ApplicationUser signedUser = userManager.FindByEmailAsync(loginViewModel.Email);
-            //var user = signInManager.UserManager.FindByNameAsync(loginViewModel.UserName);
-            //var password = userManager.CheckPasswordAsync(user, loginViewModel.Password);
-
-
+            var auth = User.Identity.IsAuthenticated;
+            var user = User.Identity.Name;
 
             var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.rememberMe, false).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
+               
                 return new ObjectResult(result);
             }
             else
             {
+       
                 return new ObjectResult(result);
             }
             
 
+        }
+
+        [Authorize]
+        [HttpPost("logout")]
+        public Task<IActionResult> Logout()
+        {
+            signInManager.SignOutAsync();
+            //_logger.LogInformation("User logged out.");
+            return null;
+            //return Redirect("./login");
+        }
+
+
+        [Authorize]
+        [HttpGet("checkAuth")]
+        public IActionResult checkForAuth()
+        {
+            var user = User.Identity.Name;
+            var auth= User.Identity.IsAuthenticated;
+
+            if (auth)
+            {
+                return null;
+            }
+            else
+            {
+                return Redirect("./login");
+            }
         }
 
 
