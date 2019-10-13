@@ -5,7 +5,7 @@ import { faPiggyBank } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-home-bank',
   templateUrl: './home-bank.component.html',
-  styleUrls: ['./home-bank.component.css']
+  styleUrls: ['./home-bank.component.css', '../app.component.css']
 })
 export class HomeBankComponent implements OnInit {
 
