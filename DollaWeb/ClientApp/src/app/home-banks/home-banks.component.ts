@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Bank } from '../bank';
-import { BankService } from '../bank.service';
+import { PiggybankService } from '../piggybank.service';
+import { Piggybank } from '../piggybank';
 
 @Component({
   selector: 'app-home-banks',
@@ -11,17 +11,19 @@ export class HomeBanksComponent implements OnInit {
 
   @Input() limit: number = 0; //0 means no limit
 
-  banks: Bank[];
+  banks: Piggybank[];
 
-  constructor(private bankService: BankService) { }
+  constructor(private bankService: PiggybankService) {
+    bankService.dataChanged$.subscribe(bank => this.refresh());
+  }
 
   ngOnInit() {
     this.refresh();
   }
 
   refresh() {
-    this.bankService.getBanks()
-      .subscribe((banks: Bank[]) => {
+    this.bankService.getPiggybanks()
+      .subscribe((banks: Piggybank[]) => {
         this.banks = banks
 
         //Enforce the limit of returned banks (used by overview to limit to top x)
