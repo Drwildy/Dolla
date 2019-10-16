@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Envelope } from './envelope';
@@ -9,13 +9,14 @@ import { filter, map } from 'rxjs/operators';
 })
 export class EnvelopeService {
 
-  constructor(private http: HttpClient) { }
+  public dataChanged$: EventEmitter<Envelope>;
 
-  addItemTest(envelope: Envelope) {
-    console.log(envelope);
-    console.log(this.http.post('/api/Envelopes', envelope)
-      .subscribe());
-    console.log("Added Envelope");
+  constructor(private http: HttpClient) {
+    this.dataChanged$ = new EventEmitter<Envelope>();
+  }
+
+  createEnvelope(envelope: Envelope): Observable<Envelope> {
+    return this.http.post<Envelope>('/api/Envelopes', envelope);
   }
 
   getEnvelopes(): Observable<Envelope[]> {

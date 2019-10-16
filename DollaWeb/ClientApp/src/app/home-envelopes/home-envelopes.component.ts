@@ -15,14 +15,16 @@ export class HomeEnvelopesComponent implements OnInit {
 
   envelopes: Envelope[];
 
-  constructor(private envelopeService: EnvelopeService) { }
+  constructor(private envelopeService: EnvelopeService) {
+    envelopeService.dataChanged$.subscribe(item => this.refresh());
+  }
 
   ngOnInit() {
-    this.refresh();
-    
+    this.refresh(); 
   }
 
   refresh() {
+    console.log('refreshing...');
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
@@ -39,6 +41,6 @@ export class HomeEnvelopesComponent implements OnInit {
 
 
     let myEnvelope: Envelope = { id: 0, username: "tstewart11", name: "Testing", amount: 12, createdDate: new Date(), icon: "empty", setAmount: 25 };
-    this.envelopeService.addItemTest(myEnvelope);
+    this.envelopeService.createEnvelope(myEnvelope);
   }
 }

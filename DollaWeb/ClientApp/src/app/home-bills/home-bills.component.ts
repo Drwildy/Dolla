@@ -13,7 +13,9 @@ export class HomeBillsComponent implements OnInit {
 
   bills: Bill[];
 
-  constructor(private billService: BillService) { }
+  constructor(private billService: BillService) {
+    billService.dataChanged$.subscribe(bill => this.refresh());
+  }
 
   ngOnInit() {
     this.refresh();
