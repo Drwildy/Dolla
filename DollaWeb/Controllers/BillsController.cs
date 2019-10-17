@@ -26,7 +26,12 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bill>>> GetBill()
         {
+
+            var user = User.Identity.Name;
+
             return await _context.Bill.ToListAsync();
+
+            //return (await _context.Bill.ToListAsync()).Where(bill => bill.Username == user);
         }
 
         // GET: api/Bills/5

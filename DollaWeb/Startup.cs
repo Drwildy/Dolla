@@ -12,6 +12,7 @@ using DollaWeb.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 
 namespace DollaWeb
@@ -28,12 +29,12 @@ namespace DollaWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*
+            
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
-            });*/
+            });
 
             //Connect DB
             services.AddDbContext<DollaWebContext>(options =>
@@ -69,6 +70,7 @@ namespace DollaWeb
 
             });
 
+            
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
@@ -80,6 +82,12 @@ namespace DollaWeb
                 options.AccessDeniedPath = new PathString("/login");
 
                 options.SlidingExpiration = true;
+
+                options.Events.OnRedirectToLogin = context =>
+                {
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
+                };
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -121,7 +129,7 @@ namespace DollaWeb
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dolla Api V1");
             });
 
-            //app.UseAuthentication();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

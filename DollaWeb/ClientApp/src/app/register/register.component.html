@@ -16,7 +16,7 @@
       <input type="password" class="form-control mb-4" id="confirmLoginFormPassword" placeholder="Confirm Password" [(ngModel)]="Password" name="passwordInput" #passwordInput="ngModel">
 
       <div class="text-center">
-        <button class="btn btn-primary custom-btn my-4" type="submit" onclick="location.href = './login';"  (click)="register" >Create Account</button>
+        <button class="btn btn-primary custom-btn my-4" type="submit" (click)="register" >Create Account</button>
       </div>
     </div>
 

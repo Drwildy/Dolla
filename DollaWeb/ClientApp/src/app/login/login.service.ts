@@ -13,33 +13,13 @@ export class LoginService {
 
     constructor(private http: HttpClient) { }
 
-    create(username: string, password: string): Observable<any> {
-        var body = {
-            'username': username,
-            'password': password
-        }
-        return this.http.post('api/login/create', body);
-    }
-
-    login(username: string, password: string): Observable<any> {
-        var body = {
-            'username': username,
-            'password': password
-        }
-        return this.http.post('api/login', body);
-    }
-
     register(register: RegisterInterface) {
-        return this.http.post('/api/User/register', register).pipe(map(data => { })).subscribe(result => {
-            console.log(result);
-        });
+        return this.http.post('/api/User/register', register);
     }
 
-    signIn(user: LoginInterface) {
+    signIn(user: LoginInterface): Observable<LoginInterface> {
         console.log(user);
-        return this.http.post('/api/User/login', user).pipe(map(data => { })).subscribe(result => {
-            console.log(result);
-        });
+        return this.http.post<LoginInterface>('/api/User/login', user);
     }
 
 }

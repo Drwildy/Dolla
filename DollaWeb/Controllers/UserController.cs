@@ -1,6 +1,4 @@
-﻿//UNUSED
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,13 +53,13 @@ namespace DollaWeb.Controllers
             var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.rememberMe, false).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
-               
-                return new ObjectResult(result);
+
+                return Ok();
             }
             else
             {
-       
-                return new ObjectResult(result);
+
+                return BadRequest();
             }
             
 
