@@ -13,7 +13,7 @@
 </div>
 
 <div *ngIf="addPaymentMethods.length === 0" class="no-data-message text-center">
-  No bills found.  You can create some from the budget page
+  No Paymentmethod found found.  You can create by clicking in + below. 
 </div>
 
 <div class="modal fade" id="addPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,9 +26,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" class="form-control" placeholder="Payment Method's Name..." [(ngModel)]="addPaymentMethodName" name="nameInput" #nameInput="ngModel" />
+        <input type="text" class="form-control" placeholder="Payment Method's Name..."
+               [(ngModel)]="paymentMethodsName" name="nameInput" #nameInput="ngModel" />
         <br />
-        <select name="selIcon" class="form-control">
+        <select class="form-control" [(ngModel)]="paymentMethodColor" name="colorInput" #nameInput="ngModel">
           <option> Pick A Color </option>
           <option>Green</option>
           <option>Red</option>
@@ -39,8 +40,11 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="addEnvelope()">Add</button>
+        <button type="button" class="btn btn-primary" (click)="addPaymentMethod()" data-dismiss="modal">Add</button>
       </div>
     </div>
   </div>
 </div>
+
+
+
