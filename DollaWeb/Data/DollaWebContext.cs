@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
+
 namespace DollaWeb.Models
 {
     public class DollaWebContext : IdentityDbContext<ApplicationUser>
@@ -20,6 +21,7 @@ namespace DollaWeb.Models
         public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
         public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
         public DbSet<DollaWeb.Models.User> User { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -32,9 +34,11 @@ namespace DollaWeb.Models
                     .HasValue<Bill>(2)
                     .HasValue<PiggyBank>(3);
 
+
             
 ;        }
         public DbSet<DollaWeb.Models.UserSettings> UserSettings { get; set; }
+        public DbSet<DollaWeb.Models.AddPaymentMethod> AddPaymentMethod { get; set; }
     }
     
 }

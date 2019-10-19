@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Envelope } from '../envelope';
+import { Router, NavigationExtras } from "@angular/router";
 
 @Component({
   selector: 'app-home-envelope',
@@ -20,7 +21,7 @@ export class HomeEnvelopeComponent implements OnInit {
   color: string;
   percentage: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if (this.envelope) {
@@ -39,4 +40,15 @@ export class HomeEnvelopeComponent implements OnInit {
     }
   }
 
+  //currently sending through query params, change using id
+  envelopeDetails() {
+    let envelopeDetails: NavigationExtras = {
+      queryParams: {
+        "envelopeName": this.envelope.name,
+        "envelopeAmount": this.envelope.amount,
+        "envelopeSetAmount": this.envelope.setAmount
+      }
+    };
+    this.router.navigate(["/home-envelope-details"], envelopeDetails);
+  }
 }

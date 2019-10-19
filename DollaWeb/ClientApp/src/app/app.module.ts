@@ -23,11 +23,14 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeBillComponent } from './home-bill/home-bill.component';
 import { HomeBankComponent } from './home-bank/home-bank.component';
+import { BillDetailsComponent } from './bill-details/bill-details.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
-import { AddpaymentmethodDialogComponent } from './addpaymentmethod-dialog/addpaymentmethod-dialog.component';
 import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
 import { AuthInterceptor } from './auth.service';
+import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
+import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { AuthInterceptor } from './auth.service';
     FetchDataComponent,
     TransactionsComponent,
     BudgetComponent,
+    BillDetailsComponent,
     SettingsComponent,
     LoginComponent,
     HomeOverviewComponent,
@@ -51,10 +55,11 @@ import { AuthInterceptor } from './auth.service';
     HomeBillComponent,
     HomeBankComponent,
     AddPaymentMethodsComponent,
-    AddpaymentmethodDialogComponent,
     TransactionComponent,
     AddPaymentMethodComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeEnvelopeDetailsComponent,
+    HomeBankDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -68,7 +73,10 @@ import { AuthInterceptor } from './auth.service';
         { path: 'settings', component: SettingsComponent },
         { path: 'login', component: LoginComponent},
         { path: 'forgot', component: ForgotComponent},
-        { path: 'register', component: RegisterComponent}
+        { path: 'register', component: RegisterComponent },
+        { path: 'home-envelope-details', component: HomeEnvelopeDetailsComponent },
+        { path: 'home-bank-details', component: HomeBankDetailsComponent },
+        { path: 'billdetails', component: BillDetailsComponent }
     ])
   ],
     providers: [{

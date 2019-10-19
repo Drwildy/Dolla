@@ -1,4 +1,107 @@
 <header>
+  <div class="modal fade" id="addTransactionModal" tabindex="-1" role="dialog" aria-labelledby="transactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document" >
+      <div class="modal-content" style="width: 75%; margin: 0 auto;">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a Transaction</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <h6>Select Transaction Type:</h6>
+            <select class="form-control" [(ngModel)]="selTransType" name="selTransT" #selTransT="ngModel" (change)="changeType($event.target.value)">
+              <option value="Transfer">Transfer</option>
+              <option value="Withdraw">Withdraw</option>
+              <option value="Deposit">Deposit</option>
+            </select>
+            <ng-container *ngIf="transferDiv">
+
+              <div class="row">
+                <div class="col-6">
+                  <h6>Transfer From:</h6>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active" (click)="fromTypeChange($event)">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
+                    </label>
+                    <label class="btn btn-secondary" (click)="fromTypeChange($event)">
+                      <input type="radio" name="options" id="option2" autocomplete="off"> Bills
+                    </label>
+                    <label class="btn btn-secondary" (click)="fromTypeChange($event)">
+                      <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
+                    </label>
+                  </div>
+                  
+                </div>
+                <div class="col-6">
+                  <h6>Transfer To:</h6>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active" (click)="toTypeChange($event)">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
+                    </label>
+                    <label class="btn btn-secondary" (click)="toTypeChange($event)">
+                      <input type="radio" name="options" id="option2" autocomplete="off"> Bills
+                    </label>
+                    <label class="btn btn-secondary" (click)="toTypeChange($event)">
+                      <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <select class="form-control" *ngIf="showEnv" [(ngModel)]="transFromE" name="selTransFromE" #selTransFromE="ngModel">
+                    <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
+                  </select>
+                  <select class="form-control" *ngIf="showBill" [(ngModel)]="transFromB" name="selTransFromB" #selTransFromB="ngModel">
+                    <option [value]="bill.id" *ngFor="let bill of bills">${{bill.amount}} - {{bill.name}}</option>
+                  </select>
+                  <select class="form-control" *ngIf="showPig" [(ngModel)]="transFromP" name="selTransFromP" #selTransFromP="ngModel">
+                    <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" *ngIf="showEnvTo" [(ngModel)]="transToE" name="selTransToE" #selTransToE="ngModel">
+                    <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
+                  </select>
+                  <select class="form-control" *ngIf="showBillTo" [(ngModel)]="transToB" name="selTransToB" #selTransToB="ngModel">
+                    <option [value]="bill.id" *ngFor="let bill of bills">${{bill.amount}} - {{bill.name}}</option>
+                  </select>
+                  <select class="form-control" *ngIf="showPigTo" [(ngModel)]="transToP" name="selTransToP" #selTransToP="ngModel">
+                    <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <hr />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+
+                  <input type="number" class="form-control" placeholder="Amount to Transfer" [(ngModel)]="transferAmount" name="transferA" #transferA="ngModel" />
+                </div>
+
+              </div>
+
+
+
+
+            </ng-container>
+
+            <br />
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTransaction()">Confirm Transaction</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="modal fade" id="addEnvelopeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -108,7 +211,7 @@
                 <i class="fas fa-plus"></i>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Add Transaction</a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addTransactionModal">Add Transaction</a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addEnvelopeModal">Add Envelope</a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addBillModal">Add Bill</a>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addPiggyBankModal">Add Piggy Bank</a>

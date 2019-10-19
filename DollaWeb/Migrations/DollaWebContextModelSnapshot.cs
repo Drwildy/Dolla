@@ -19,6 +19,7 @@ namespace DollaWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+
             modelBuilder.Entity("DollaWeb.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -68,6 +69,24 @@ namespace DollaWeb.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DollaWeb.Models.AddPaymentMethod", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AddPaymentMethod");
+
                 });
 
             modelBuilder.Entity("DollaWeb.Models.Moneybox", b =>

@@ -44,19 +44,62 @@ namespace DollaWeb.Controllers
         }
 
         // PUT: api/PiggyBanks/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutPiggyBank(int id, PiggyBank piggyBank)
+        //{
+        //    if (id != piggyBank.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(piggyBank).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!PiggyBankExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
+        //adding to a piggy bank
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPiggyBank(int id, PiggyBank piggyBank)
+        public async Task<ActionResult<PiggyBank>> PutPiggyBank(int id, TransferInfo info)
         {
-            if (id != piggyBank.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != piggyBank.Id)
+            //{
+            //    return BadRequest();
+            //}
+            //var pigBank = new PiggyBank() { Id = id, Amount = newAmount };
+            //_context.Entry(piggyBank).State = EntityState.Modified;
+            var pigBank = _context.PiggyBank.First(a => a.Id == id);
+            double amount = pigBank.Amount;
+            if (info.type == "To")
+                amount = amount + info.amount;
+            else if (info.type == "From")
+                amount = amount - info.amount;
+            pigBank.Amount = amount;
 
-            _context.Entry(piggyBank).State = EntityState.Modified;
-
+            _context.Entry(pigBank).State = EntityState.Modified;
             try
             {
+                
+                
                 await _context.SaveChangesAsync();
+                //_context.PiggyBank.Where(c => c.Id == id).Update()
+                //_context.PiggyBank.Attach(pigBank);
+                //_context.Entry(pigBank).Property(x => x.Amount).IsModified = true;
+                //await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -69,10 +112,8 @@ namespace DollaWeb.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            return pigBank;
         }
-
         // POST: api/PiggyBanks
         [HttpPost]
         public async Task<ActionResult<PiggyBank>> PostPiggyBank(PiggyBank piggyBank)

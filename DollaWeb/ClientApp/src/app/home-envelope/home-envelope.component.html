@@ -1,5 +1,5 @@
 <div *ngIf="envelope" class="container-fluid my-3">
-  <div class="progress position-relative row">
+  <div class="progress position-relative row" (click) ="envelopeDetails()">
     <div class="progress-bar position-absolute" [style.width]="percentage + '%'" [style.backgroundColor]="color" role="progressbar"></div>
     <div class="col-9 h6 my-auto">
       {{envelope.name}}
