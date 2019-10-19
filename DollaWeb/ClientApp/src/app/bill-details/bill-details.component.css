@@ -1,0 +1,49 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.unpaid{
+ color:red; 
+}
+.paid{
+ color:forestgreen;
+}
+table{
+  font-size:20px; 
+  border-collapse:collapse;
+  width:100%;
+}
+tr{
+  border-bottom:solid;
+  background-color:azure;
+}
+td{
+  text-align:center;
+  padding:20px; 
+}
+.fontsize{
+  font-size:20px;
+}
+.bottomborder{
+  width:100%;
+  border-bottom:solid 5px;
+}
+.centeralign{
+  text-align:center;
+  width:100%;
+  align-content:center;
+  align-items:center;
+  
+}
+.leftDiv{
+
+  margin:auto;
+  width:50%;
+  padding:10px;
+}
+.rightDiv {
+  right:0px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+
+}

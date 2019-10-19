@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DollaWeb.Models;
 
 namespace DollaWeb.Models
 {
@@ -28,6 +29,7 @@ namespace DollaWeb.Models
                     .HasValue<Bill>(2)
                     .HasValue<PiggyBank>(3);
         }
+        public DbSet<DollaWeb.Models.AddPaymentMethod> AddPaymentMethod { get; set; }
     }
     
 }
