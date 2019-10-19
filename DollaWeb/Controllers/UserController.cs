@@ -28,7 +28,6 @@ namespace DollaWeb.Controllers
             this.userManager = userManager;
         }
 
-
         // POST: api/User/register
         [HttpPost("register")]
         public IActionResult Register([FromBody]RegisterViewModel registerViewModel)
@@ -46,53 +45,26 @@ namespace DollaWeb.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody]LoginViewModel loginViewModel)
         {
-
             var auth = User.Identity.IsAuthenticated;
             var user = User.Identity.Name;
-
             var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.rememberMe, false).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
-
                 return Ok();
             }
             else
             {
-
                 return BadRequest();
             }
-            
-
         }
 
         [Authorize]
         [HttpPost("logout")]
-        public Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
             signInManager.SignOutAsync();
-            //_logger.LogInformation("User logged out.");
-            return null;
-            //return Redirect("./login");
+            return Ok();
         }
-
-
-        [Authorize]
-        [HttpGet("checkAuth")]
-        public IActionResult checkForAuth()
-        {
-            var user = User.Identity.Name;
-            var auth= User.Identity.IsAuthenticated;
-
-            if (auth)
-            {
-                return null;
-            }
-            else
-            {
-                return Redirect("./login");
-            }
-        }
-
 
         // GET: api/User
         [HttpGet]
@@ -106,12 +78,10 @@ namespace DollaWeb.Controllers
         public async Task<ActionResult<User>> GetUser(string id)
         {
             var user = await _context.User.FindAsync(id);
-
             if (user == null)
             {
                 return NotFound();
             }
-
             return user;
         }
 
@@ -123,9 +93,7 @@ namespace DollaWeb.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(user).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -141,19 +109,8 @@ namespace DollaWeb.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
-
-        // POST: api/User
-        //[HttpPost]
-        //public async Task<ActionResult<User>> PostUser(User user)
-        //{
-         //   _context.User.Add(user);
-         //   await _context.SaveChangesAsync();
-//
- //           return CreatedAtAction("GetUser", new { id = user.Username }, user);
-  //      }
 
         // DELETE: api/User/5
         [HttpDelete("{id}")]
@@ -164,10 +121,8 @@ namespace DollaWeb.Controllers
             {
                 return NotFound();
             }
-
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
-
             return user;
         }
 
@@ -176,4 +131,5 @@ namespace DollaWeb.Controllers
             return _context.User.Any(e => e.Username == id);
         }
     }
+
 }

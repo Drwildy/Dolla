@@ -4,11 +4,9 @@
     <div class="container">
       <h1 class="mb-4 text-center">$Dolla</h1>
       <h4 class="mb-4 text-center">Earn 'em. Track 'em. Spend 'em</h4>
-
       <input type="text" id="defaultLoginFormUserName" class="form-control mb-4" placeholder="Username" [(ngModel)]="UserName" name="usernameInput" #usernameInput="ngModel">
-
       <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" [(ngModel)]="Password" name="passwordInput" #passwordInput="ngModel">
-
+      <div *ngIf="bad" class="alert alert-danger">Username/Password incorrect</div>
       <div class="text-center">
         <button class="btn btn-primary custom-btn my-4 text-center" type="submit" >Login</button>
       </div>
@@ -27,5 +25,5 @@
       </div>
     </div>
   </section>
-  
+
 </form>
