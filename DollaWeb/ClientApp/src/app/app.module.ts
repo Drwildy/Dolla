@@ -27,6 +27,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
 import { AddpaymentmethodDialogComponent } from './addpaymentmethod-dialog/addpaymentmethod-dialog.component';
 import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
+import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
+import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
     AddpaymentmethodDialogComponent,
     TransactionComponent,
     AddPaymentMethodComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeEnvelopeDetailsComponent,
+    HomeBankDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -67,7 +71,9 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
         { path: 'settings', component: SettingsComponent },
         { path: 'login', component: LoginComponent},
         { path: 'forgot', component: ForgotComponent},
-        { path: 'register', component: RegisterComponent}
+        { path: 'register', component: RegisterComponent },
+        { path: 'home-envelope-details', component: HomeEnvelopeDetailsComponent },
+        { path: 'home-bank-details', component: HomeBankDetailsComponent }
     ])
   ],
   providers: [],
