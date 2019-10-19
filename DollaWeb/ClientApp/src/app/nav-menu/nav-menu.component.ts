@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Envelope } from '../envelope';
 import { Bill } from '../bill';
 import { EnvelopeService } from '../envelope.service';
@@ -19,6 +19,7 @@ import { TransferInfo } from '../transferinfo';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+
   isExpanded = false;
 
   public envName: string;
@@ -70,7 +71,6 @@ export class NavMenuComponent {
   }
 
   addEnvelope() {
-
     let myEnvelope: Envelope =
     {
       id: 0,
@@ -81,8 +81,14 @@ export class NavMenuComponent {
       icon: this.selIconEnvelope,
       setAmount: this.setAmount
     };
-    this.envelopeService.addItemTest(myEnvelope);
+    this.envelopeService.createEnvelope(myEnvelope)
+      .subscribe(
+        result => {
+          this.envelopeService.dataChanged$.emit();
+        }
+      );
   }
+
   addBill() {
     let myBill: Bill = {
       id: 0,
@@ -94,8 +100,14 @@ export class NavMenuComponent {
       dayDue: this.dayDue,
       paid: false
     }
-    this.billService.addItemTest(myBill);
+    this.billService.createBill(myBill)
+      .subscribe(
+        result => {
+          this.billService.dataChanged$.emit();
+        }
+      );
   }
+
   addPiggybank() {
     console.log(this.selIconPiggy);
     let myPiggyBank: Piggybank = {
@@ -107,7 +119,12 @@ export class NavMenuComponent {
       amount: 0,
       test: null
     }
-    this.piggybankService.addItemTest(myPiggyBank);
+    this.piggybankService.createPiggybank(myPiggyBank)
+      .subscribe(
+        result => {
+          this.piggybankService.dataChanged$.emit();
+        }
+      );
   }
   changeType(value: any) {
     console.log(value);
