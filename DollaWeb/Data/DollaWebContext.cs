@@ -18,6 +18,7 @@ namespace DollaWeb.Models
         public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
         public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
         public DbSet<DollaWeb.Models.User> User { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Moneybox>()

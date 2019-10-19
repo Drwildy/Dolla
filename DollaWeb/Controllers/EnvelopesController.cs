@@ -31,7 +31,8 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Envelope>>> GetEnvelope()
         {
-            return await _context.Envelope.ToListAsync();
+            //return await _context.Envelope.ToListAsync();
+            return await _context.Envelope.Where(x => x.MoneyBoxType == 1).ToListAsync();
         }
 
         // GET: api/Envelopes/5
@@ -39,6 +40,7 @@ namespace DollaWeb.Controllers
         public async Task<ActionResult<Envelope>> GetEnvelope(int id)
         {
             var envelope = await _context.Envelope.FindAsync(id);
+            //var envelope = await _context.Envelope.Where(x => x.MoneyBoxType == 1).ToListAsync();
 
             if (envelope == null)
             {
@@ -49,19 +51,61 @@ namespace DollaWeb.Controllers
         }
 
         // PUT: api/Envelopes/5
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutEnvelope(int id, Envelope envelope)
+        //{
+        //    if (id != envelope.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    _context.Entry(envelope).State = EntityState.Modified;
+
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!EnvelopeExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return NoContent();
+        //}
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEnvelope(int id, Envelope envelope)
+        public async Task<ActionResult<Envelope>> PutEnvelope(int id, TransferInfo info)
         {
-            if (id != envelope.Id)
-            {
-                return BadRequest();
-            }
+            //if (id != piggyBank.Id)
+            //{
+            //    return BadRequest();
+            //}
+            //var pigBank = new PiggyBank() { Id = id, Amount = newAmount };
+            //_context.Entry(piggyBank).State = EntityState.Modified;
+            var envelope = _context.Envelope.First(a => a.Id == id);
+            double amount = envelope.Amount;
+            if (info.type == "To")
+                amount = amount + info.amount;
+            else if (info.type == "From")
+                amount = amount - info.amount;
+            envelope.Amount = amount;
 
             _context.Entry(envelope).State = EntityState.Modified;
-
             try
             {
+
+
                 await _context.SaveChangesAsync();
+                //_context.PiggyBank.Where(c => c.Id == id).Update()
+                //_context.PiggyBank.Attach(pigBank);
+                //_context.Entry(pigBank).Property(x => x.Amount).IsModified = true;
+                //await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -74,10 +118,8 @@ namespace DollaWeb.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            return envelope;
         }
-
         // POST: api/Envelopes
         [HttpPost]
         public async Task<ActionResult<Envelope>> PostEnvelope(Envelope envelope)

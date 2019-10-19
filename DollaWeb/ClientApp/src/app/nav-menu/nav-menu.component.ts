@@ -7,6 +7,10 @@ import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
 import { User } from '../User';
 import { NavbarService } from '../navbar.service';
+import { TransactionService } from '../transaction.service';
+import { Moneybox } from '../moneybox';
+import { Transaction } from '../transaction';
+import { TransferInfo } from '../transferinfo';
 
 
 @Component({
@@ -27,8 +31,37 @@ export class NavMenuComponent {
   public selIconPiggy: string;
   public selIconBill: string;
   public selIconEnvelope: string;
-    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService) { }
+  public selTransType: string;
+  public transferAmount: number;
+  public transferDiv: boolean = false;
+  public showEnv: boolean = true;
+  public showBill: boolean = false;
+  public showPig: boolean = false;
+  public showEnvTo: boolean = true;
+  public showBillTo: boolean = false;
+  public showPigTo: boolean = false;
+  public transFromE: number;
+  public transFromB: number;
+  public transFromP: number;
+  public transToE: number;
+  public transToB: number;
+  public transToP: number;
+  public envelopes: Envelope[];
+  public bills: Bill[];
+  public piggyBanks: Piggybank[];
+  constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService, public transactionService: TransactionService) { }
+  ngOnInit() {
+    this.refresh();
+  }
 
+  refresh() {
+    this.envelopeService.getEnvelopes()
+      .subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
+    this.billService.getBills()
+      .subscribe((bills: Bill[]) => { this.bills = bills });
+    this.piggybankService.getBanks()
+      .subscribe((piggyBanks: Piggybank[]) => { this.piggyBanks = piggyBanks });
+  }
   collapse() {
     this.isExpanded = false;
   }
@@ -92,6 +125,76 @@ export class NavMenuComponent {
           this.piggybankService.dataChanged$.emit();
         }
       );
+  }
+  changeType(value: any) {
+    console.log(value);
+
+   this.transferDiv = (value == "Transfer")
+
+    
+  }
+  fromTypeChange(evt: any) {
+    var target = evt.target;
+    //console.log(target.innerHTML);
+    //The (change) function is not fired on the input instead the UI fires it on the label, thus the value or inner html reutrns the input with
+    //the text of what radiobutton it is
+    this.showEnv = target.innerHTML.includes('Envelopes');
+    this.showBill = target.innerHTML.includes('Bills');
+    this.showPig = target.innerHTML.includes('Piggybanks');
+  }
+  toTypeChange(evt: any) {
+    var target = evt.target;
+
+    this.showEnvTo = target.innerHTML.includes('Envelopes');
+    this.showBillTo = target.innerHTML.includes('Bills');
+    this.showPigTo = target.innerHTML.includes('Piggybanks');
+  }
+  addTransaction() {
+    var fromID: number;
+    var toID: number;
+    if (this.showEnv)
+      fromID = this.transFromE;
+    else if (this.showBill)
+      fromID = this.transFromB;
+    else
+      fromID = this.transFromP;
+    if (this.showEnvTo)
+      toID = this.transToE;
+    else if (this.showBillTo)
+      toID = this.transToB;
+    else
+      toID = this.transToP;
+    console.log(toID + ' ' + fromID);
+    let transaction: Transaction = {
+      id: 0,
+      username: "tstewart11",
+      type: this.selTransType,
+      transferFromId: fromID,
+      transferToId: toID,
+      transferAmount: this.transferAmount,
+      transactionDate: new Date()
+    }
+    let toInfo: TransferInfo = {
+      type: "To",
+      id: toID,
+      amount: this.transferAmount
+    }
+    let fromInfo: TransferInfo = {
+      type: "From",
+      id: fromID,
+      amount: this.transferAmount
+    }
+    if (this.showPigTo)
+      this.piggybankService.addMoney(toID, toInfo);
+    else if (this.showEnvTo)
+      this.envelopeService.addMoney(toID, toInfo);
+    if (this.showPig)
+      this.piggybankService.addMoney(fromID, fromInfo);
+    else if (this.showEnv)
+      this.envelopeService.addMoney(fromID, fromInfo);
+
+    this.transactionService.addTransaction(transaction);
+    
   }
 }
 

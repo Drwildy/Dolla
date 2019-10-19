@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Piggybank } from './piggybank';
+import { TransferInfo } from './transferinfo';
 import { filter, map } from 'rxjs/operators';
 
 @Injectable({
@@ -13,6 +14,13 @@ export class PiggybankService {
 
   constructor(private http: HttpClient) {
     this.dataChanged$ = new EventEmitter<Piggybank>();
+  }
+  getBanks(): Observable<Piggybank[]> {
+    return this.http.get<Piggybank[]>('/api/piggybanks/');
+  }
+  addMoney(id: number, info: TransferInfo) {
+    return this.http.put('/api/piggybanks/' + id, info)
+      .subscribe();
   }
 
   createPiggybank(piggybank: Piggybank): Observable<Piggybank> {
