@@ -23,9 +23,9 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeBillComponent } from './home-bill/home-bill.component';
 import { HomeBankComponent } from './home-bank/home-bank.component';
+import { BillDetailsComponent } from './bill-details/bill-details.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
-import { AddpaymentmethodDialogComponent } from './addpaymentmethod-dialog/addpaymentmethod-dialog.component';
 import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
 import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
 import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
@@ -39,6 +39,7 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
     FetchDataComponent,
     TransactionsComponent,
     BudgetComponent,
+    BillDetailsComponent,
     SettingsComponent,
     LoginComponent,
     HomeOverviewComponent,
@@ -52,7 +53,6 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
     HomeBillComponent,
     HomeBankComponent,
     AddPaymentMethodsComponent,
-    AddpaymentmethodDialogComponent,
     TransactionComponent,
     AddPaymentMethodComponent,
     RegisterComponent,
@@ -73,7 +73,8 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
         { path: 'forgot', component: ForgotComponent},
         { path: 'register', component: RegisterComponent },
         { path: 'home-envelope-details', component: HomeEnvelopeDetailsComponent },
-        { path: 'home-bank-details', component: HomeBankDetailsComponent }
+        { path: 'home-bank-details', component: HomeBankDetailsComponent },
+        { path: 'billdetails', component: BillDetailsComponent }
     ])
   ],
   providers: [],

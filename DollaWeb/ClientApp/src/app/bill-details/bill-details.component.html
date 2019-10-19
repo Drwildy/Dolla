@@ -1,0 +1,46 @@
+<div class="d-flex flex-wrap">
+  <div class="bottomborder">
+    <br /><br />
+          <div>
+            <div *ngIf="myBills[0].paid" class="paid">
+              <i style="font-size:50px" class="fas fa-home"> </i>
+            </div>
+            <div *ngIf="!myBills.paid" class="unpaid">
+              <i style="font-size:50px" class="fas fa-home"></i>
+            </div>
+            <p style="font-size:35px;">Rent</p>
+            <div class="centeralign fontsize">
+              Due Date: {{myBills[0].name}} - {{myBills[myBills.length-1].dayDue}}
+            </div>
+          </div>
+         
+   
+  </div>
+
+  <table>
+    <tr *ngFor="let bill of myBills">
+      <td>
+        {{bill.name}}
+      </td>
+      <td *ngIf="bill.paid" class="paid">
+        Paid - {{bill.createdDate.toLocaleDateString()}}
+      </td>
+      <td *ngIf="!bill.paid" class="unpaid">
+        Unpaid
+      </td>
+      <td *ngIf="bill.paid" class="paid">
+        -${{bill.amount}}
+      </td>
+      <td *ngIf="!bill.paid" class="unpaid">
+        ${{bill.amount}}
+      </td>
+      <td *ngIf="!bill.paid" class="unpaid">
+        <button type="button" class="btn btn-outline-success"> Mark Paid </button>
+      </td>
+      <td *ngIf="bill.paid" class="unpaid">
+        <button type="button" class="btn btn-outline-danger"> Mark Unpaid</button>
+      </td>
+    </tr>
+  </table>
+
+</div>

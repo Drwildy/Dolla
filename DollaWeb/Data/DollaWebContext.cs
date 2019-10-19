@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DollaWeb.Models;
 
 namespace DollaWeb.Models
 {
@@ -18,6 +19,7 @@ namespace DollaWeb.Models
         public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
         public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
         public DbSet<DollaWeb.Models.User> User { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Moneybox>()
@@ -27,6 +29,7 @@ namespace DollaWeb.Models
                     .HasValue<Bill>(2)
                     .HasValue<PiggyBank>(3);
         }
+        public DbSet<DollaWeb.Models.AddPaymentMethod> AddPaymentMethod { get; set; }
     }
     
 }

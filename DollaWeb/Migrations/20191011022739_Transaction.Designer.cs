@@ -4,37 +4,22 @@ using DollaWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DollaWeb.Migrations
 {
     [DbContext(typeof(DollaWebContext))]
-    partial class DollaWebContextModelSnapshot : ModelSnapshot
+    [Migration("20191011022739_Transaction")]
+    partial class Transaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("DollaWeb.Models.AddPaymentMethod", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AddPaymentMethod");
-                });
 
             modelBuilder.Entity("DollaWeb.Models.Moneybox", b =>
                 {
@@ -61,6 +46,31 @@ namespace DollaWeb.Migrations
                     b.ToTable("MoneyBox");
 
                     b.HasDiscriminator<int>("MoneyBoxType");
+                });
+
+            modelBuilder.Entity("DollaWeb.Models.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("TransactionDate");
+
+                    b.Property<double>("TransferAmount");
+
+                    b.Property<int?>("TransferFromId");
+
+                    b.Property<int?>("TransferToId");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username");
+
+                    b.ToTable("Transaction");
                 });
 
             modelBuilder.Entity("DollaWeb.Models.User", b =>
@@ -114,6 +124,13 @@ namespace DollaWeb.Migrations
                 {
                     b.HasOne("DollaWeb.Models.User")
                         .WithMany("moneyBoxID")
+                        .HasForeignKey("Username");
+                });
+
+            modelBuilder.Entity("DollaWeb.Models.Transaction", b =>
+                {
+                    b.HasOne("DollaWeb.Models.User")
+                        .WithMany("transactions")
                         .HasForeignKey("Username");
                 });
 #pragma warning restore 612, 618
