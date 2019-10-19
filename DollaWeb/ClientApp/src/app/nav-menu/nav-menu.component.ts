@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SystemJsNgModuleLoader } from '@angular/core';
 import { Envelope } from '../envelope';
 import { Bill } from '../bill';
 import { LoginService } from '../login/login.service';
@@ -8,6 +8,7 @@ import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
 import { User } from '../User';
 import { NavbarService } from '../navbar.service';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute, ParamMap } from '@angular/router';
 
 
 
@@ -17,7 +18,8 @@ import { NavbarService } from '../navbar.service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
+export class NavMenuComponent
+{
   isExpanded = false;
 
   public envName: string;
@@ -29,18 +31,20 @@ export class NavMenuComponent {
   public selIconPiggy: string;
   public selIconBill: string;
   public selIconEnvelope: string;
-    constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService) { }
+    constructor(private router: Router, private loginService: LoginService, private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService) { }
 
-  collapse() {
+  collapse()
+  {
     this.isExpanded = false;
   }
 
-  toggle() {
+  toggle()
+  {
     this.isExpanded = !this.isExpanded;
   }
 
-  addEnvelope() {
-
+  addEnvelope()
+  {
     let myEnvelope: Envelope =
     {
       id: 0,
@@ -53,8 +57,10 @@ export class NavMenuComponent {
     };
     this.envelopeService.addItemTest(myEnvelope);
   }
-  addBill() {
-    let myBill: Bill = {
+  addBill()
+  {
+    let myBill: Bill =
+    {
       id: 0,
       username: "tstewart11",
       name: this.billName,
@@ -66,9 +72,11 @@ export class NavMenuComponent {
     }
     this.billService.addItemTest(myBill);
   }
-  addPiggybank() {
+  addPiggybank()
+  {
     console.log(this.selIconPiggy);
-    let myPiggyBank: Piggybank = {
+    let myPiggyBank: Piggybank =
+    {
       id: 0,
       username: "tstewart11",
       name: this.piggyName,
@@ -78,11 +86,21 @@ export class NavMenuComponent {
       test: null
     }
     this.piggybankService.addItemTest(myPiggyBank);
-    }
+  }
 
-    signOut() {
+  signOut()
+  {
+    this.loginService.signOut().subscribe(
+      result => {
+        console.log(result);
+        this.nav.hide();
+        this.router.navigateByUrl(`/login`);
+      },
+      error => {
+        console.log(error);
+        //Display Failed to log in on screen
+      }
+    );
+  }
 
-
-    }
 }
-
