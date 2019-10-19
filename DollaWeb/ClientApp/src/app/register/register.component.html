@@ -1,21 +1,41 @@
-<form class="border border-light p-5">
+<form #loginForm="ngForm" (ngSubmit)="register()" class="border border-light p-5">
 
   <section class="skewedBox">
     <div class="container">
       <h2 class="mb-4 text-center">Create Account</h2>
-    
-      <p>Email Address</p>
-      <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Email Address">
-    
-      <p>Password</p>
-      <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
 
-      <input type="password" id="confirmLoginFormPassword" class="form-control mb-4" placeholder="Confirm Password">
-    
+      <p>Email Address</p>
+      <input type="email" class="form-control mb-4" id="defaultLoginFormEmail" placeholder="Email Address" [(ngModel)]="Email" name="emailInput" #emailInput="ngModel">
+
+      <p>Username</p>
+      <input type="text"  class="form-control mb-4" id="defaultLoginFormUsername" placeholder="Username" [(ngModel)]="Username" name="usernameInput" #usernameInput="ngModel">
+
+      <p>Password</p>
+      <input type="password" class="form-control mb-4" id="defaultLoginFormPassword" placeholder="Password">
+
+      <input type="password" class="form-control mb-4" id="confirmLoginFormPassword" placeholder="Confirm Password" [(ngModel)]="Password" name="passwordInput" #passwordInput="ngModel">
+
       <div class="text-center">
-        <button class="btn btn-primary custom-btn my-4" type="submit" onclick="location.href = './login';">Create Account</button>
+        <button class="btn btn-primary custom-btn my-4" type="submit" (click)="register" >Create Account</button>
       </div>
     </div>
+
+    <div *ngIf="duplicate" class="mb-3 alert alert-danger">
+      Username has been taken
+    </div>
+    <div *ngIf="length" class="mb-3 alert alert-danger">
+      Must be at least 8 characters long
+    </div>
+    <div *ngIf="upper" class="mb-3 alert alert-danger">
+      Must have an uppercase letter
+    </div>
+    <div *ngIf="lower" class="mb-3 alert alert-danger">
+      Must have a lowercase letter
+    </div>
+    <div *ngIf="number" class="mb-3 alert alert-danger">
+      Must have a numeric character
+    </div>
+
   </section>
 
 </form>

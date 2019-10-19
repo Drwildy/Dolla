@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { AppComponent } from './app.component';
@@ -27,8 +27,10 @@ import { BillDetailsComponent } from './bill-details/bill-details.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
 import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
+import { AuthInterceptor } from './auth.service';
 import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
 import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
+
 
 @NgModule({
   declarations: [
@@ -77,7 +79,14 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
         { path: 'billdetails', component: BillDetailsComponent }
     ])
   ],
-  providers: [],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useFactory: function (router: Router) {
+            return new AuthInterceptor(router);
+        },
+        multi: true,
+        deps: [Router]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DollaWeb.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BillsController : ControllerBase
@@ -24,7 +26,12 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bill>>> GetBill()
         {
+
+            var user = User.Identity.Name;
+
             return await _context.Bill.ToListAsync();
+
+            //return (await _context.Bill.ToListAsync()).Where(bill => bill.Username == user);
         }
 
         // GET: api/Bills/5

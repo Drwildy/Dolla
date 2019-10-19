@@ -1,16 +1,19 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, SystemJsNgModuleLoader, Output, EventEmitter } from '@angular/core';
 import { Envelope } from '../envelope';
 import { Bill } from '../bill';
+import { LoginService } from '../login/login.service';
 import { EnvelopeService } from '../envelope.service';
 import { BillService } from '../bill.service';
 import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
 import { User } from '../User';
 import { NavbarService } from '../navbar.service';
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute, ParamMap } from '@angular/router';
 import { TransactionService } from '../transaction.service';
 import { Moneybox } from '../moneybox';
 import { Transaction } from '../transaction';
 import { TransferInfo } from '../transferinfo';
+
 
 
 @Component({
@@ -18,8 +21,9 @@ import { TransferInfo } from '../transferinfo';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
 
+export class NavMenuComponent 
+{
   isExpanded = false;
 
   public envName: string;
@@ -31,6 +35,7 @@ export class NavMenuComponent {
   public selIconPiggy: string;
   public selIconBill: string;
   public selIconEnvelope: string;
+
   public selTransType: string;
   public transferAmount: number;
   public transferDiv: boolean = false;
@@ -49,11 +54,17 @@ export class NavMenuComponent {
   public envelopes: Envelope[];
   public bills: Bill[];
   public piggyBanks: Piggybank[];
-  constructor(private envelopeService: EnvelopeService, private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService, public transactionService: TransactionService) { }
+ 
+  
+  //Prayus make sure there are no errors here, had a big merge conflict
+  constructor(private router: Router, private loginService: LoginService, private envelopeService: EnvelopeService, 
+                private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService, public transactionService: TransactionService) { }
+   
   ngOnInit() {
     this.refresh();
   }
 
+    
   refresh() {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
@@ -62,15 +73,19 @@ export class NavMenuComponent {
     this.piggybankService.getBanks()
       .subscribe((piggyBanks: Piggybank[]) => { this.piggyBanks = piggyBanks });
   }
+ 
   collapse() {
     this.isExpanded = false;
   }
 
-  toggle() {
+  toggle()
+  {
     this.isExpanded = !this.isExpanded;
   }
 
-  addEnvelope() {
+
+  addEnvelope()
+  {
     let myEnvelope: Envelope =
     {
       id: 0,
@@ -89,8 +104,11 @@ export class NavMenuComponent {
       );
   }
 
-  addBill() {
-    let myBill: Bill = {
+  addBill()
+  {
+    let myBill: Bill =
+    {
+
       id: 0,
       username: "tstewart11",
       name: this.billName,
@@ -108,9 +126,11 @@ export class NavMenuComponent {
       );
   }
 
-  addPiggybank() {
+  addPiggybank()
+  {
     console.log(this.selIconPiggy);
-    let myPiggyBank: Piggybank = {
+    let myPiggyBank: Piggybank =
+    {
       id: 0,
       username: "tstewart11",
       name: this.piggyName,
@@ -196,5 +216,20 @@ export class NavMenuComponent {
     this.transactionService.addTransaction(transaction);
     
   }
-}
 
+  signOut()
+  {
+    this.loginService.signOut().subscribe(
+      result => {
+        console.log(result);
+        this.nav.hide();
+        this.router.navigateByUrl(`/login`);
+      },
+      error => {
+        console.log(error);
+        //Display Failed to log in on screen
+      }
+    );
+  }
+
+}

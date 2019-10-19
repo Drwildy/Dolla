@@ -36,6 +36,10 @@ nav {
   color: black;
 }
 
+.fa-sign-out-alt {
+  color: white;
+}
+
 ul.dropdown-menu {
   position: static;
   float: none;
