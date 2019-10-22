@@ -1,7 +1,7 @@
 
 export class Transaction {
   id: number;
-  username: string;
+  applicationUserId: string;
   type: string;
   transferFromId: number;
   transferToId: number;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
@@ -16,10 +17,13 @@ namespace DollaWeb.Controllers
     public class BillsController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public BillsController(DollaWebContext context)
+        public BillsController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
+
         }
 
         // GET: api/Bills
@@ -82,6 +86,10 @@ namespace DollaWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<Bill>> PostBill(Bill bill)
         {
+
+            //This Line gets the active UserID and adds it as a FK to the Bill
+            bill.ApplicationUserId = userManager.GetUserId(User);
+
             _context.Bill.Add(bill);
             await _context.SaveChangesAsync();
 

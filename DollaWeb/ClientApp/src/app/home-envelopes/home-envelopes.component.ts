@@ -40,7 +40,7 @@ export class HomeEnvelopesComponent implements OnInit {
    
 
 
-    let myEnvelope: Envelope = { id: 0, username: "tstewart11", name: "Testing", amount: 12, createdDate: new Date(), icon: "empty", setAmount: 25 };
+      let myEnvelope: Envelope = { id: 0, applicationUserId: "tstewart11", name: "Testing", amount: 12, createdDate: new Date(), icon: "empty", setAmount: 25 };
     this.envelopeService.createEnvelope(myEnvelope);
   }
 }
