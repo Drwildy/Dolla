@@ -16,10 +16,12 @@ namespace DollaWeb.Models
         public string Name { get; set; }
         public string Color { get; set; }
         public DateTime CreatedDate { get; set; }
-        
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
 
-       
-        
+
+
+
 
     }
 }
