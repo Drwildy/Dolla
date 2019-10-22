@@ -66,6 +66,7 @@ namespace DollaWeb.Controllers
             return Ok();
         }
 
+        /*
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -130,6 +131,7 @@ namespace DollaWeb.Controllers
         {
             return _context.User.Any(e => e.Username == id);
         }
+        */
     }
 
 }
