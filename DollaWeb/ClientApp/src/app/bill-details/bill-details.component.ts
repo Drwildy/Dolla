@@ -34,30 +34,30 @@ export class BillDetailsComponent implements OnInit {
       id: 23,
       username: '',
       name: 'Oct',
-      amount: 560.80,
+      amount: 240.00,
       createdDate: new Date('09/29/19'),
       icon: '',
-      dayDue: 5,
-      paid: false
+      dayDue: 1,
+      paid: true
     });
     myBill.push({
       id: 23,
       username: '',
       name: 'Sept',
-      amount: 560.80,
+      amount: 240.00,
       createdDate: new Date('08/29/10'),
       icon: '',
-      dayDue: 5,
+      dayDue: 1,
       paid: false
     });
     myBill.push({
       id: 23,
       username: '',
       name: 'Aug',
-      amount: 560.80,
+      amount: 240.00,
       createdDate: new Date('07/29/19'),
       icon: '',
-      dayDue: 5,
+      dayDue: 1,
       paid: true
     });
 
