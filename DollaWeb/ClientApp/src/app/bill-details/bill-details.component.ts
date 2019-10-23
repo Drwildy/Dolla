@@ -38,7 +38,7 @@ export class BillDetailsComponent implements OnInit {
       createdDate: new Date('09/29/19'),
       icon: '',
       dayDue: 5,
-      paid: true
+      paid: false
     });
     myBill.push({
       id: 23,

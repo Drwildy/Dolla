@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 
 import { AppComponent } from './app.component';
@@ -23,10 +23,14 @@ import { ForgotComponent } from './forgot/forgot.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeBillComponent } from './home-bill/home-bill.component';
 import { HomeBankComponent } from './home-bank/home-bank.component';
+import { BillDetailsComponent } from './bill-details/bill-details.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { AddPaymentMethodComponent } from './addpaymentmethod/addpaymentmethod.component';
-import { AddpaymentmethodDialogComponent } from './addpaymentmethod-dialog/addpaymentmethod-dialog.component';
 import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethods.component';
+import { AuthInterceptor } from './auth.service';
+import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
+import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +41,7 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
     FetchDataComponent,
     TransactionsComponent,
     BudgetComponent,
+    BillDetailsComponent,
     SettingsComponent,
     LoginComponent,
     HomeOverviewComponent,
@@ -50,10 +55,11 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
     HomeBillComponent,
     HomeBankComponent,
     AddPaymentMethodsComponent,
-    AddpaymentmethodDialogComponent,
     TransactionComponent,
     AddPaymentMethodComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeEnvelopeDetailsComponent,
+    HomeBankDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -67,10 +73,20 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
         { path: 'settings', component: SettingsComponent },
         { path: 'login', component: LoginComponent},
         { path: 'forgot', component: ForgotComponent},
-        { path: 'register', component: RegisterComponent}
+        { path: 'register', component: RegisterComponent },
+        { path: 'home-envelope-details', component: HomeEnvelopeDetailsComponent },
+        { path: 'home-bank-details', component: HomeBankDetailsComponent },
+        { path: 'billdetails', component: BillDetailsComponent }
     ])
   ],
-  providers: [],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useFactory: function (router: Router) {
+            return new AuthInterceptor(router);
+        },
+        multi: true,
+        deps: [Router]
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

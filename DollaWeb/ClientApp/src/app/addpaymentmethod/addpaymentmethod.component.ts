@@ -1,5 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AddPaymentMethod } from '../addpaymentmethod'
+import { AddPaymentMethod } from '../addpaymentmethod';
+import { Router, NavigationExtras } from '@angular/router';
+import { Observable } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-addpaymentmethod',
@@ -9,9 +14,16 @@ import { AddPaymentMethod } from '../addpaymentmethod'
 export class AddPaymentMethodComponent implements OnInit {
   @Input() addPaymentMethod: AddPaymentMethod;
 
-  constructor() { }
+ // state$: Observable<any>;
+   
+  
+  constructor(public router: Router) {
+    
+  }
 
   ngOnInit() {
+   // console.log(this.addPaymentMethod)
   }
+
 
 }

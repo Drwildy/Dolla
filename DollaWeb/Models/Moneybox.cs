@@ -18,7 +18,7 @@ namespace DollaWeb.Models
         public double Amount { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Icon { get; set; }
-        [ForeignKey("User")]
+        [ForeignKey("ApplicationUser")]
         public string Username { get; set; }
 
     }

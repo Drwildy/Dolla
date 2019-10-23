@@ -22,5 +22,12 @@ export class BillService {
   getBills(): Observable<Bill[]> {
     return this.http.get<Bill[]>('/api/bills/');
   }
-
+  /*
+  getBillsById(id: number): Observable<Bill> {
+    return this.http.get<Bill>('/api/Bills/'+id);
+  }
+  */
+  getBillsById(id: number): Observable <Bill> {
+    return this.http.get<Bill>("api/bills/" + id)
+  }  
 }

@@ -1,4 +1,4 @@
-<div class="d-flex flex-column align-items-center justify-items-center square m-4"
+<div class="d-flex flex-column align-items-center justify-items-center square m-4" (click)="direct()"
      [ngClass]="bill.paid ? 'paid' : 'past-due'">
   <div class="d-flex align-items-start text-center break-word text-light h5 mt-3">
     {{bill.name}}
