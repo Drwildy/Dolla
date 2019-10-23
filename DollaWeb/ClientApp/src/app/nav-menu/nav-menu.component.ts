@@ -61,7 +61,7 @@ export class NavMenuComponent
                 private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService, public transactionService: TransactionService) { }
    
   ngOnInit() {
-    this.refresh();
+    //this.refresh();
   }
 
     

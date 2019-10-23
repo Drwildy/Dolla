@@ -28,7 +28,9 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AddPaymentMethod>>> GetAddPaymentMethod()
         {
-            return await _context.AddPaymentMethod.ToListAsync();
+
+            return await _context.AddPaymentMethod.Where(x => x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+            //return await _context.AddPaymentMethod.ToListAsync();
         }
 
         // GET: api/AddPaymentMethods/5

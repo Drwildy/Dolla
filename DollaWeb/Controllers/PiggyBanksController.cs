@@ -29,7 +29,9 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PiggyBank>>> GetPiggyBank()
         {
-            return await _context.PiggyBank.ToListAsync();
+
+            return await _context.PiggyBank.Where(x => x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+            //return await _context.PiggyBank.ToListAsync();
         }
 
         // GET: api/PiggyBanks/5

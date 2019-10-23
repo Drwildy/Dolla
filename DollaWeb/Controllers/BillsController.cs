@@ -33,7 +33,9 @@ namespace DollaWeb.Controllers
 
             var user = User.Identity.Name;
 
-            return await _context.Bill.ToListAsync();
+            return await _context.Bill.Where(x => x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+
+            //return await _context.Bill.ToListAsync();
 
             //return (await _context.Bill.ToListAsync()).Where(bill => bill.Username == user);
         }
