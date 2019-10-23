@@ -1,7 +1,7 @@
 
 export class Moneybox {
   id: number;
-  username: string;
+  applicationUserId: string;
   name: string;
   amount: number;
   createdDate: Date;

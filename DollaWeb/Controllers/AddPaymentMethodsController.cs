@@ -6,25 +6,31 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AddPaymentMethodsController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public AddPaymentMethodsController(DollaWebContext context)
+        public AddPaymentMethodsController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: api/AddPaymentMethods
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AddPaymentMethod>>> GetAddPaymentMethod()
         {
-            return await _context.AddPaymentMethod.ToListAsync();
+
+            return await _context.AddPaymentMethod.Where(x => x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+            //return await _context.AddPaymentMethod.ToListAsync();
         }
 
         // GET: api/AddPaymentMethods/5
@@ -75,6 +81,9 @@ namespace DollaWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<AddPaymentMethod>> PostAddPaymentMethod(AddPaymentMethod addPaymentMethod)
         {
+            //This Line gets the active UserID and adds it as a FK to the APM
+            addPaymentMethod.ApplicationUserId = userManager.GetUserId(User);
+
             _context.AddPaymentMethod.Add(addPaymentMethod);
             await _context.SaveChangesAsync();
 

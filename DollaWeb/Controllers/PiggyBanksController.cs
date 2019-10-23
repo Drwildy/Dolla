@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
@@ -16,17 +17,21 @@ namespace DollaWeb.Controllers
     public class PiggyBanksController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public PiggyBanksController(DollaWebContext context)
+        public PiggyBanksController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: api/PiggyBanks
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PiggyBank>>> GetPiggyBank()
         {
-            return await _context.PiggyBank.ToListAsync();
+
+            return await _context.PiggyBank.Where(x => x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+            //return await _context.PiggyBank.ToListAsync();
         }
 
         // GET: api/PiggyBanks/5
@@ -118,6 +123,9 @@ namespace DollaWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<PiggyBank>> PostPiggyBank(PiggyBank piggyBank)
         {
+            //This Line gets the active UserID and adds it as a FK to the PB
+            piggyBank.ApplicationUserId = userManager.GetUserId(User);
+
             _context.PiggyBank.Add(piggyBank);
             await _context.SaveChangesAsync();
 

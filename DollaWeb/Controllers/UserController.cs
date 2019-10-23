@@ -45,8 +45,13 @@ namespace DollaWeb.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody]LoginViewModel loginViewModel)
         {
+
+            var userId = userManager.GetUserId(User);
+
             var auth = User.Identity.IsAuthenticated;
             var user = User.Identity.Name;
+
+
             var result = signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, loginViewModel.rememberMe, false).GetAwaiter().GetResult();
             if (result.Succeeded)
             {
@@ -66,6 +71,7 @@ namespace DollaWeb.Controllers
             return Ok();
         }
 
+        /*
         // GET: api/User
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUser()
@@ -130,6 +136,7 @@ namespace DollaWeb.Controllers
         {
             return _context.User.Any(e => e.Username == id);
         }
+        */
     }
 
 }

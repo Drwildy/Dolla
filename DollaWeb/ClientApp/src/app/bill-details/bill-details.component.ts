@@ -32,7 +32,7 @@ export class BillDetailsComponent implements OnInit {
     var myBill: Array<Bill> = [];
     myBill.push({
       id: 23,
-      username: '',
+      applicationUserId: '',
       name: 'Oct',
       amount: 240.00,
       createdDate: new Date('09/29/19'),
@@ -42,7 +42,7 @@ export class BillDetailsComponent implements OnInit {
     });
     myBill.push({
       id: 23,
-      username: '',
+      applicationUserId: '',
       name: 'Sept',
       amount: 240.00,
       createdDate: new Date('08/29/10'),
@@ -52,7 +52,7 @@ export class BillDetailsComponent implements OnInit {
     });
     myBill.push({
       id: 23,
-      username: '',
+      applicationUserId: '',
       name: 'Aug',
       amount: 240.00,
       createdDate: new Date('07/29/19'),
