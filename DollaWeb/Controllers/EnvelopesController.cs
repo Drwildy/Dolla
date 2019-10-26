@@ -34,6 +34,8 @@ namespace DollaWeb.Controllers
         public async Task<ActionResult<IEnumerable<Envelope>>> GetEnvelope()
         {
             //return await _context.Envelope.ToListAsync();
+            Envelope test = new Envelope();
+            
             return await _context.Envelope.Where(x => x.MoneyBoxType == 1).ToListAsync();
         }
 

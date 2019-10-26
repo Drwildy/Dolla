@@ -20,7 +20,6 @@ namespace DollaWeb.Models
         public DbSet<DollaWeb.Models.PiggyBank> PiggyBank { get; set; }
         public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
         public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
-        public DbSet<DollaWeb.Models.User> User { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,7 +36,6 @@ namespace DollaWeb.Models
 
             
 ;        }
-        public DbSet<DollaWeb.Models.UserSettings> UserSettings { get; set; }
         public DbSet<DollaWeb.Models.AddPaymentMethod> AddPaymentMethod { get; set; }
     }
     

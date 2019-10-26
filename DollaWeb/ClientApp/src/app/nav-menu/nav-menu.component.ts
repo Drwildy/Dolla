@@ -61,15 +61,14 @@ export class NavMenuComponent
                 private billService: BillService, private piggybankService: PiggybankService, public nav: NavbarService, public transactionService: TransactionService) { }
    
   ngOnInit() {
-    this.refresh();
+    //this.refresh();
   }
 
     
   refresh() {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => { this.envelopes = envelopes });
-    this.billService.getBills()
-      .subscribe((bills: Bill[]) => { this.bills = bills });
+
     this.piggybankService.getBanks()
       .subscribe((piggyBanks: Piggybank[]) => { this.piggyBanks = piggyBanks });
   }
@@ -148,7 +147,7 @@ export class NavMenuComponent
   }
   changeType(value: any) {
     console.log(value);
-
+   this.refresh();
    this.transferDiv = (value == "Transfer")
 
     

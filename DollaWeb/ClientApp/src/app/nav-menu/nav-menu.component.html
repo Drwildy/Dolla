@@ -26,9 +26,6 @@
                       <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
                     </label>
                     <label class="btn btn-secondary" (click)="fromTypeChange($event)">
-                      <input type="radio" name="options" id="option2" autocomplete="off"> Bills
-                    </label>
-                    <label class="btn btn-secondary" (click)="fromTypeChange($event)">
                       <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
                     </label>
                   </div>
@@ -41,9 +38,6 @@
                       <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
                     </label>
                     <label class="btn btn-secondary" (click)="toTypeChange($event)">
-                      <input type="radio" name="options" id="option2" autocomplete="off"> Bills
-                    </label>
-                    <label class="btn btn-secondary" (click)="toTypeChange($event)">
                       <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
                     </label>
                   </div>
@@ -54,9 +48,7 @@
                   <select class="form-control" *ngIf="showEnv" [(ngModel)]="transFromE" name="selTransFromE" #selTransFromE="ngModel">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
-                  <select class="form-control" *ngIf="showBill" [(ngModel)]="transFromB" name="selTransFromB" #selTransFromB="ngModel">
-                    <option [value]="bill.id" *ngFor="let bill of bills">${{bill.amount}} - {{bill.name}}</option>
-                  </select>
+
                   <select class="form-control" *ngIf="showPig" [(ngModel)]="transFromP" name="selTransFromP" #selTransFromP="ngModel">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
@@ -65,9 +57,7 @@
                   <select class="form-control" *ngIf="showEnvTo" [(ngModel)]="transToE" name="selTransToE" #selTransToE="ngModel">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
-                  <select class="form-control" *ngIf="showBillTo" [(ngModel)]="transToB" name="selTransToB" #selTransToB="ngModel">
-                    <option [value]="bill.id" *ngFor="let bill of bills">${{bill.amount}} - {{bill.name}}</option>
-                  </select>
+
                   <select class="form-control" *ngIf="showPigTo" [(ngModel)]="transToP" name="selTransToP" #selTransToP="ngModel">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
