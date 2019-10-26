@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
@@ -14,10 +15,12 @@ namespace DollaWeb.Controllers
     public class TransactionsController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public TransactionsController(DollaWebContext context)
+        public TransactionsController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: api/Transactions
@@ -75,6 +78,10 @@ namespace DollaWeb.Controllers
         [HttpPost]
         public async Task<ActionResult<Transaction>> PostTransaction(Transaction transaction)
         {
+
+            //This Line gets the active UserID and adds it as a FK to the PB
+            transaction.ApplicationUserId = userManager.GetUserId(User);
+
             _context.Transaction.Add(transaction);
             await _context.SaveChangesAsync();
 

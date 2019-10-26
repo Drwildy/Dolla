@@ -88,7 +88,7 @@ export class NavMenuComponent
     let myEnvelope: Envelope =
     {
       id: 0,
-      username: "tstewart11",
+      applicationUserId: "tstewart11",
       name: this.envName,
       amount: 0,
       createdDate: new Date(),
@@ -109,7 +109,7 @@ export class NavMenuComponent
     {
 
       id: 0,
-      username: "tstewart11",
+      applicationUserId: "tstewart11",
       name: this.billName,
       createdDate: new Date(),
       icon: this.selIconBill,
@@ -131,7 +131,7 @@ export class NavMenuComponent
     let myPiggyBank: Piggybank =
     {
       id: 0,
-      username: "tstewart11",
+      applicationUserId: "tstewart11",
       name: this.piggyName,
       createdDate: new Date(),
       icon: this.selIconPiggy,
@@ -186,7 +186,7 @@ export class NavMenuComponent
     console.log(toID + ' ' + fromID);
     let transaction: Transaction = {
       id: 0,
-      username: "tstewart11",
+      applicationUserId: "tstewart11",
       type: this.selTransType,
       transferFromId: fromID,
       transferToId: toID,

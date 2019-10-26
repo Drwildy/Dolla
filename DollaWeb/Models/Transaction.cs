@@ -11,8 +11,8 @@ namespace DollaWeb.Models
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("User")]
-        public string Username {get; set;}
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId {get; set;}
         public string Type { get; set; } //Withdraw, Depostin, Trnasfer
         [ForeignKey("Moneybox")]
         public int? TransferFromId { get; set; }

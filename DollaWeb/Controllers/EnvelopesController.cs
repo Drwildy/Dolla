@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
@@ -16,10 +17,12 @@ namespace DollaWeb.Controllers
     public class EnvelopesController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public EnvelopesController(DollaWebContext context)
+        public EnvelopesController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: api/Envelopes/TestConnection
@@ -34,9 +37,7 @@ namespace DollaWeb.Controllers
         public async Task<ActionResult<IEnumerable<Envelope>>> GetEnvelope()
         {
             //return await _context.Envelope.ToListAsync();
-            Envelope test = new Envelope();
-            
-            return await _context.Envelope.Where(x => x.MoneyBoxType == 1).ToListAsync();
+            return await _context.Envelope.Where(x => x.MoneyBoxType == 1 && x.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
         }
 
         // GET: api/Envelopes/5
@@ -130,6 +131,10 @@ namespace DollaWeb.Controllers
         {
             try
             {
+               
+                //This Line gets the active UserID and adds it as a FK to the Envelope
+                envelope.ApplicationUserId = userManager.GetUserId(User);
+
                 _context.Envelope.Add(envelope);
                 await _context.SaveChangesAsync();
 
