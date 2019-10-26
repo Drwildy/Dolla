@@ -38,21 +38,28 @@ export class NavMenuComponent
 
   public selTransType: string;
   public transferAmount: number;
+  public withdrawAmount: number;
+  public depositAmount: number;
   public transferDiv: boolean = false;
+  public withdrawDiv: boolean = false;
+  public depositDiv: boolean = false;
   public showEnv: boolean = true;
-  public showBill: boolean = false;
+  public showEnvW: boolean = true;
+  public showEnvD: boolean = true;
   public showPig: boolean = false;
+  public showPigW: boolean = false;
+  public showPigD: boolean = false;
   public showEnvTo: boolean = true;
-  public showBillTo: boolean = false;
   public showPigTo: boolean = false;
   public transFromE: number;
-  public transFromB: number;
   public transFromP: number;
   public transToE: number;
-  public transToB: number;
   public transToP: number;
+  public withFromE: number;
+  public withFromP: number;
+  public depToE: number;
+  public depToP: number;
   public envelopes: Envelope[];
-  public bills: Bill[];
   public piggyBanks: Piggybank[];
  
   
@@ -148,7 +155,9 @@ export class NavMenuComponent
   changeType(value: any) {
     console.log(value);
    this.refresh();
-   this.transferDiv = (value == "Transfer")
+    this.transferDiv = (value == "Transfer");
+    this.withdrawDiv = (value == "Withdraw");
+    this.depositDiv = (value == "Deposit");
 
     
   }
@@ -158,62 +167,119 @@ export class NavMenuComponent
     //The (change) function is not fired on the input instead the UI fires it on the label, thus the value or inner html reutrns the input with
     //the text of what radiobutton it is
     this.showEnv = target.innerHTML.includes('Envelopes');
-    this.showBill = target.innerHTML.includes('Bills');
     this.showPig = target.innerHTML.includes('Piggybanks');
   }
   toTypeChange(evt: any) {
     var target = evt.target;
 
     this.showEnvTo = target.innerHTML.includes('Envelopes');
-    this.showBillTo = target.innerHTML.includes('Bills');
     this.showPigTo = target.innerHTML.includes('Piggybanks');
+  }
+  withdrawTypeChange(evt: any) {
+    var target = evt.target;
+
+    this.showEnvW = target.innerHTML.includes('Envelopes');
+    this.showPigW = target.innerHTML.includes('Piggybanks');
+  }
+  depositTypeChange(evt: any) {
+    var target = evt.target;
+
+    this.showEnvD = target.innerHTML.includes('Envelopes');
+    this.showPigD = target.innerHTML.includes('Piggybanks');
   }
   addTransaction() {
     var fromID: number;
     var toID: number;
-    if (this.showEnv)
-      fromID = this.transFromE;
-    else if (this.showBill)
-      fromID = this.transFromB;
-    else
-      fromID = this.transFromP;
-    if (this.showEnvTo)
-      toID = this.transToE;
-    else if (this.showBillTo)
-      toID = this.transToB;
-    else
-      toID = this.transToP;
-    console.log(toID + ' ' + fromID);
-    let transaction: Transaction = {
-      id: 0,
-      applicationUserId: "tstewart11",
-      type: this.selTransType,
-      transferFromId: fromID,
-      transferToId: toID,
-      transferAmount: this.transferAmount,
-      transactionDate: new Date()
-    }
-    let toInfo: TransferInfo = {
-      type: "To",
-      id: toID,
-      amount: this.transferAmount
-    }
-    let fromInfo: TransferInfo = {
-      type: "From",
-      id: fromID,
-      amount: this.transferAmount
-    }
-    if (this.showPigTo)
-      this.piggybankService.addMoney(toID, toInfo);
-    else if (this.showEnvTo)
-      this.envelopeService.addMoney(toID, toInfo);
-    if (this.showPig)
-      this.piggybankService.addMoney(fromID, fromInfo);
-    else if (this.showEnv)
-      this.envelopeService.addMoney(fromID, fromInfo);
+    if (this.transferDiv) {
 
-    this.transactionService.addTransaction(transaction);
-    
+      if (this.showEnv)
+        fromID = this.transFromE;
+      else
+        fromID = this.transFromP;
+      if (this.showEnvTo)
+        toID = this.transToE;
+      else
+        toID = this.transToP;
+      console.log(toID + ' ' + fromID);
+      let transaction: Transaction = {
+        id: 0,
+        applicationUserId: "tstewart11",
+        type: this.selTransType,
+        transferFromId: fromID,
+        transferToId: toID,
+        transferAmount: this.transferAmount,
+        transactionDate: new Date()
+      }
+      let toInfo: TransferInfo = {
+        type: "To",
+        id: toID,
+        amount: this.transferAmount
+      }
+      let fromInfo: TransferInfo = {
+        type: "From",
+        id: fromID,
+        amount: this.transferAmount
+      }
+      if (this.showPigTo)
+        this.piggybankService.addMoney(toID, toInfo);
+      else if (this.showEnvTo)
+        this.envelopeService.addMoney(toID, toInfo);
+      if (this.showPig)
+        this.piggybankService.addMoney(fromID, fromInfo);
+      else if (this.showEnv)
+        this.envelopeService.addMoney(fromID, fromInfo);
+
+      this.transactionService.addTransaction(transaction);
+    }
+    else if (this.withdrawDiv) {
+      if (this.showEnvW)
+        fromID = this.withFromE;
+      else
+        fromID = this.withFromP;
+      let transaction: Transaction = {
+        id: 0,
+        applicationUserId: "tstewart11",
+        type: this.selTransType,
+        transferFromId: fromID,
+        transferToId: null,
+        transferAmount: this.withdrawAmount,
+        transactionDate: new Date()
+      }
+      let fromInfo: TransferInfo = {
+        type: "From",
+        id: fromID,
+        amount: this.withdrawAmount
+      }
+      if (this.showPigW)
+        this.piggybankService.addMoney(fromID, fromInfo);
+      else if (this.showEnvW)
+        this.envelopeService.addMoney(fromID, fromInfo);
+      this.transactionService.addTransaction(transaction);
+    }
+    else {
+      if (this.showEnvD)
+        toID = this.depToE;
+      else
+        toID = this.depToP;
+      let transaction: Transaction = {
+        id: 0,
+        applicationUserId: "tstewart11",
+        type: this.selTransType,
+        transferFromId: null,
+        transferToId: toID,
+        transferAmount: this.depositAmount,
+        transactionDate: new Date()
+      }
+      let toInfo: TransferInfo = {
+        type: "To",
+        id: toID,
+        amount: this.depositAmount
+      }
+      if (this.showPigD)
+        this.piggybankService.addMoney(toID, toInfo);
+      else if (this.showEnvD)
+        this.envelopeService.addMoney(toID, toInfo);
+    }
   }
 
   signOut()

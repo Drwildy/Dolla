@@ -16,6 +16,74 @@
               <option value="Withdraw">Withdraw</option>
               <option value="Deposit">Deposit</option>
             </select>
+            <ng-container *ngIf="depositDiv">
+              <div class="row">
+                <div class="col-12">
+                  <h6>Deposit to:</h6>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active" (click)="depositTypeChange($event)">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
+                    </label>
+                    <label class="btn btn-secondary" (click)="depositTypeChange($event)">
+                      <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <select class="form-control" *ngIf="showEnvD" [(ngModel)]="depToE" name="selWithFromE" #selDepFromE="ngModel">
+                    <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
+                  </select>
+
+                  <select class="form-control" *ngIf="showPigD" [(ngModel)]="depToP" name="selWithFromP" #selDepFromP="ngModel">
+                    <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+
+                  <input type="number" class="form-control" placeholder="Amount to Deposit" [(ngModel)]="depositAmount" name="depositA" #depositA="ngModel" />
+                </div>
+
+              </div>
+            </ng-container>
+            <ng-container *ngIf="withdrawDiv">
+              <div class="row">
+                <div class="col-12">
+                  <h6>Withdraw From:</h6>
+                  <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-secondary active" (click)="withdrawTypeChange($event)">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked> Envelopes
+                    </label>
+                    <label class="btn btn-secondary" (click)="withdrawTypeChange($event)">
+                      <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <select class="form-control" *ngIf="showEnvW" [(ngModel)]="withFromE" name="selWithFromE" #selWithFromE="ngModel">
+                    <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
+                  </select>
+
+                  <select class="form-control" *ngIf="showPigW" [(ngModel)]="withFromP" name="selWithFromP" #selWithFromP="ngModel">
+                    <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+
+                  <input type="number" class="form-control" placeholder="Amount to Withdraw" [(ngModel)]="withdrawAmount" name="withdrawA" #withdrawA="ngModel" />
+                </div>
+
+              </div>
+            </ng-container>
             <ng-container *ngIf="transferDiv">
 
               <div class="row">
@@ -29,7 +97,7 @@
                       <input type="radio" name="options" id="option3" autocomplete="off"> Piggybanks
                     </label>
                   </div>
-                  
+
                 </div>
                 <div class="col-6">
                   <h6>Transfer To:</h6>
