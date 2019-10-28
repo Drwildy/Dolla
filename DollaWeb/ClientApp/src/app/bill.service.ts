@@ -27,6 +27,9 @@ export class BillService {
     return this.http.get<Bill>('/api/Bills/'+id);
   }
   */
+  editBill(id: number, bill:Bill): Observable<Bill> {
+    return this.http.put<Bill>('/api/Bills/'+id, bill);
+  }
   getBillsById(id: number): Observable <Bill> {
     return this.http.get<Bill>("api/bills/" + id)
   }  

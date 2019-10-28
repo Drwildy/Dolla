@@ -3,44 +3,88 @@
     <br /><br />
           <div>
             <div *ngIf="myBills[0].paid" class="paid">
-              <i style="font-size:50px" class="fas fa-home"> </i>
+              <i style="font-size:50px" class="{{myBill.icon}}"> </i>
             </div>
             <div *ngIf="!myBills[0].paid" class="unpaid">
-              <i style="font-size:50px" class="fas fa-home"></i>
+              <i style="font-size:50px" class="{{myBill.icon}}"></i>
             </div>
-            <p style="font-size:35px;">Rent</p>
+            <div>
+              <button class="right transparentbutton" data-toggle="modal" data-target="#editBillModal">
+                <i class="fas fa-edit"> </i>
+              </button>
+            </div>
+            
+            <p style="font-size:35px;"> {{myBill.name}} </p>
             <div class="centeralign fontsize">
-              Due Date: {{myBills[0].name}} - {{myBills[myBills.length-1].dayDue}}
+              Due Date:  {{myBill.dayDue}} of each month.
             </div>
           </div>
-         
-   
-  </div>
 
+  </div >
+
+    <div class="modal fade" id="editBillModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit your Bill</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">Name: 
+            <input type="text" class="form-control" placeholder="{{myBill.name}}" [(ngModel)]="editName" name="nameBillInput" #nameBillInput="ngModel" />
+           
+            Amount:
+            <input type="number" class="form-control" placeholder="{{myBill.amount}}" [(ngModel)]="editAmount" name="billAmountInput" #billAmountInput="ngModel" />
+           
+            Day Due:
+            <input type="number" class="form-control" placeholder="{{myBill.dayDue}}" [(ngModel)]="editDayDue" name="dayDueInput" #dayDueInput="ngModel" />
+          
+            Icon:
+            <select class="form-control" [(ngModel)]="editIcon" name="selIconB" #selIconB="ngModel">
+              <option>--Select an icon--</option>
+              <option value="fas fa-cog">Cog</option>
+              <option value="fas fa-apple-alt"> Apple </option>
+              <option value="fas fa-file-invoice-dollar">Invoice</option>
+              <option value="fas fa-home">House</option>
+              <option value="fas fa-wifi">Internet</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editBill()" >Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- use *ngIf to render transactions for previous months.-->
   <table>
-    <tr *ngFor="let bill of myBills">
+    <tr>
       <td>
-        {{bill.name}}
+        <!--Need to display transaction month instead -->
+        {{myBill.createdDate}}
       </td>
-      <td *ngIf="bill.paid" class="paid">
-        Paid - {{bill.createdDate.toLocaleDateString()}}
+      <td *ngIf="myBill.paid" class="paid">
+        Paid
       </td>
-      <td *ngIf="!bill.paid" class="unpaid">
+      <td *ngIf="!myBill.paid" class="unpaid">
         Unpaid
       </td>
-      <td *ngIf="bill.paid" class="paid">
-        -${{bill.amount}}
+      <td *ngIf="!myBill.paid" class="unpaid">
+        ${{myBill.amount}}
       </td>
-      <td *ngIf="!bill.paid" class="unpaid">
-        ${{bill.amount}}
+      <td *ngIf="myBill.paid" class="paid">
+        -${{myBill.amount}}
       </td>
-      <td *ngIf="!bill.paid" class="unpaid">
-        <button type="button" class="btn btn-outline-success"> Mark Paid </button>
-      </td>
-      <td *ngIf="bill.paid" class="unpaid">
+      <td *ngIf="myBill.paid" class="paid">
         <button type="button" class="btn btn-outline-danger"> Mark Unpaid</button>
       </td>
+      <td *ngIf="!myBill.paid" class="unpaid">
+        <button type="button" class="btn btn-outline-success"> Mark Paid </button>
+      </td>
+    </tr>
+    <tr *ngIf="myBill.paid">
+      Bill is paid.
     </tr>
   </table>
-
 </div>
