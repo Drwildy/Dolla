@@ -9,7 +9,6 @@ import { AddpaymentmethodService } from '../addpaymentmethod.service';
 })
 export class AddPaymentMethodsComponent implements OnInit {
   addPaymentMethods: AddPaymentMethod[];
-
   public paymentMethodsName: string;
   public paymentMethodColor: string;
   public paymentMethodId: number; 
@@ -17,6 +16,7 @@ export class AddPaymentMethodsComponent implements OnInit {
 
   constructor(private addPaymentMethodService: AddpaymentmethodService) {
     addPaymentMethodService.dataChanged$.subscribe(item => this.refresh());
+    this.addPaymentMethods = [];
   }
 
   ngOnInit() {
