@@ -21,6 +21,7 @@ namespace DollaWeb.Models
         public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
         public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<PaidBill> PaidBill { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
