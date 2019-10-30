@@ -29,6 +29,7 @@ export class HomeBankComponent implements OnInit {
       queryParams: {
         "bankName": this.bank.name,
         "bankAmount": this.bank.amount,
+        "bankIcon": this.bank.icon,
         //can send the icon from here as well       
       }
     };

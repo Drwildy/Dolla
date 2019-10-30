@@ -32,6 +32,7 @@ import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envel
 import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,7 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
     AddPaymentMethodComponent,
     RegisterComponent,
     HomeEnvelopeDetailsComponent,
-    HomeBankDetailsComponent
+    HomeBankDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
