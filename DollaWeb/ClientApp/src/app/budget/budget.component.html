@@ -1,25 +1,34 @@
 <div id="budget-tabbed-area" class="container">
   <ul class="nav nav-tabs nav-fill justify-content-center mt-4" role="tablist">
     <li class="nav-item">
-      <a href="#envelopes" data-toggle="tab" role="tab" class="nav-link active">Envelopes</a>
+      <a href="#envelopes" data-toggle="tab" role="tab" class="nav-link active" (click)="envelopeRefresh()">Envelopes</a>
     </li>
     <li class="nav-item">
-      <a href="#bills" data-toggle="tab" role="tab" class="nav-link">Bills</a>
+      <a href="#bills" data-toggle="tab" role="tab" class="nav-link" (click)="billRefresh()">Bills</a>
     </li>
     <li class="nav-item">
-      <a href="#banks" data-toggle="tab" role="tab" class="nav-link">Banks</a>
+      <a href="#banks" data-toggle="tab" role="tab" class="nav-link" (click)="bankRefresh()">Banks</a>
     </li>
   </ul>
 
   <div class="tab-content mt-3">
     <div class="tab-pane active" id="envelopes">
-      <app-budget-moneybox *ngFor="let envelope of envelopes" [moneybox]="envelope"></app-budget-moneybox>
+      <div *ngIf="envelopes && envelopes.length > 0">
+        <app-budget-moneybox *ngFor="let envelope of envelopes" [moneybox]="envelope"></app-budget-moneybox>
+      </div>
+      <div *ngIf="!envelopes || envelopes.length == 0">No envelopes found</div>
     </div>
     <div class="tab-pane" id="bills">
-      <app-budget-moneybox *ngFor="let bill of bills" [moneybox]="bill"></app-budget-moneybox>
+      <div *ngIf="bills && bills.length > 0">
+        <app-budget-moneybox *ngFor="let bill of bills" [moneybox]="bill"></app-budget-moneybox>
+      </div>
+      <div *ngIf="!bills || bills.length == 0">No bills found</div>
     </div>
     <div class="tab-pane" id="banks">
-      <app-budget-moneybox *ngFor="let bank of banks" [moneybox]="bank"></app-budget-moneybox>
+      <div *ngIf="banks && banks.length > 0">
+        <app-budget-moneybox *ngFor="let bank of banks" [moneybox]="bank"></app-budget-moneybox>
+      </div>
+      <div *ngIf="!banks || banks.length == 0">No banks found</div>
     </div>
   </div>
 </div>
