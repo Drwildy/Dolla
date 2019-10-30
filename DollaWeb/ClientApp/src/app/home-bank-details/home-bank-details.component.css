@@ -1,3 +1,5 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 header {
   background-color: #666;
   padding: 30px;
@@ -12,4 +14,23 @@ p {
   text-align: center;
   font-size: 35px;
   color: black;
+}
+
+
+.col-sm-2 {
+  font-size: 50px;
+}
+
+.col-sm-7 {
+  font-size: 50px;
+}
+
+
+.invis {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none
 }
