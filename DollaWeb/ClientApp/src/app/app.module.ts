@@ -30,6 +30,7 @@ import { AddPaymentMethodsComponent } from './addpaymentmethods/addpaymentmethod
 import { AuthInterceptor } from './auth.service';
 import { HomeEnvelopeDetailsComponent } from './home-envelope-details/home-envelope-details.component';
 import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.component';
+import { BudgetMoneyboxComponent } from './budget-moneybox/budget-moneybox.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
     AddPaymentMethodComponent,
     RegisterComponent,
     HomeEnvelopeDetailsComponent,
-    HomeBankDetailsComponent
+    HomeBankDetailsComponent,
+    BudgetMoneyboxComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

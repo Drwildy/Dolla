@@ -24,7 +24,6 @@ export class HomeEnvelopesComponent implements OnInit {
   }
 
   refresh() {
-    console.log('refreshing...');
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
