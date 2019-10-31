@@ -33,6 +33,7 @@ import { HomeBankDetailsComponent } from './home-bank-details/home-bank-details.
 import { BudgetMoneyboxComponent } from './budget-moneybox/budget-moneybox.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
