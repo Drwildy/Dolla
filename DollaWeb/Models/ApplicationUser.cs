@@ -9,5 +9,6 @@ namespace DollaWeb.Models
     {
         //[Required]
         public ICollection<Moneybox> moneyBoxID { get; set; }
+        public Salary SalarySettings { get; set; }
     }
 }

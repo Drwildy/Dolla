@@ -16,12 +16,14 @@ namespace DollaWeb.Models
 
         }
 
-        public DbSet<DollaWeb.Models.Envelope> Envelope { get; set; }
-        public DbSet<DollaWeb.Models.PiggyBank> PiggyBank { get; set; }
-        public DbSet<DollaWeb.Models.Bill> Bill { get; set; }
-        public DbSet<DollaWeb.Models.Moneybox> Moneybox { get; set; }
+        public DbSet<Envelope> Envelope { get; set; }
+        public DbSet<PiggyBank> PiggyBank { get; set; }
+        public DbSet<Bill> Bill { get; set; }
+        public DbSet<Moneybox> Moneybox { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
         public DbSet<PaidBill> PaidBill { get; set; }
+        public DbSet<Salary> Salaries { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
