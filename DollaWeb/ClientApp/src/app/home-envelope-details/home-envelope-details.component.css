@@ -1,3 +1,5 @@
+@import "~@fortawesome/fontawesome-free/css/all.css";
+
 header {
   background-color: #666;
   padding: 30px;
@@ -12,4 +14,23 @@ p {
   text-align: center;
   font-size: 35px;
   color: black;
+}
+
+.invis {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none
+}
+
+
+.bd-highlight {
+  background-color: rgba(86,61,124,0.15);
+  border: 1px solid rgba(86,61,124,0.15);
+}
+
+.fontSize {
+  font-size: 30px;
 }

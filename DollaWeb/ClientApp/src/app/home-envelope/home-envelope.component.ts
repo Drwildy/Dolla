@@ -46,7 +46,8 @@ export class HomeEnvelopeComponent implements OnInit {
       queryParams: {
         "envelopeName": this.envelope.name,
         "envelopeAmount": this.envelope.amount,
-        "envelopeSetAmount": this.envelope.setAmount
+        "envelopeSetAmount": this.envelope.setAmount,
+        "envelopeIcon": this.envelope.icon
       }
     };
     this.router.navigate(["/home-envelope-details"], envelopeDetails);

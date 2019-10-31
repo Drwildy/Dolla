@@ -11,15 +11,17 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   public envelopeName: string;
   public envelopeAmount: number;
   public envelopeSetAmount: number;
+  public envelopeIcon: string;
 
   //receives query data from another component
   constructor(private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.envelopeName = params["envelopeName"];
       this.envelopeAmount = params["envelopeAmount"];
-      this.envelopeSetAmount = params["envelopeSetAmount"]
+      this.envelopeSetAmount = params["envelopeSetAmount"];
+      this.envelopeIcon = params["envelopeIcon"];
     });
-    console.log(this.envelopeName, this.envelopeAmount, this.envelopeSetAmount);
+      console.log(this.envelopeName, this.envelopeAmount, this.envelopeSetAmount, this.envelopeIcon);
   }
 
   ngOnInit() {

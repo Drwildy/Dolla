@@ -1,15 +1,77 @@
-<br />
 <div class="container">
-  <header>
-    <h2>Envelope Detail</h2>
-    <p>
-      Name: {{envelopeName}}
-    </p>
-    <p>
-      Amount: {{envelopeAmount}}
-    </p>
-    <p>
-      Amount Capacity: {{envelopeSetAmount}}
-    </p>
-  </header>
+  <!-- Grid for Icon/Name/Amount-->
+  <div class="d-flex justify-content-center fontSize border-bottom">
+
+    <div class="p-2 w-100">
+
+      <div class="row align-items-start">
+        <div class="col-2 col-sm-2 col-lg-2">
+          <i class="{{envelopeIcon}}"></i>
+        </div>
+        <div class="col-6 col-sm-6 col-lg-6">{{envelopeName}}</div>
+        <div class="col-4 col-sm-4 col-lg-4" id="amount">${{envelopeAmount}}/${{envelopeSetAmount}}</div>
+      </div>
+
+      <div class="row align-items-center">
+
+
+        <div class="col-6 col-sm-6 col-lg-6 border-right">
+          <button class="invis">
+            <div class="row align-items-start">
+              <div class="col-12 col-sm-12 col-lg-12" align="center">
+                <i class="fas fa-arrow-right fa-lg"></i>
+              </div>
+
+            </div>
+            <div class="row align-items-center" align="center">
+              <div class="col-12 col-sm-12 col-lg-12" align="center">
+                Deep Savings
+              </div>
+            </div>
+          </button>
+        </div>
+
+
+        <div class="col-6 col-sm-6 col-lg-6" align="center">
+          <button class="invis">
+            <i class="fas fa-cog fa-2x"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graph Goes Here-->
+    <div class="p-2 flex-shrink-1"><i class="fas fa-chart-area fa-2x"></i></div>
+  </div>
+
+  <!-- Table change this to take transaction Data-->
+  <table class="table table-striped table-hover">
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td style="color:red">@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td style="color:lawngreen">@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td style="color:lawngreen">@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+
+
 </div>
+
+
+
+
+
