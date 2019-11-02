@@ -22,11 +22,14 @@ export class TransactionsComponent implements OnInit {
 
   public transactions: Transaction[];
   public mapping = new Map([
-    ["gas", "&#xf52f"],
-    ["fastfood", "&#xf805"],
-    ["school", "&#xf5d1"],
-    ["glasses", "&#xf530"],
-    ["books", "&#xf02d"]
+    ["transferFrom", "\uf19c"],
+    ["transferTo", "\uf19c"],
+    ["depositFrom", "\uf4c0"],
+    ["depositTo", "\uf19c"],
+    ["withdrawFrom", "\uf19c"],
+    ["withdrawTo", "\uf4c0"],
+    ["billpayFrom", "\uf19c"],
+    ["billpayTo", "\uf155"]
     // etc...
   ]);
 
@@ -43,10 +46,7 @@ export class TransactionsComponent implements OnInit {
      * Font Awesome icon for the sending account 
      * to be used in an HTML template.
      */
-
-    return this.mapping.get(this.transactions.find(t => {
-      t.id == transaction.transferToId
-    }).type);
+    return this.mapping.get(transaction.type.toLowerCase().concat("From"));
   }
 
   getToIcon(transaction: Transaction) {
@@ -56,10 +56,7 @@ export class TransactionsComponent implements OnInit {
      * Font Awesome icon for the receiving account 
      * to be used in an HTML template.
      */
-
-    return this.mapping.get(this.transactions.find(t => {
-      t.id == transaction.transferToId
-    }).type);
+    return this.mapping.get(transaction.type.toLowerCase().concat("To"));
   }
 
   ngOnInit() {

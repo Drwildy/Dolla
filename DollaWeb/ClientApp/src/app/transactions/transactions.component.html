@@ -1,16 +1,20 @@
+<!--
 <div class="d-flex flex-wrap" *ngIf="transactions.length > 0">
   <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"> </app-transaction>
 </div>
+-->
 <!-- Dropdown menu for future filtering of transactions -->
 <div class="dropdown show" style="display:inline;">
-  Transactions
-  <a class="btn btn-light btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    All
+  <div class="h3 p-4" style="display: inline;">Transactions</div>
+  <a class="btn btn-light btn-sm dropdown-toggle my-4" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item">Type 1</a>
-    <a class="dropdown-item">Type 2</a>
-    <a class="dropdown-item">Type 3</a>
+    <a class="dropdown-item">All</a>
+    <a class="dropdown-item">BillPay</a>
+    <a class="dropdown-item">Deposit</a>
+    <a class="dropdown-item">Tansfer</a>
+    <a class="dropdown-item">Withdraw</a>
   </div>
 </div>
 <!-- Table template for transactions.  Details currently not working -->
@@ -18,16 +22,26 @@
   <table class="table table-hover">
     <tbody>
       <tr *ngFor="let data of transactions" data-toggle="modal" [attr.data-target]="'#' + data.id">
-        <td>(from_icon) -> (to_icon)</td>
+        <td>
+          <i class="fa">{{getFromIcon(data)}}</i> 
+          <i class="fas fa-arrow-right px-4"></i> 
+          <i class="fa">{{getToIcon(data)}}</i>
+        </td>
         <td>{{data.type}}</td>
-        <td>{{data.transferAmount}}</td>
+        <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
       </tr>
-      <!-- Data binding broken here. -->
+      <!-- Data binding broken here. Need a method for determining payment method.
       <tr data-target="'#' + data.id" class="modal">
-        <td>(from_icon) {{data.type}} -> (to_icon)</td>
+        <td>
+            <i class="fa">{{getFromIcon(data))}}</i> 
+            {{data.type}}
+            <i class="fas fa-arrow-right px-4"></i> 
+            <i class="fa">{{getToIcon(data}}</i>
+        </td>
         <td>(payment_method)</td>
         <td>{{data.transactionDate}}</td>
       </tr>
+      -->
     </tbody>
   </table>
 </div>
