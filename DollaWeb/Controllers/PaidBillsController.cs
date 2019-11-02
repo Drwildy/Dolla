@@ -6,18 +6,23 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PaidBillsController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> userManager;
 
-        public PaidBillsController(DollaWebContext context)
+        public PaidBillsController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            this.userManager = userManager;
         }
 
         // GET: api/PaidBills
@@ -29,9 +34,9 @@ namespace DollaWeb.Controllers
 
         // GET: api/PaidBills/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PaidBill>> GetPaidBill(int id)
+        public async Task<ActionResult<IEnumerable<PaidBill>>> GetPaidBill(int id)
         {
-            var paidBill = await _context.PaidBill.FindAsync(id);
+            var paidBill = await _context.PaidBill.Where(x => x.BillId == id).ToListAsync();
 
             if (paidBill == null)
             {
