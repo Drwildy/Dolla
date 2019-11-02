@@ -8,7 +8,7 @@ import { Transaction } from '../transaction';
 })
 export class TransactionComponent implements OnInit {
 
-  @Input() transaction: Transaction; 
+  @Input() transaction: Transaction;
 
   constructor() { }
 

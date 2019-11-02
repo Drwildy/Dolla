@@ -50,6 +50,7 @@ export class HomeEnvelopeComponent implements OnInit {
         "envelopeIcon": this.envelope.icon
       }
     };
+    //since transactions not showing, this shoddy method is made (change with actual database pull)
     this.router.navigate(["/home-envelope-details"], envelopeDetails);
   }
 }
