@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DollaWeb.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
@@ -14,92 +15,56 @@ namespace DollaWeb.Controllers
     public class SalariesController : ControllerBase
     {
         private readonly DollaWebContext _context;
+        private UserManager<ApplicationUser> _userManager;
 
-        public SalariesController(DollaWebContext context)
+        public SalariesController(DollaWebContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Salaries
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Salary>>> GetSalaries()
+        public async Task<ActionResult<Salary>> GetSalaries()
         {
-            return await _context.Salaries.ToListAsync();
+            return (await _context.Salaries.Where(s => s.ApplicationUser == _userManager.GetUserId(User)).ToListAsync()).FirstOrDefault();
         }
 
-        // GET: api/Salaries/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Salary>> GetSalary(int id)
+        // PUT: api/Salaries
+        [HttpPut]
+        public async Task<IActionResult> PutSalary(Salary salary)
         {
-            var salary = await _context.Salaries.FindAsync(id);
-
-            if (salary == null)
+            if (SalaryExists())
             {
-                return NotFound();
-            }
+                var dbSalary = _context.Salaries.First(s => s.ApplicationUser == _userManager.GetUserId(User));
+                dbSalary.SalaryAmount = salary.SalaryAmount;
+                dbSalary.IsSalary = salary.IsSalary;
 
-            return salary;
-        }
+                _context.Entry(dbSalary).State = EntityState.Modified;
 
-        // PUT: api/Salaries/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutSalary(int id, Salary salary)
-        {
-            if (id != salary.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(salary).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SalaryExists(id))
+                try
                 {
-                    return NotFound();
+                    await _context.SaveChangesAsync();
+                    return NoContent();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
                     throw;
                 }
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Salaries
-        [HttpPost]
-        public async Task<ActionResult<Salary>> PostSalary(Salary salary)
-        {
-            _context.Salaries.Add(salary);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSalary", new { id = salary.Id }, salary);
-        }
-
-        // DELETE: api/Salaries/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Salary>> DeleteSalary(int id)
-        {
-            var salary = await _context.Salaries.FindAsync(id);
-            if (salary == null)
+            else
             {
-                return NotFound();
+                salary.ApplicationUser = _userManager.GetUserId(User);
+                _context.Salaries.Add(salary);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.Salaries.Remove(salary);
-            await _context.SaveChangesAsync();
-
-            return salary;
         }
 
-        private bool SalaryExists(int id)
+        private bool SalaryExists()
         {
-            return _context.Salaries.Any(e => e.Id == id);
+            return _context.Salaries.Where(s => s.ApplicationUser == _userManager.GetUserId(User)).Any();
         }
     }
 }

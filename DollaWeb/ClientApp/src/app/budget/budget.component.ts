@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvelopeService } from '../envelope.service';
-import { Envelope } from '../envelope';
-import { BillService } from '../bill.service';
-import { PiggybankService } from '../piggybank.service';
-import { Bank } from '../bank';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Bill } from '../bill';
+import { BillService } from '../bill.service';
+import { Envelope } from '../envelope';
+import { EnvelopeService } from '../envelope.service';
+import { PiggybankService } from '../piggybank.service';
+import { Salary } from '../salary';
+import { SalaryService } from '../salary.service';
+import { Piggybank } from '../piggybank';
 
 @Component({
   selector: 'app-budget',
@@ -15,10 +18,15 @@ export class BudgetComponent implements OnInit {
 
   envelopes: Envelope[];
   bills: Bill[];
-  banks: Bank[];
+  banks: Piggybank[];
+
+  salary: Salary;
+  allocated: number;
+
+  editIcon = faEdit;
 
   constructor(private envelopeService: EnvelopeService, private billService: BillService,
-    private bankService: PiggybankService) {
+    private bankService: PiggybankService, private salaryService: SalaryService) {
     envelopeService.dataChanged$.subscribe(item => this.envelopeRefresh());
     billService.dataChanged$.subscribe(bill => this.billRefresh());
     bankService.dataChanged$.subscribe(bank => this.bankRefresh());
@@ -28,12 +36,21 @@ export class BudgetComponent implements OnInit {
     this.envelopeRefresh();
     this.billRefresh();
     this.bankRefresh();
+    this.salaryService.getSalary()
+      .subscribe((salary: Salary) => {
+        if (salary) {
+          this.salary = salary;
+        } else {
+          this.salary = { salaryAmount: 0, isSalary: false };
+        }
+      });
   }
 
   envelopeRefresh() {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
+        this.allocatedRefresh();
       });
   }
 
@@ -41,15 +58,28 @@ export class BudgetComponent implements OnInit {
     this.billService.getBills()
       .subscribe((bills: Bill[]) => {
         this.bills = bills;
+        this.allocatedRefresh();
       });
   }
 
   bankRefresh() {
     this.bankService.getPiggybanks()
-      .subscribe((banks: Bank[]) => {
-        console.log(banks);
+      .subscribe((banks: Piggybank[]) => {
         this.banks = banks;
+        this.allocatedRefresh();
       });
   }
 
+  allocatedRefresh() {
+    this.allocated = 0;
+    this.allocated += this.envelopes.map((env) => env.setAmount).reduce((a, b) => a + b);
+    this.allocated += this.bills.map((bill) => bill.amount).reduce((a, b) => a + b);
+    this.allocated += this.banks.map((bank) => bank.monthlyAllocation).reduce((a, b) => a + b);
+  }
+
+  saveSalary() {
+    this.salaryService.updateSalary(this.salary)
+      .subscribe((salary: Salary) => {
+      });
+  }
 }
