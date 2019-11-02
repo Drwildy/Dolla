@@ -13,6 +13,13 @@ export class TransactionService {
     this.http.post('/api/Transactions', transaction)
       .subscribe();
   }
+
+  /*
+  createTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>('/api/Transactions', transaction);
+  }
+  */
+
   getTransaction(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>('/api/Transactions/');
     //let list: Array<Transaction> = [];
