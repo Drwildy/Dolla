@@ -143,7 +143,7 @@ export class NavMenuComponent
       createdDate: new Date(),
       icon: this.selIconPiggy,
       amount: 0,
-      test: null
+      monthlyAllocation: 0
     }
     this.piggybankService.createPiggybank(myPiggyBank)
       .subscribe(
