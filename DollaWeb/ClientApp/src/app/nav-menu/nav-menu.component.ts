@@ -279,6 +279,7 @@ export class NavMenuComponent
         this.piggybankService.addMoney(toID, toInfo);
       else if (this.showEnvD)
         this.envelopeService.addMoney(toID, toInfo);
+      this.transactionService.addTransaction(transaction);
     }
   }
 
