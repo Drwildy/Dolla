@@ -2,10 +2,10 @@
   <div class="bottomborder">
     <br /><br />
           <div>
-            <div *ngIf="myBills[0].paid" class="paid">
+            <div *ngIf="myBill" class="paid">
               <i style="font-size:50px" class="{{myBill.icon}}"> </i>
             </div>
-            <div *ngIf="!myBills[0].paid" class="unpaid">
+            <div *ngIf="!myBill" class="unpaid">
               <i style="font-size:50px" class="{{myBill.icon}}"></i>
             </div>
             <div>
@@ -57,11 +57,31 @@
         </div>
       </div>
     </div>
-  <!-- use *ngIf to render transactions for previous months.-->
   <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let month of pastMonths">
+        <td *ngIf="!month.month == ''">
+          {{month.month}}
+        </td>
+        <td *ngIf="!month.month == ''">
+          <span *ngIf="month.paid">Paid</span>
+          <span *ngIf="!month.paid" style="color:red;">Unpaid</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- use *ngIf to render transactions for previous months.-->
+  <!-- paid is no longer a property for bill. Re-doing this -->
+  <!--<table>
     <tr>
       <td>
-        <!--Need to display transaction month instead -->
+        
         {{myBill.createdDate}}
       </td>
       <td *ngIf="myBill.paid" class="paid">
@@ -86,5 +106,5 @@
     <tr *ngIf="myBill.paid">
       Bill is paid.
     </tr>
-  </table>
+  </table>-->
 </div>

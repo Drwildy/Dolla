@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BillService } from '../bill.service';
+import { PaidBillService } from '../paidbill.service';
 import { Bill } from '../bill';
 import { icon } from '@fortawesome/fontawesome-svg-core';
+import { PaidBill } from '../paidbill';
+import { MonthPaid } from '../MonthPaid'
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-bill-details',
@@ -21,17 +25,22 @@ export class BillDetailsComponent implements OnInit {
 
 
 
-  myBill: Bill;
+  public myBill: Bill;
+  public myBillPayments: PaidBill[];
+  public months: string[];
+  public pastMonths: MonthPaid[];
   public editName: string;
   public editIcon: string;
   public editAmount: number;
   public editDayDue: number;
+  public iconClass: string;
 
-  public constructor(private route: ActivatedRoute, private billService: BillService) {
+  public constructor(private route: ActivatedRoute, private billService: BillService, private payBillService: PaidBillService) {
 
-   
+
+    this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     
-
+    
     //billService.dataChanged$.subscribe(bill => this.refresh());
     this.route.queryParams.subscribe(params => {
       if (params["type"] == "Bill") {
@@ -39,8 +48,10 @@ export class BillDetailsComponent implements OnInit {
         this.id = params["id"];
       }
       this.getBillbyId();
+      this.getBillPayments();
     });
-
+    //this.pastMonths.push()
+    
 
     // call a service to get a specific bill. 
   
@@ -168,11 +179,35 @@ export class BillDetailsComponent implements OnInit {
   //  console.log('Inside getBill')
     this.billService.getBillsById(this.id)
       .subscribe((bill: Bill) => {
-        this.myBill = { ...bill }
-        console.log(bill);
+        this.myBill = bill;
+        this.iconClass = bill.icon;
+        console.log(this.myBill);
         //console.log("Bill is assigned. ")
       });
     
+  }
+  getBillPayments() {
+    this.payBillService.getPayments(this.id)
+      .subscribe((bills: PaidBill[]) => {
+        this.myBillPayments = bills;
+        //console.log(bills);
+        var d = new Date();
+        var n = d.getMonth();
+        this.pastMonths = [{month:"", paid: false}] 
+        for (var i = n - 1; i >= 0; i--) {
+          let tempMonth: MonthPaid = new MonthPaid();
+          tempMonth.paid = false;
+          tempMonth.month = this.months[i];
+          for (var k = 0; k < this.myBillPayments.length; k++) {
+            if (this.myBillPayments[k].month == tempMonth.month) {
+              tempMonth.paid = true;
+            }
+            
+          }
+          this.pastMonths.push(tempMonth);
+        }
+        console.log(this.pastMonths);
+      });
   }
 
 
