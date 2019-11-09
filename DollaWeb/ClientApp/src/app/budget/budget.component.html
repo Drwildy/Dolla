@@ -4,7 +4,7 @@
     <div class="col-8 h2">Monthly Budget</div>
     <div id="salaryDisplay" class="col-4 h2 text-right" data-toggle="modal" data-target="#modalSalary">
       <div *ngIf="salary.isSalary">{{allocated | currency}} / {{salary.salaryAmount | currency}} <fa-icon [icon]="editIcon" class="fa-xs"></fa-icon></div>
-      <div *ngIf="!salary.isSalary">Hourly</div>
+      <div *ngIf="!salary.isSalary">{{allocated | currency}} <fa-icon [icon]="editIcon" class="fa-xs"></fa-icon></div>
     </div>
   </div>
 </div>
