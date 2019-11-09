@@ -24,15 +24,11 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Compile Remove="ClientApp\src\app\addpaymentmethod-dialog\**" />
     <Compile Remove="ClientApp\src\app\newpaymentmethod\**" />
     <Content Remove="$(SpaRoot)**" />
-    <Content Remove="ClientApp\src\app\addpaymentmethod-dialog\**" />
     <Content Remove="ClientApp\src\app\newpaymentmethod\**" />
-    <EmbeddedResource Remove="ClientApp\src\app\addpaymentmethod-dialog\**" />
     <EmbeddedResource Remove="ClientApp\src\app\newpaymentmethod\**" />
     <None Remove="$(SpaRoot)**" />
-    <None Remove="ClientApp\src\app\addpaymentmethod-dialog\**" />
     <None Remove="ClientApp\src\app\newpaymentmethod\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
@@ -61,10 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\addpaymentmethod-dialog\addpaymentmethod-dialog.component.css" />
-    <None Remove="ClientApp\src\app\addpaymentmethod-dialog\addpaymentmethod-dialog.component.html" />
-    <None Remove="ClientApp\src\app\addpaymentmethod-dialog\addpaymentmethod-dialog.component.spec.ts" />
-    <None Remove="ClientApp\src\app\addpaymentmethod-dialog\addpaymentmethod-dialog.component.ts" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.css" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.html" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.spec.ts" />
