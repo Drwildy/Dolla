@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 @Injectable()
-export class AddPaymentMethod {
+export class PaymentMethod {
   id: number;
   name: string;
   createdDate: Date;

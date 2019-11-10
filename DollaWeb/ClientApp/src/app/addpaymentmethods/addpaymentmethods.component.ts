@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AddPaymentMethod } from '../addpaymentmethod';
-import { AddpaymentmethodService } from '../addpaymentmethod.service';
+import { PaymentMethod } from '../paymentmethod';
+import { PaymentMethodService } from '../paymentmethod.service';
 
 @Component({
   selector: 'app-addpaymentmethods',
@@ -8,14 +8,14 @@ import { AddpaymentmethodService } from '../addpaymentmethod.service';
   styleUrls: ['./addpaymentmethods.component.css']
 })
 export class AddPaymentMethodsComponent implements OnInit {
-  addPaymentMethods: AddPaymentMethod[];
+  addPaymentMethods: PaymentMethod[];
   public paymentMethodsName: string;
   public paymentMethodColor: string;
   public paymentMethodId: number; 
 
 
-  constructor(private addPaymentMethodService: AddpaymentmethodService) {
-    addPaymentMethodService.dataChanged$.subscribe(item => this.refresh());
+  constructor(private paymentMethodService: PaymentMethodService) {
+    paymentMethodService.dataChanged$.subscribe(item => this.refresh());
     this.addPaymentMethods = [];
   }
 
@@ -25,8 +25,8 @@ export class AddPaymentMethodsComponent implements OnInit {
 
   refresh() {
     console.log('refreshing...');
-    this.addPaymentMethodService.getPaymentMethod()
-      .subscribe((paymentMethod: AddPaymentMethod[]) => {
+    this.paymentMethodService.getPaymentMethod()
+      .subscribe((paymentMethod: PaymentMethod[]) => {
         this.addPaymentMethods = paymentMethod;
 
         //Enforce the limit of returned envelopes (used by overview to limit to top x)
@@ -36,7 +36,7 @@ export class AddPaymentMethodsComponent implements OnInit {
 
 
   addPaymentMethod() {
-    let myPaymentMethod: AddPaymentMethod =
+    let myPaymentMethod: PaymentMethod =
     {
       id: 0,
       name: this.paymentMethodsName,
@@ -44,10 +44,10 @@ export class AddPaymentMethodsComponent implements OnInit {
       color: this.paymentMethodColor,
       
     };
-    this.addPaymentMethodService.createPaymentMethod(myPaymentMethod)
+    this.paymentMethodService.createPaymentMethod(myPaymentMethod)
       .subscribe(
         result => {
-          this.addPaymentMethodService.dataChanged$.emit();
+          this.paymentMethodService.dataChanged$.emit();
         }
     );
 
@@ -55,9 +55,9 @@ export class AddPaymentMethodsComponent implements OnInit {
   }
 
   deletePaymentMethod(paymentMethodId: number) {
-    this.addPaymentMethodService.deletePaymentMethod(paymentMethodId)
+    this.paymentMethodService.deletePaymentMethod(paymentMethodId)
       .subscribe(result => {
-        this.addPaymentMethodService.dataChanged$.emit();
+        this.paymentMethodService.dataChanged$.emit();
       })
   }
 }

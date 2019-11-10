@@ -6,7 +6,6 @@ import { EnvelopeService } from '../envelope.service';
 import { BillService } from '../bill.service';
 import { PiggybankService } from '../piggybank.service'
 import { Piggybank } from '../piggybank';
-import { User } from '../User';
 import { NavbarService } from '../navbar.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute, ParamMap } from '@angular/router';
 import { TransactionService } from '../transaction.service';

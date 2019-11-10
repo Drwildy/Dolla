@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DollaWeb.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {

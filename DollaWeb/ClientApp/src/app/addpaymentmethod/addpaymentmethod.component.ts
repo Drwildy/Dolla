@@ -1,10 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AddPaymentMethod } from '../addpaymentmethod';
+import { PaymentMethod } from '../paymentmethod';
 import { Router, NavigationExtras } from '@angular/router';
 import { Observable } from 'rxjs';
-
-
-
 
 @Component({
   selector: 'app-addpaymentmethod',
@@ -12,18 +9,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./addpaymentmethod.component.css']
 })
 export class AddPaymentMethodComponent implements OnInit {
-  @Input() addPaymentMethod: AddPaymentMethod;
+  @Input() paymentMethod: PaymentMethod;
 
- // state$: Observable<any>;
-   
   
-  constructor(public router: Router) {
-    
-  }
+  constructor(public router: Router) { }
 
   ngOnInit() {
-   // console.log(this.addPaymentMethod)
   }
-
 
 }

@@ -1,12 +1,12 @@
 <div>
-  <div class="d-flex align-items-start  text-dark h5 mt-3" (click)="direct()">
+  <div class="d-flex align-items-start  text-dark h5 mt-3">
     <table class="border">
       <tr class="background">
         <td class="short">
-         <i class="far fa-credit-card  {{addPaymentMethod.color}} "></i>
+         <i class="far fa-credit-card  {{paymentMethod.color}} "></i>
         </td>
-        <td class="long"> 
-          {{addPaymentMethod.name}}
+        <td class="long">
+          {{paymentMethod.name}}
         </td>
         <td class="short">
 
@@ -19,36 +19,40 @@
     </table>
   </div>
 </div>
-<div>
-  <div class="modal fade" id="editPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header Green">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Payment Method </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Payment Method's Name..." [(ngModel)]="editPaymentMethodName" name="nameEdit" #nameInput="ngModel" />
-          <br />
-          <select name="selIcon" class="form-control">
-            <option> Pick A Color </option>
-            <option>Green</option>
-            <option>Red</option>
-            <option>Orange</option>
-            <option>Blue</option>
-            <option>Black</option>
-          </select>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" (click)="addPaymentMethod()">Submit Changes</button>
-        </div>
+
+
+<!-- Not yet implemented -->
+
+<!--
+<div class="modal fade" id="editPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header Green">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Payment Method </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" placeholder="Payment Method's Name..." [(ngModel)]="editPaymentMethodName" name="nameEdit" #nameInput="ngModel" />
+        <br />
+        <select name="selIcon" class="form-control">
+          <option> Pick A Color </option>
+          <option>Green</option>
+          <option>Red</option>
+          <option>Orange</option>
+          <option>Blue</option>
+          <option>Black</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addPaymentMethod()">Submit Changes</button>
       </div>
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="deletePaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -59,9 +63,9 @@
         </button>
       </div>
       <div class="modal-body Red">
-        <h5>Are you sure you want to delete? </h5> {{addPaymentMethod.id}}
+        <h5>Are you sure you want to delete? </h5> {{paymentMethod.id}}
         <br />
-       
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -70,4 +74,4 @@
     </div>
   </div>
 </div>
-
+-->

@@ -5,8 +5,8 @@ import { PaidBillService } from '../paidbill.service';
 import { Bill } from '../bill';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 import { PaidBill } from '../paidbill';
-import { MonthPaid } from '../MonthPaid'
 import { forEach } from '@angular/router/src/utils/collection';
+import { MonthPaid } from '../month-paid';
 
 @Component({
   selector: 'app-bill-details',
@@ -20,10 +20,6 @@ export class BillDetailsComponent implements OnInit {
   public id: number;
   public myBills: Array<Bill>;
   public newBills: Array<Bill>;
-
-
-
-
 
   public myBill: Bill;
   public myBillPayments: PaidBill[];
@@ -193,7 +189,7 @@ export class BillDetailsComponent implements OnInit {
         //console.log(bills);
         var d = new Date();
         var n = d.getMonth();
-        this.pastMonths = [{month:"", paid: false}] 
+        this.pastMonths = [{month:"", paid: false}]
         for (var i = n - 1; i >= 0; i--) {
           let tempMonth: MonthPaid = new MonthPaid();
           tempMonth.paid = false;
