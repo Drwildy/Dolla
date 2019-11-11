@@ -21,6 +21,7 @@ namespace DollaWeb.Controllers
         private SignInManager<ApplicationUser> signInManager;
         private UserManager<ApplicationUser> userManager;
 
+
         public UserController(DollaWebContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
@@ -70,6 +71,34 @@ namespace DollaWeb.Controllers
             signInManager.SignOutAsync();
             return Ok();
         }
+
+        [Authorize]
+        [HttpPut("changePass")]
+        public async Task<IActionResult> changePassAsync([FromBody]SettingsViewModel settingsViewModel)
+        {
+            //ApplicationUser loggedUser = new ApplicationUser { UserName = userManager.GetUserName(User) };
+            //var userId = await userManager.GetUserNameAsync(loggedUser);
+            var user = await userManager.FindByNameAsync(userManager.GetUserName(User));
+
+            var result = await userManager.ChangePasswordAsync(user, settingsViewModel.currentPass, settingsViewModel.newPass);
+
+            //var user =  userManager.FindByIdAsync(userId);
+
+            //var token = userManager.GeneratePasswordResetTokenAsync(User);
+
+            //var result = await UserManager.ResetPasswordAsync(user, token, "MyN3wP@ssw0rd");
+
+            if (result.Succeeded)
+            {
+                await signInManager.SignOutAsync();
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
 
         /*
         // GET: api/User
