@@ -73,7 +73,6 @@ export class SettingsComponent implements OnInit {
 
   changePass() {
       // do signup or something
-      console.log(this.frmSignup.value);
       this.newPass = this.frmSignup.value.confirmPassword;
       this.currentPass = this.frmSignup.value.password2;
 

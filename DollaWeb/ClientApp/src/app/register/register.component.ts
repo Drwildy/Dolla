@@ -74,7 +74,6 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
-        console.log(this.frmRegister.value.confirmPassword)
         let myUser = { Email: this.Email, UserName: this.Username, Password: this.frmRegister.value.confirmPassword };
         this.loginService.register(myUser)
             .subscribe(result => {
