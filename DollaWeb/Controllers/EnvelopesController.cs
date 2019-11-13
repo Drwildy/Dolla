@@ -62,35 +62,36 @@ namespace DollaWeb.Controllers
             return envelope;
         }
 
-        // PUT: api/Envelopes/5
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutEnvelope(int id, Envelope envelope)
-        //{
-        //    if (id != envelope.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutEnvelope(int id, Envelope envelope)
+        {
+            if (id != envelope.Id)
+            {
+                return BadRequest();
+            }
 
-        //    _context.Entry(envelope).State = EntityState.Modified;
+            _context.Entry(envelope).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!EnvelopeExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EnvelopeExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
+
+       /*
         [HttpPut("{id}")]
         public async Task<ActionResult<Envelope>> PutEnvelope(int id, TransferInfo info)
         {
@@ -132,6 +133,9 @@ namespace DollaWeb.Controllers
             }
             return envelope;
         }
+
+
+    */
         // POST: api/Envelopes
         [HttpPost]
         public async Task<ActionResult<Envelope>> PostEnvelope(Envelope envelope)

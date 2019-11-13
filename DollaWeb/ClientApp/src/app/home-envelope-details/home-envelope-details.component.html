@@ -3,17 +3,17 @@
   <div class="d-flex justify-content-center fontSize border-bottom">
 
     <div class="p-2 w-100">
-
       <div class="row align-items-start">
         <div class="col-2 col-sm-2 col-lg-2">
-          <i class="{{envelopeIcon}}"></i>
+          <button class="btn-icon" data-toggle="modal" data-target="#editEnvIcon">
+          <i class="{{myEnvelope.icon}}"></i>
+          </button>
         </div>
-        <div class="col-6 col-sm-6 col-lg-6">{{envelopeName}}</div>
-        <div class="col-4 col-sm-4 col-lg-4" id="amount">${{envelopeAmount}}/${{envelopeSetAmount}}</div>
+        <div class="col-6 col-sm-6 col-lg-6">{{myEnvelope.name}}</div>
+        <div class="col-4 col-sm-4 col-lg-4" id="amount">${{myEnvelope.amount}}/${{myEnvelope.setAmount}}</div>
       </div>
 
       <div class="row align-items-center">
-
 
         <div class="col-6 col-sm-6 col-lg-6 border-right">
           <button class="invis">
@@ -69,7 +69,71 @@
   </table>
 
 
+
+  <div class="modal fade" id="editEnvIcon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Envelope Icon</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         
+          <div class="displayIcon">
+
+            <table>
+              <tr>
+                <td>
+                  <i class="fas fa-envelope"></i> Envelope
+                </td>
+                <td>
+                  <i class="fas fa-plane-departure"></i>Plane
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <i class="fas fa-snowboarding"></i> Snowboarding
+                </td>
+                <td>
+                  <i class="fas fa-cart-plus"></i> Cart
+                </td>
+               
+              </tr>
+              <tr>
+                <td>
+                  <i class="fas fa-home"></i> House
+                </td>
+                <td>
+                  <i class="fas fa-car"></i> Car
+                </td>
+              </tr>
+            </table>
+
+            Icon:
+            <select class="form-control" [(ngModel)]="editEnvIcon" name="selIconB" #selIconB="ngModel">
+              <option>--Select an icon--</option>
+              <option value="fas fa-envelope">Envelope</option>
+              <option value="fas fa-plane-departure"> Plane </option>
+              <option value="fas fa-home">House</option>
+              <option value="fas fa-snowboarding">Snowboarding</option>
+              <option value="fas fa-cart-plus">Cart</option>
+              <option value="fas fa-car">Car</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="editEnvelopeIcon()" data-dismiss="modal">Edit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
 
 
 
