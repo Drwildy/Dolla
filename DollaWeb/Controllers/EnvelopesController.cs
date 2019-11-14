@@ -62,8 +62,8 @@ namespace DollaWeb.Controllers
             return envelope;
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutEnvelope(int id, Envelope envelope)
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchEnvelope(int id, Envelope envelope)
         {
             if (id != envelope.Id)
             {
@@ -91,7 +91,7 @@ namespace DollaWeb.Controllers
             return NoContent();
         }
 
-       /*
+       
         [HttpPut("{id}")]
         public async Task<ActionResult<Envelope>> PutEnvelope(int id, TransferInfo info)
         {
@@ -135,7 +135,7 @@ namespace DollaWeb.Controllers
         }
 
 
-    */
+    
         // POST: api/Envelopes
         [HttpPost]
         public async Task<ActionResult<Envelope>> PostEnvelope(Envelope envelope)

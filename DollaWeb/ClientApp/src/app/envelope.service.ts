@@ -33,7 +33,7 @@ export class EnvelopeService {
   }
 
   editEnvelope(id: number, envelope: Envelope): Observable<Envelope> {
-    return this.http.put<Envelope>('/api/envelopes/' + id, envelope);
+    return this.http.patch<Envelope>('/api/envelopes/' + id, envelope);
   }
 
 }

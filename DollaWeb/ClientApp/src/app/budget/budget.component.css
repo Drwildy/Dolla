@@ -1,3 +1,11 @@
 #budget-tabbed-area .tab-content {
   padding: 5px 15px;
 }
+.leftdiv{
+  width:45%;
+  float:left;
+}
+.rightdiv{
+  width:45%;
+  float:right;
+}

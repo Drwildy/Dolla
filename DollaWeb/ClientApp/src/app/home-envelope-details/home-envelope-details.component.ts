@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { Envelope } from '../envelope';
 import { EnvelopeService } from '../envelope.service';
+import { Chart } from 'chart.js';
+
 
 @Component({
   selector: 'app-home-envelope-details',
@@ -19,20 +21,20 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   public id: number; 
   public myEnvelope: Envelope;
   public editEnvIcon: string;
-   
-  //receives query data from another component
-  constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService) {
 
+
+  my_Bar_Chart: any;
+  my_Dougnnut_Chart: any;
+
+
+  //receives query data from another component
+  constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef) {
     this.route.queryParams.subscribe(params => {
       this.envelopeID = params["envelopeID"]
 
     });
-
-
     this.id = this.envelopeID; 
     this.getEnvelopeByID();
-
-
   }
   getEnvelopeByID() {
     this.envelopeService.getEnvelopeById(this.id)
@@ -55,16 +57,79 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
         .subscribe(
           result => {
             this.envelopeService.dataChanged$.emit();
-            console.log("Edit Successful. ")
+           
           }
         );
     } catch{
-      console.log("Error Encountered")
+     
     }
 
   }
    
   ngOnInit() {
+    
+    this.envelope_Bar_Chart();
+
+  }
+
+  envName = ["env1", "env2", "env3", "env4", "env5", "env6"];
+  envAmount = [300, 400, 100, 500, 300, 200];
+  envSetAmount = [100, 500, 300, 200, 399, 234];
+
+
+  envelope_Bar_Chart() {
+    this.my_Bar_Chart = new Chart('bar_chart', {
+      type: "bar",
+      data: {
+        labels: this.envName,
+        datasets: [
+          {
+            label: 'Envelope Allowance',
+            data: this.envAmount,
+            backgroundColor: "#2A6735",
+            borderWidth: 1,
+          },
+          {
+            label: "Envelope Expense",
+            data: this.envSetAmount,
+            backgroundColor: "#C12807",
+            borderWidth: 1,
+
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Overall Envelopes Details",
+
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: true
+        },
+        legend: {
+          position: 'top'
+        },
+        responsive: true,
+        scales: {
+          xAxes: [{
+            stacked: false,
+            ticks: {
+              beginAtZero: true,
+            }
+          }],
+          yAxes: [{
+            stacked: false,
+            ticks: {
+              beginAtZero: true,
+            }
+          }]
+        }
+      }
+
+    });
+
   }
 
 }
