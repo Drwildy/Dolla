@@ -33,13 +33,13 @@ export class TransactionsComponent implements OnInit {
     // etc...
   ]);
 
-  constructor(private transactionService: TransactionService) {
+   constructor(private transactionService: TransactionService) {
     transactionService.getTransaction().forEach(t => {
       this.transactions = t;
     });
   }
 
-  getFromIcon(transaction: Transaction) {
+   getFromIcon(transaction: Transaction) {
     /* 
      * This function takes a transaction and
      * returns the unicode for the corresponding
@@ -60,12 +60,13 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.refresh();
+    this.refresh(0);
   }
 
-  refresh() {
-    this.transactionService.getTransaction()
+  refresh(months: number) {
+    this.transactionService.filterTransactions(months.toString())
       .subscribe((transactions: Transaction[]) => { this.transactions = transactions });
+    //console.log("refresh(" + months + ")");
   }
-
+  
 }
