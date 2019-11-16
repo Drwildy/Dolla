@@ -27,9 +27,55 @@ namespace DollaWeb.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transaction>>> GetTransaction()
         {
-            return await _context.Transaction.ToListAsync();
+            var user = User.Identity.Name;
+            return await _context.Transaction.Where(t => 
+                t.ApplicationUserId == userManager.GetUserId(User))
+                .ToListAsync();
         }
 
+        // GET: api/Transactions
+        [HttpGet("{months}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> FilterTransactions([FromRoute] string strMonths)
+        {
+            //Console.Write("httpget filter");
+            var user = User.Identity.Name;
+            var span = Convert.ToInt32(strMonths);
+            var currentMonth = DateTime.Now.Month;
+            switch (span)
+            {
+                // this month
+                case 1: return await _context.Transaction.Where(t =>
+                    t.ApplicationUserId == userManager.GetUserId(User)
+                    && t.TransactionDate.Month == currentMonth).ToListAsync();
+                // 3 months (going to have bugs - need to loop around 12->1)
+                case 3: return await _context.Transaction.Where(t =>
+                    t.ApplicationUserId == userManager.GetUserId(User)
+                    && 
+                      ((t.TransactionDate.Month == currentMonth)
+                    || (t.TransactionDate.Month - 1) == (currentMonth - 1)
+                    || (t.TransactionDate.Month - 2) == (currentMonth - 2)))
+                    .ToListAsync();
+                // 6 months (going to have bugs - need to loop around 12->1)
+                case 6: return await _context.Transaction.Where(t =>
+                    t.ApplicationUserId == userManager.GetUserId(User)
+                    &&
+                      ((t.TransactionDate.Month == currentMonth)
+                    || (t.TransactionDate.Month - 1) == (currentMonth - 1)
+                    || (t.TransactionDate.Month - 2) == (currentMonth - 2)
+                    || (t.TransactionDate.Month - 3) == (currentMonth - 3)
+                    || (t.TransactionDate.Month - 4) == (currentMonth - 4)
+                    || (t.TransactionDate.Month - 5) == (currentMonth - 5)))
+                    .ToListAsync();
+                // this year
+                case 12: return await _context.Transaction.Where(t =>
+                    t.ApplicationUserId == userManager.GetUserId(User)
+                    && t.TransactionDate.Year == DateTime.Now.Year).ToListAsync();
+                // all
+                default: return await _context.Transaction.Where(t =>
+                    t.ApplicationUserId == userManager.GetUserId(User)).ToListAsync();
+            }
+        }
+        
         // GET: api/Transactions/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transaction>> GetTransaction(int id)
