@@ -27,6 +27,10 @@ export class PiggybankService {
     return this.http.post<Piggybank>('/api/Piggybanks', piggybank);
   }
 
+  getPiggyBankById(id: number): Observable<Piggybank> {
+    return this.http.get<Piggybank>('/api/Piggybanks/' + id);
+  }
+
   getPiggybanks(): Observable<Piggybank[]> {
     return this.http.get<Piggybank[]>('/api/piggybanks/');
   }

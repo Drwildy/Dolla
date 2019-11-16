@@ -34,3 +34,13 @@ p {
 .fontSize {
   font-size: 30px;
 }
+
+.btn-icon{
+  border:none;
+  background-color:transparent;
+  font-size:35px; 
+}
+.displayIcon{
+  font-size:20px;
+}
+
