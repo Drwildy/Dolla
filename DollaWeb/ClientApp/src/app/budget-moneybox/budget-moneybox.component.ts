@@ -106,19 +106,25 @@ export class BudgetMoneyboxComponent implements OnInit {
         this.envelope.name = this.editMoneybox.name;
         this.envelope.icon = this.icon;
         this.envelope.setAmount = this.editAmount;
-        this.envelopeService.editEnvelope(this.envelope.id, this.envelope).subscribe(res => this.envelopeService.dataChanged$.emit());
+        this.envelopeService.editEnvelope(this.envelope.id, this.envelope).subscribe(res => {
+          //this.envelopeService.dataChanged$.emit();
+        });
         break;
       case 2:
         this.bill.name = this.editMoneybox.name;
         this.bill.icon = this.icon;
         this.bill.amount = this.editAmount;
-        this.billService.editBill(this.bill.id, this.bill).subscribe(res => this.billService.dataChanged$.emit());
+        this.billService.editBill(this.bill.id, this.bill).subscribe(res => {
+          //this.billService.dataChanged$.emit();
+        });
         break;
       case 3:
         this.bank.name = this.editMoneybox.name;
         this.bank.icon = this.icon;
         this.bank.monthlyAllocation = this.editAmount;
-        this.bankService.editPiggybank(this.bank.id, this.bank).subscribe(res => this.bankService.dataChanged$.emit());
+        this.bankService.editPiggybank(this.bank.id, this.bank).subscribe(res => {
+          //this.bankService.dataChanged$.emit();
+        });
         break;
     }
   }

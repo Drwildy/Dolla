@@ -5,7 +5,7 @@ import { PaidBillService } from '../paidbill.service';
 import { Bill } from '../bill';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 import { PaidBill } from '../paidbill';
-import { MonthPaid } from '../MonthPaid'
+import { MonthPaid } from '../monthpaid'
 import { forEach } from '@angular/router/src/utils/collection';
 import { Transaction } from '../transaction';
 import { TransactionService } from '../transaction.service';
