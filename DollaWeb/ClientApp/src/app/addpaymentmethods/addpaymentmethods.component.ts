@@ -10,7 +10,7 @@ import { PaymentMethodService } from '../paymentmethod.service';
 export class AddPaymentMethodsComponent implements OnInit {
   addPaymentMethods: PaymentMethod[];
   public paymentMethodsName: string;
-  public paymentMethodColor: string;
+  public paymentMethodColor: string = 'Black';
   public paymentMethodId: number; 
 
 
