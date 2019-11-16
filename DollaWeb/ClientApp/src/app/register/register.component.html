@@ -1,41 +1,90 @@
-<form #loginForm="ngForm" (ngSubmit)="register()" class="border border-light p-5">
-
+<form [formGroup]="frmRegister" (ngSubmit)="register()" class="border border-light p-5">
   <section class="skewedBox">
     <div class="container">
       <h2 class="mb-4 text-center">Create Account</h2>
 
       <p>Email Address</p>
-      <input type="email" class="form-control mb-4" id="defaultLoginFormEmail" placeholder="Email Address" [(ngModel)]="Email" name="emailInput" #emailInput="ngModel">
+      <input type="email" class="form-control mb-4" id="defaultLoginFormEmail" placeholder="Email Address" [(ngModel)]="Email" name="emailInput" #emailInput="ngModel" [ngModelOptions]="{standalone: true}">
 
       <p>Username</p>
-      <input type="text"  class="form-control mb-4" id="defaultLoginFormUsername" placeholder="Username" [(ngModel)]="Username" name="usernameInput" #usernameInput="ngModel">
+      <input type="text" class="form-control mb-4" id="defaultLoginFormUsername" placeholder="Username" [(ngModel)]="Username" name="usernameInput" #usernameInput="ngModel" [ngModelOptions]="{standalone: true}">
 
-      <p>Password</p>
-      <input type="password" class="form-control mb-4" id="defaultLoginFormPassword" placeholder="Password">
+      <!--<p>Password</p>-->
+      <div class="form-group">
+        <label for="password" [ngClass]="frmRegister.controls['password'].invalid ? 'text-danger' : ''">Password:</label>
+        <input type="password" formControlName="password" class="form-control mb-4" id="defaultLoginFormPassword password" placeholder="Password" [ngClass]="frmRegister.controls['password'].invalid ? 'is-invalid' : ''">
 
-      <input type="password" class="form-control mb-4" id="confirmLoginFormPassword" placeholder="Confirm Password" [(ngModel)]="Password" name="passwordInput" #passwordInput="ngModel">
+        <label class="col" [ngClass]="frmRegister.controls['password'].hasError('required') || frmRegister.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+          <i class="  {{
+                    frmRegister.controls['password'].hasError('required') ||
+                    frmRegister.controls['password'].hasError('minlength') ? 'fas fa-times' :
+                    'fas fa-check'
+                  }}">
+          </i>
+          Must be at least 8 characters!
+        </label>
 
-      <div class="text-center">
-        <button class="btn btn-primary custom-btn my-4" type="submit" (click)="register" >Create Account</button>
+        <label class="col" [ngClass]="frmRegister.controls['password'].hasError('required') || frmRegister.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+          <i class=" {{
+                    frmRegister.controls['password'].hasError('required') ||
+                    frmRegister.controls['password'].hasError('hasNumber') ? 'fas fa-times' :
+                    'fas fa-check'
+                  }}">
+          </i>
+          Must contain at least 1 number!
+        </label>
+
+        <label class="col" [ngClass]="frmRegister.controls['password'].hasError('required') || frmRegister.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+          <i class="{{
+                    frmRegister.controls['password'].hasError('required') ||
+                    frmRegister.controls['password'].hasError('hasCapitalCase') ? 'fas fa-times' :
+                    'fas fa-check'
+                  }}">
+          </i>
+          Must contain at least 1 in Capital Case!
+        </label>
+
+        <label class="col" [ngClass]="frmRegister.controls['password'].hasError('required') || frmRegister.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+          <i class="                  {{
+                    frmRegister.controls['password'].hasError('required') ||
+                    frmRegister.controls['password'].hasError('hasSmallCase') ? 'fas fa-times' :
+                    'fas fa-check'
+                  }}">
+          </i>
+          Must contain at least 1 Letter in Small Case!
+        </label>
+
+        <!-- Add me if you want to check for special characters
+   <label class="col" [ngClass]="frmRegister.controls['password'].hasError('required') || frmRegister.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+   <i class=" {{
+      frmRegister.controls['password'].hasError('required') ||
+      frmRegister.controls['password'].hasError('hasSpecialCharacters') ? 'fas fa-times' :
+      'fas fa-check'
+    }}">
+   </i>
+   Must contain at least 1 Special Character!
+  </label>
+   -->
       </div>
-    </div>
 
-    <div *ngIf="duplicate" class="mb-3 alert alert-danger">
-      Username has been taken
-    </div>
-    <div *ngIf="length" class="mb-3 alert alert-danger">
-      Must be at least 8 characters long
-    </div>
-    <div *ngIf="upper" class="mb-3 alert alert-danger">
-      Must have an uppercase letter
-    </div>
-    <div *ngIf="lower" class="mb-3 alert alert-danger">
-      Must have a lowercase letter
-    </div>
-    <div *ngIf="number" class="mb-3 alert alert-danger">
-      Must have a numeric character
-    </div>
+      <div class="form-group">
+        <label for="confirmPassword" [ngClass]="frmRegister.controls['confirmPassword'].invalid ? 'text-danger' : ''">
+          Confirm
+          Password:
+        </label>
+        <input id="confirmPassword confirmLoginFormPassword" formControlName="confirmPassword" type="password" class="form-control mb-4" placeholder="Confirm Password" [ngClass]="frmRegister.controls['confirmPassword'].invalid ? 'is-invalid' : ''" >
+        <label class="text-danger" *ngIf="frmRegister.controls['confirmPassword'].hasError('required')">
+          Password is Required!
+        </label>
+        <label class="text-danger" *ngIf="frmRegister.controls['confirmPassword'].hasError('NoPassswordMatch')">
+          Password do not match
+        </label>
+      </div>
 
-  </section>
+        <div class="text-center">
+          <button [disabled]="frmRegister.invalid" class="btn btn-primary custom-btn my-4" type="submit" (click)="register">Create Account</button>
+        </div>
+      </div>
+</section>
 
 </form>
