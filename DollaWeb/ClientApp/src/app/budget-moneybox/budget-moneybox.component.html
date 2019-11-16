@@ -1,3 +1,53 @@
-<div>
-  {{moneybox.name}}
+<div [ngClass]="{ 'opened' : isOpen }" class="container parent my-2">
+  <div class="budget-row-header row" data-toggle="collapse" [attr.data-target]="'#details_' + editMoneybox.id" (click)="onClickHeader()">
+    <div class="col-1 my-auto pl-2"><i class="{{icon}}"></i></div>
+    <div class="col-5 my-auto">{{editMoneybox.name}}</div>
+    <div class="col-6 text-right pr-5 my-auto">{{amount | currency }}</div>
+  </div>
+  <div [id]="'details_' + editMoneybox.id" class="collapse row">
+    <div class="col-4">
+      <div *ngIf="type == 1">
+        <!--Overflow stuff would go here-->
+      </div>
+      <div *ngIf="type == 2" class="text-center form-group">
+        <label [attr.for]="'inputDue+' + editMoneybox.id" class="form-label">Name:</label>
+        <input type="number" class="form-control" [attr.id]="'inputDue+' + editMoneybox.id" min="1" max="31" [(ngModel)]="bill.dayDue" (blur)="onDueExit()" />
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-group row">
+        <label [attr.for]="'inputName+' + editMoneybox.id" class="form-label">Name:</label>
+        <input type="text" class="form-control" [attr.id]="'inputName+' + editMoneybox.id" maxlength="15" [(ngModel)]="editMoneybox.name" (blur)="onNameExit()" />
+      </div>
+      <div class="form-group row">
+        <label [attr.for]="'inputIcon+' + editMoneybox.id" class="form-label">Icon:</label>
+        <select class="form-control" [(ngModel)]="icon" (change)="onIconChange()">
+          <option value="">--Select an icon--</option>
+          <option value="fas fa-cog">Cog</option>
+          <option value="fas fa-apple-alt"> Apple </option>
+          <option value="fas fa-file-invoice-dollar">Invoice</option>
+          <option value="fas fa-home">House</option>
+          <option value="fas fa-wifi">Internet</option>
+          <option value="fas fa-sign-out-alt">Sign Out</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4 text-center">
+      <div (click)="incrementAmount(5)">
+        <i class="fas fa-angle-double-up"></i>
+      </div>
+      <div (click)="incrementAmount(1)">
+        <i class="fas fa-angle-up"></i>
+      </div>
+      <div>
+        {{editAmount | currency }}
+      </div>
+      <div (click)="incrementAmount(-1)">
+        <i class="fas fa-angle-down"></i>
+      </div>
+      <div (click)="incrementAmount(-5)">
+        <i class="fas fa-angle-double-down"></i>
+      </div>
+    </div>
+  </div>
 </div>

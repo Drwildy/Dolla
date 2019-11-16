@@ -34,4 +34,10 @@ export class PiggybankService {
   getPiggybanks(): Observable<Piggybank[]> {
     return this.http.get<Piggybank[]>('/api/piggybanks/');
   }
+
+  editPiggybank(id: number, bank: Piggybank): Observable<Piggybank> {
+    return this.http.patch<Piggybank>('/api/piggybanks/' + id, bank);
+  }
 }
+
+

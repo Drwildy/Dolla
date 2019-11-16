@@ -157,6 +157,7 @@ export class BudgetComponent implements OnInit {
       }
     });
   }
+
   envelopeRefresh() {
     
     this.envelopeService.getEnvelopes()
@@ -189,9 +190,12 @@ export class BudgetComponent implements OnInit {
 
   allocatedRefresh() {
     this.allocated = 0;
-    this.allocated += this.envelopes.map((env) => env.setAmount).reduce((a, b) => a + b);
-    this.allocated += this.bills.map((bill) => bill.amount).reduce((a, b) => a + b);
-    this.allocated += this.banks.map((bank) => bank.monthlyAllocation).reduce((a, b) => a + b);
+    if (this.envelopes)
+      this.allocated += this.envelopes.map((env) => env.setAmount).reduce((a, b) => a + b);
+    if (this.bills)
+      this.allocated += this.bills.map((bill) => bill.amount).reduce((a, b) => a + b);
+    if (this.banks)
+      this.allocated += this.banks.map((bank) => bank.monthlyAllocation).reduce((a, b) => a + b);
   }
 
   saveSalary() {
