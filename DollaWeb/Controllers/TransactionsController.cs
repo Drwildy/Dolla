@@ -34,12 +34,12 @@ namespace DollaWeb.Controllers
         }
 
         // GET: api/Transactions
-        [HttpGet("{months}")]
-        public async Task<ActionResult<IEnumerable<Transaction>>> FilterTransactions([FromRoute] string strMonths)
+        [HttpGet("{key}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> FilterTransactions(string months)
         {
-            //Console.Write("httpget filter");
+            Console.Write("httpget filter");
             var user = User.Identity.Name;
-            var span = Convert.ToInt32(strMonths);
+            var span = Convert.ToInt32(months);
             var currentMonth = DateTime.Now.Month;
             switch (span)
             {

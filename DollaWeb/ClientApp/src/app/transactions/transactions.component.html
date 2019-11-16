@@ -18,10 +18,11 @@
   </div>
 </div>
 <!-- Table template for transactions.  Details currently not working -->
+<!--
 <div>
   <table class="table table-hover">
     <tbody *ngFor="let data of transactions">
-      <!-- data-target and id are not binding -->
+      
       <tr data-toggle="collapse" data-target="'#a' + data.id">
         <td>
           <i class="fa">{{getFromIcon(data)}}</i> 
@@ -31,7 +32,7 @@
         <td>{{data.type}}</td>
         <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
       </tr>
-      <!-- data-target and id are not binding -->
+      
       <tr id="'a' + data.id">
         <td>
             <i class="fa">{{getFromIcon(data)}}</i> 
@@ -44,6 +45,38 @@
     </tbody>
   </table>
 </div>
+-->
+<div *ngFor="let data of transactions">
+  <table class="table table-hover">
+    <tbody data-toggle="collapse" data-target="#a">
+      <!-- data-target and id are not binding -->
+      <tr>
+        <td>
+          <i class="fa">{{getFromIcon(data)}}</i> 
+          <i class="fas fa-arrow-right px-4"></i> 
+          <i class="fa">{{getToIcon(data)}}</i>
+        </td>
+        <td>{{data.type}}</td>
+        <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-hover">
+    <tbody class="collapse" id="a">
+      <!-- data-target and id are not binding -->
+      <tr>
+        <td>
+            <i class="fa">{{getFromIcon(data)}}</i> 
+            {{data.type}}
+            <i class="fas fa-arrow-right px-4"></i> 
+            <i class="fa">{{getToIcon(data)}}</i>
+        </td>
+        <td>{{data.transactionDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <!--
 <div *ngIf="transactions.length === 0" class="no-data-message text-center">
   No Transactions found.  You can create some from the budget page

@@ -68,5 +68,5 @@ export class TransactionsComponent implements OnInit {
       .subscribe((transactions: Transaction[]) => { this.transactions = transactions });
     //console.log("refresh(" + months + ")");
   }
-
+  
 }
