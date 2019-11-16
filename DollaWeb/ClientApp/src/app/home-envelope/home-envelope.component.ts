@@ -44,6 +44,7 @@ export class HomeEnvelopeComponent implements OnInit {
   envelopeDetails() {
     let envelopeDetails: NavigationExtras = {
       queryParams: {
+        "envelopeID": this.envelope.id,
         "envelopeName": this.envelope.name,
         "envelopeAmount": this.envelope.amount,
         "envelopeSetAmount": this.envelope.setAmount,
@@ -52,5 +53,11 @@ export class HomeEnvelopeComponent implements OnInit {
     };
     //since transactions not showing, this shoddy method is made (change with actual database pull)
     this.router.navigate(["/home-envelope-details"], envelopeDetails);
+  }
+
+  getEnvelopebyId() {
+    //  console.log('Inside getBill')
+   
+
   }
 }

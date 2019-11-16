@@ -28,4 +28,12 @@ export class EnvelopeService {
       .subscribe();
   }
 
+  getEnvelopeById(id: number): Observable<Envelope> {
+    return this.http.get<Envelope>('/api/envelopes/' + id);
+  }
+
+  editEnvelope(id: number, envelope: Envelope): Observable<Envelope> {
+    return this.http.patch<Envelope>('/api/envelopes/' + id, envelope);
+  }
+
 }

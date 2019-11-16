@@ -28,6 +28,14 @@
         <app-budget-moneybox *ngFor="let envelope of envelopes" [envelope]="envelope" [bill]="" [bank]="" ></app-budget-moneybox>
       </div>
       <div *ngIf="!envelopes || envelopes.length == 0">No envelopes found</div>
+      <div>
+        <div class="leftdiv">
+          <canvas style="background-color:#F5F5F5" id="bar_Envelope_Chart" name="barchartname"></canvas>
+        </div>
+        <div class="rightdiv">
+          <canvas style="background-color:#F5F5F5" id="doughnut_Envelope_Chart" name="donoughtchartname"></canvas>
+        </div>
+      </div>
     </div>
     <div class="tab-pane" id="bills">
       <div *ngIf="bills && bills.length > 0">
@@ -42,6 +50,7 @@
       <div *ngIf="!banks || banks.length == 0">No banks found</div>
     </div>
   </div>
+  
 </div>
 
 

@@ -126,33 +126,6 @@ export class BillDetailsComponent implements OnInit {
     }
 
    
-    /*
-    // this code works but there are some bugs
-    if (this.editName.length > 1) {
-      editBillInfo.name = this.editName;
-    } else {
-      editBillInfo.name = this.myBill.name; 
-    }
-    if (this.editIcon.length > 1) {
-      editBillInfo.icon = this.editIcon;
-    } else {
-      editBillInfo.icon = this.myBill.icon;
-    }
-
-
-    if (this.editAmount > 1) {
-      editBillInfo.amount = this.editAmount;
-    } else {
-      editBillInfo.amount = this.myBill.amount;
-    }
-   
-
-    if (this.editDayDue > 1) {
-      editBillInfo.dayDue = this.editDayDue;
-    } else {
-      editBillInfo.dayDue = this.myBill.dayDue; 
-    }
-    */
     //edit bill through bill service
     this.billService.editBill(this.id, editBillInfo)
       .subscribe(
@@ -161,15 +134,7 @@ export class BillDetailsComponent implements OnInit {
         }
     );
   }
-  /*
-  this.addPaymentMethodService.createPaymentMethod(myPaymentMethod)
-  .subscribe(
-    result => {
-      this.addPaymentMethodService.dataChanged$.emit();
-    }
-  );
-
-*/
+  
 
   getBillbyId() {
   //  console.log('Inside getBill')
