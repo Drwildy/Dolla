@@ -119,6 +119,37 @@ namespace DollaWeb.Controllers
             }
             return pigBank;
         }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchPiggyBank(int id, PiggyBank bank)
+        {
+            if (id != bank.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(bank).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PiggyBankExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
         // POST: api/PiggyBanks
         [HttpPost]
         public async Task<ActionResult<PiggyBank>> PostPiggyBank(PiggyBank piggyBank)

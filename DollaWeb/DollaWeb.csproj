@@ -24,11 +24,23 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\budget-bank\**" />
+    <Compile Remove="ClientApp\src\app\budget-bill\**" />
+    <Compile Remove="ClientApp\src\app\budget-envelope\**" />
     <Compile Remove="ClientApp\src\app\newpaymentmethod\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\budget-bank\**" />
+    <Content Remove="ClientApp\src\app\budget-bill\**" />
+    <Content Remove="ClientApp\src\app\budget-envelope\**" />
     <Content Remove="ClientApp\src\app\newpaymentmethod\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\budget-bank\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\budget-bill\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\budget-envelope\**" />
     <EmbeddedResource Remove="ClientApp\src\app\newpaymentmethod\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\budget-bank\**" />
+    <None Remove="ClientApp\src\app\budget-bill\**" />
+    <None Remove="ClientApp\src\app\budget-envelope\**" />
     <None Remove="ClientApp\src\app\newpaymentmethod\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
@@ -57,6 +69,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\budget-bank\budget-bank.component.css" />
+    <None Remove="ClientApp\src\app\budget-bank\budget-bank.component.html" />
+    <None Remove="ClientApp\src\app\budget-bank\budget-bank.component.spec.ts" />
+    <None Remove="ClientApp\src\app\budget-bank\budget-bank.component.ts" />
+    <None Remove="ClientApp\src\app\budget-bill\budget-bill.component.css" />
+    <None Remove="ClientApp\src\app\budget-bill\budget-bill.component.html" />
+    <None Remove="ClientApp\src\app\budget-bill\budget-bill.component.spec.ts" />
+    <None Remove="ClientApp\src\app\budget-bill\budget-bill.component.ts" />
+    <None Remove="ClientApp\src\app\budget-envelope\budget-envelope.component.css" />
+    <None Remove="ClientApp\src\app\budget-envelope\budget-envelope.component.html" />
+    <None Remove="ClientApp\src\app\budget-envelope\budget-envelope.component.spec.ts" />
+    <None Remove="ClientApp\src\app\budget-envelope\budget-envelope.component.ts" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.css" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.html" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.spec.ts" />
