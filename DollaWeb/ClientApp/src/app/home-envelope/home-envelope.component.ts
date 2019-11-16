@@ -45,10 +45,6 @@ export class HomeEnvelopeComponent implements OnInit {
     let envelopeDetails: NavigationExtras = {
       queryParams: {
         "envelopeID": this.envelope.id,
-        "envelopeName": this.envelope.name,
-        "envelopeAmount": this.envelope.amount,
-        "envelopeSetAmount": this.envelope.setAmount,
-        "envelopeIcon": this.envelope.icon
       }
     };
     //since transactions not showing, this shoddy method is made (change with actual database pull)

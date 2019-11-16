@@ -34,3 +34,12 @@ p {
   overflow: hidden;
   outline: none
 }
+.btn-icon {
+  border: none;
+  background-color: transparent;
+  font-size: 35px;
+}
+
+.displayIcon {
+  font-size: 20px;
+}

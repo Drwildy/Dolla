@@ -24,33 +24,43 @@
 
   <div id="budgetContent" class="tab-content mt-3">
     <div class="tab-pane active" id="envelopes">
-      <div *ngIf="envelopes && envelopes.length > 0">
+      <div *ngIf="envelopes && envelopes.length > 0"style="border-bottom:double; border-bottom-color:black">
         <app-budget-moneybox *ngFor="let envelope of envelopes" [envelope]="envelope" [bill]="" [bank]="" ></app-budget-moneybox>
       </div>
       <div *ngIf="!envelopes || envelopes.length == 0">No envelopes found</div>
       <div>
-        <div class="leftdiv">
-          <canvas style="background-color:#F5F5F5" id="bar_Envelope_Chart" name="barchartname"></canvas>
+        <div style="background-color:azure;">
+          <canvas id="doughnut_Envelope_Chart" name="donoughtchartname"></canvas>
         </div>
-        <div class="rightdiv">
-          <canvas style="background-color:#F5F5F5" id="doughnut_Envelope_Chart" name="donoughtchartname"></canvas>
+        <br /><br />
+        <div  style="background-color:aliceblue;">
+          <canvas id="bar_Envelope_Chart" name="barchartname"></canvas>
         </div>
       </div>
     </div>
     <div class="tab-pane" id="bills">
-      <div *ngIf="bills && bills.length > 0">
-        <app-budget-moneybox *ngFor="let bill of bills" [bill]="bill" [envelope]="" [bank]="" ></app-budget-moneybox>
+      <div *ngIf="bills && bills.length > 0" style="border-bottom:double; border-bottom-color:black">
+        <app-budget-moneybox *ngFor="let bill of bills" [bill]="bill" [envelope]="" [bank]=""></app-budget-moneybox>
       </div>
       <div *ngIf="!bills || bills.length == 0">No bills found</div>
+      <div>
+        <div>
+          <canvas id="pie_Bills_Chart" name="barchartname"></canvas>
+        </div>
+      </div>
     </div>
     <div class="tab-pane" id="banks">
-      <div *ngIf="banks && banks.length > 0">
-        <app-budget-moneybox *ngFor="let bank of banks" [bank]="bank" [envelope]="" [bill]="" ></app-budget-moneybox>
+      <div *ngIf="banks && banks.length > 0" style="border-bottom:double; border-bottom-color:black">
+        <app-budget-moneybox *ngFor="let bank of banks" [bank]="bank" [envelope]="" [bill]=""></app-budget-moneybox>
       </div>
       <div *ngIf="!banks || banks.length == 0">No banks found</div>
+      <div>
+        <div>
+          <canvas id="pie_Piggybank_Chart" name="barchartname"></canvas>
+        </div>
+      </div>
     </div>
   </div>
-  
 </div>
 
 

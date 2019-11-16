@@ -42,8 +42,9 @@
 
     <!-- Graph Goes Here-->
     
-    <div class="p-2 flex-shrink-1"><i class="fas fa-chart-area fa-2x"></i></div>
-
+    <div>
+      <canvas style="height:35%; width:35%" id="doughnut_chart" name="chartname"> </canvas>
+    </div>
 
     </div>
 
@@ -71,9 +72,9 @@
     </tbody>
   </table>
 
-  <canvas style="background-color:#F5F5F5" id="bar_chart" name="barchartname">
-  </canvas>
-  <p> Envelopes chart rendered above. </p>
+  <canvas style="background-color:#F5F5F5" id="bar_chart" name="barchartname"> </canvas>
+ 
+  
 
   <div class="modal fade" id="editEnvIcon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -104,7 +105,6 @@
                 <td>
                   <i class="fas fa-cart-plus"></i> Cart
                 </td>
-
               </tr>
               <tr>
                 <td>
