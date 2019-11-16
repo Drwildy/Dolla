@@ -33,5 +33,9 @@ export class PaymentMethodService {
   deletePaymentMethod(id: number) {
     return this.http.delete('/api/AddPaymentMethods/' + id);
   }
+
+  editPaymentMethod(id: number, paymentMethod: PaymentMethod) {
+    return this.http.put('/api/AddPaymentMethods/' + id, paymentMethod);
+  }
 }
 

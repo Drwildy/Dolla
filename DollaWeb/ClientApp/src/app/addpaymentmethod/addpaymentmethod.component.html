@@ -9,20 +9,20 @@
           {{paymentMethod.name}}
         </td>
         <td class="short">
-          <button id="{{paymentMethod.id}}" class="transparentbutton" data-toggle="modal" data-target="#editPaymentMethodModal">
-          <i class="fas fa-edit Green">{{paymentMethod.id}}</i>
+          <button id="{{paymentMethod.id}}" class="transparentbutton" data-toggle="modal" [attr.data-target]="'#editPaymentMethodModal' + paymentMethod.id">
+          <i class="fas fa-edit Green"></i>
           </button>
 
 
         </td>
 
         <td class="short">
-          <button id="{{paymentMethod.id}}" class="transparentbutton" data-toggle="modal" data-target="#deletePaymentMethodModal">
-          <i class="far fa-trash-alt Red">{{paymentMethod.id}}</i>
+          <button id="{{paymentMethod.id}}" class="transparentbutton" data-toggle="modal" [attr.data-target]="'#deletePaymentMethodModal' + paymentMethod.id">
+          <i class="far fa-trash-alt Red"></i>
           </button>
 
 
-          <div class="modal fade" id="deletePaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal fade" [attr.id]="'deletePaymentMethodModal' + paymentMethod.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -32,12 +32,12 @@
                   </button>
                 </div>
                 <div class="modal-body Red">
-                  <h5>Are you sure you want to delete? </h5> {{paymentMethod.id}} {{paymentMethod.name}}
+                  <h5>Are you sure you want to delete? </h5> {{paymentMethod.name}}
                   <br />
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                  <button type="button" class="btn btn-primary" (click)="deletePaymentMethod()" data-dismiss="modal">Delete</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deletePaymentMethod()" data-dismiss="modal">Delete</button>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@
         </td>
       </tr>
     </table>
-    <div class="modal fade" id="editPaymentMethodModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" [attr.id]="'editPaymentMethodModal' + paymentMethod.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header Green">
@@ -57,20 +57,19 @@
             </button>
           </div>
           <div class="modal-body">
-            <input type="text" class="form-control" placeholder="{{paymentMethod.name}}" [(ngModel)]="paymentMethod" name="nameEdit" #nameInput="ngModel" />
+            <input type="text" class="form-control" [(ngModel)]="ePaymentMethod.name" name="nameEdit" #nameInput="ngModel" />
             <br />
-            <select name="selIcon" class="form-control">
-              <option> Pick A Color </option>
-              <option>Green</option>
-              <option>Red</option>
-              <option>Orange</option>
-              <option>Blue</option>
-              <option>Black</option>
+            <select name="selIcon" class="form-control" [(ngModel)]="ePaymentMethod.color">
+              <option value="Green">Green</option>
+              <option value="Red">Red</option>
+              <option value="Orange">Orange</option>
+              <option value="Blue">Blue</option>
+              <option value="Black">Black</option>
             </select>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="editPaymentMethod()">Submit Changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="editPaymentMethod()" [disabled]="!ePaymentMethod.name">Submit Changes</button>
           </div>
         </div>
       </div>
