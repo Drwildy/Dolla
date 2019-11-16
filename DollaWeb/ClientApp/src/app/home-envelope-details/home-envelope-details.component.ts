@@ -31,18 +31,18 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef) {
     this.route.queryParams.subscribe(params => {
       this.envelopeID = params["envelopeID"]
-
     });
     this.id = this.envelopeID; 
     this.getEnvelopeByID();
+  
   }
+
+
   getEnvelopeByID() {
     this.envelopeService.getEnvelopeById(this.id)
       .subscribe((envelope: Envelope) => {
         this.myEnvelope = envelope;
-       
-       console.log(this.myEnvelope);
-      
+        this.my_Dougnnut_Chart_Display();
       });
   }
 
@@ -67,31 +67,83 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   }
    
   ngOnInit() {
-    
-    this.envelope_Bar_Chart();
+    this.chartDisplay();
+  }
+  // Variables for displaying charts. 
+  public envelopes: Envelope[];
+  public envelopesName = [];
+  public envelopesAmount = [];
+  public envelopesSetAmount = [];
 
+
+  chartDisplay() {
+    this.envelopeService.getEnvelopes()
+      .subscribe((envelopes: Envelope[]) => {
+        this.envelopes = envelopes;
+        this.envelopesName = [];
+        this.envelopesAmount = [];
+        this.envelopesSetAmount = [];
+
+        for (let env of envelopes) {
+          this.envelopesName.push(env.name);
+          this.envelopesAmount.push(env.amount);
+          this.envelopesSetAmount.push(env.setAmount);
+        }
+        this.my_Bar_Chart_Display();
+       
+       
+      });
+  }
+  my_Dougnnut_Chart_Display() {
+   
+    this.my_Dougnnut_Chart = new Chart('doughnut_chart', {
+      type: "doughnut",
+      data: {
+        labels: ['Total', 'Accumulated'],
+        datasets: [
+          {
+            label: '',
+            data: [this.myEnvelope.setAmount, this.myEnvelope.amount],
+            backgroundColor: ['#2A6735','#C12807'],
+            borderWidth: 1,
+          },
+        ]
+      },
+      options: {
+        title: {
+          display: false,
+          text: "",
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        legend: {
+          position:"left",
+          display: false,
+          
+        },
+        responsive: true,
+      }
+    });
   }
 
-  envName = ["env1", "env2", "env3", "env4", "env5", "env6"];
-  envAmount = [300, 400, 100, 500, 300, 200];
-  envSetAmount = [100, 500, 300, 200, 399, 234];
 
-
-  envelope_Bar_Chart() {
+  my_Bar_Chart_Display() {
     this.my_Bar_Chart = new Chart('bar_chart', {
       type: "bar",
       data: {
-        labels: this.envName,
+        labels: this.envelopesName,
         datasets: [
           {
             label: 'Envelope Allowance',
-            data: this.envAmount,
+            data: this.envelopesSetAmount,
             backgroundColor: "#2A6735",
             borderWidth: 1,
           },
           {
             label: "Envelope Expense",
-            data: this.envSetAmount,
+            data: this.envelopesAmount,
             backgroundColor: "#C12807",
             borderWidth: 1,
 
@@ -101,15 +153,15 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
       options: {
         title: {
           display: true,
-          text: "Overall Envelopes Details",
-
+          text: "Overall Envelopes Status",
         },
         tooltips: {
-          mode: 'index',
+          mode: 'nearest',
           intersect: true
         },
         legend: {
-          position: 'top'
+          display:true,
+          position: 'left'
         },
         responsive: true,
         scales: {

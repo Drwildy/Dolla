@@ -10,18 +10,20 @@
     Filter
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item">All</a>
-    <a class="dropdown-item">BillPay</a>
-    <a class="dropdown-item">Deposit</a>
-    <a class="dropdown-item">Tansfer</a>
-    <a class="dropdown-item">Withdraw</a>
+    <button type="button" class="dropdown-item" (click)="refresh(0)">All</button>
+    <button type="button" class="dropdown-item" (click)="refresh(12)">Year</button>
+    <button type="button" class="dropdown-item" (click)="refresh(6)">6 Months</button>
+    <button type="button" class="dropdown-item" (click)="refresh(3)">3 Months</button>
+    <button type="button" class="dropdown-item" (click)="refresh(1)">This Month</button>
   </div>
 </div>
 <!-- Table template for transactions.  Details currently not working -->
+<!--
 <div>
   <table class="table table-hover">
-    <tbody>
-      <tr *ngFor="let data of transactions" data-toggle="modal" [attr.data-target]="'#' + data.id">
+    <tbody *ngFor="let data of transactions">
+      
+      <tr data-toggle="collapse" data-target="'#a' + data.id">
         <td>
           <i class="fa">{{getFromIcon(data)}}</i> 
           <i class="fas fa-arrow-right px-4"></i> 
@@ -30,21 +32,51 @@
         <td>{{data.type}}</td>
         <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
       </tr>
-      <!-- Data binding broken here. Need a method for determining payment method.
-      <tr data-target="'#' + data.id" class="modal">
+      
+      <tr id="'a' + data.id">
         <td>
-            <i class="fa">{{getFromIcon(data))}}</i> 
+            <i class="fa">{{getFromIcon(data)}}</i> 
             {{data.type}}
             <i class="fas fa-arrow-right px-4"></i> 
-            <i class="fa">{{getToIcon(data}}</i>
+            <i class="fa">{{getToIcon(data)}}</i>
         </td>
-        <td>(payment_method)</td>
         <td>{{data.transactionDate}}</td>
       </tr>
-      -->
     </tbody>
   </table>
 </div>
+-->
+<div *ngFor="let data of transactions">
+  <table class="table table-hover">
+    <tbody data-toggle="collapse" data-target="#a">
+      <!-- data-target and id are not binding -->
+      <tr>
+        <td>
+          <i class="fa">{{getFromIcon(data)}}</i> 
+          <i class="fas fa-arrow-right px-4"></i> 
+          <i class="fa">{{getToIcon(data)}}</i>
+        </td>
+        <td>{{data.type}}</td>
+        <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="table table-hover">
+    <tbody class="collapse" id="a">
+      <!-- data-target and id are not binding -->
+      <tr>
+        <td>
+            <i class="fa">{{getFromIcon(data)}}</i> 
+            {{data.type}}
+            <i class="fas fa-arrow-right px-4"></i> 
+            <i class="fa">{{getToIcon(data)}}</i>
+        </td>
+        <td>{{data.transactionDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <!--
 <div *ngIf="transactions.length === 0" class="no-data-message text-center">
   No Transactions found.  You can create some from the budget page

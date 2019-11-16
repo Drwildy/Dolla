@@ -10,7 +10,7 @@
         <!--Overflow stuff would go here-->
       </div>
       <div *ngIf="type == 2" class="text-center form-group">
-        <label [attr.for]="'inputDue+' + editMoneybox.id" class="form-label">Name:</label>
+        <label [attr.for]="'inputDue+' + editMoneybox.id" class="form-label">Due :</label>
         <input type="number" class="form-control" [attr.id]="'inputDue+' + editMoneybox.id" min="1" max="31" [(ngModel)]="bill.dayDue" (blur)="onDueExit()" />
       </div>
     </div>
