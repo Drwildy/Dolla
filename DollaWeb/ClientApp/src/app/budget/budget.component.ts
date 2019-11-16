@@ -9,6 +9,7 @@ import { Salary } from '../salary';
 import { SalaryService } from '../salary.service';
 import { Piggybank } from '../piggybank';
 import { Chart } from 'chart.js';
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -33,6 +34,10 @@ export class BudgetComponent implements OnInit {
   my_Envelope_Bar_Chart: any;
   my_Envelope_Dougnnut_Chart: any;
 
+  my_Piggybank_Pie_Chart: any; 
+
+  my_Bill_Pie_Chart: any;
+
   constructor(private envelopeService: EnvelopeService, private billService: BillService,
     private bankService: PiggybankService, private salaryService: SalaryService, private elementRef: ElementRef ) {
     envelopeService.dataChanged$.subscribe(item => this.envelopeRefresh());
@@ -52,11 +57,80 @@ export class BudgetComponent implements OnInit {
           this.salary = { salaryAmount: 0, isSalary: false };
         }
       });
-    
     // For displaying charts.
-    this.my_Envelope_Bar_Chart_Display();
-    this.my_Envelope_Dougnnut_Chart_Display();
+  }
 
+  public billsNames = [];
+  public billsColor = [];
+  public billsAmount = [];
+
+  my_Bill_Pie_Chart_Display() {
+    this.my_Bill_Pie_Chart = new Chart('pie_Bills_Chart', {
+      type: "pie",
+      data: {
+        labels: this.billsNames,
+        datasets: [
+          {
+            label: 'Bills Overview',
+            data: this.billsAmount,
+            backgroundColor: this.billsColor,
+            borderWidth: 1,
+          },
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Overall Bills Details",
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        legend: {
+          display:false,
+          position: 'bottom'
+        },
+        responsive: true,
+      }
+    });
+  }
+
+  public piggyBankNames = [];
+  public piggyBankColor = [];
+  public piggyBankAmount = [];
+  
+  my_Piggybank_Pie_Chart_Display() {
+    this.my_Piggybank_Pie_Chart = new Chart('pie_Piggybank_Chart', {
+      type: "pie",
+      data: {
+        labels: this.piggyBankNames,
+        datasets: [
+          {
+            label: 'Piggybank Overview',
+            data: this.piggyBankAmount,
+            backgroundColor: this.piggyBankColor,
+            borderWidth: 1,
+          },
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: "Overall Piggybank Details",
+
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false
+        },
+        legend: {
+          display:false,
+          position: 'bottom'
+        },
+        responsive: true,
+      }
+    });
   }
 
   public envelopesName = [] 
@@ -72,13 +146,13 @@ export class BudgetComponent implements OnInit {
         datasets: [
           {
             label: 'Envelope Allowance',
-            data: this.envelopesAmount,
+            data: this.envelopesSetAmount, 
             backgroundColor: "#2A6735",
             borderWidth: 1,
           },
           {
             label: "Envelope Expense",
-            data: this.envelopesSetAmount,
+            data: this.envelopesAmount,
             backgroundColor: "#C12807",
             borderWidth: 1,
 
@@ -93,9 +167,11 @@ export class BudgetComponent implements OnInit {
         },
         tooltips: {
           mode: 'index',
-          intersect: true
+          intersect: false,
+          
         },
         legend: {
+          display:false,
           position: 'bottom'
         },
         responsive: true,
@@ -130,15 +206,13 @@ export class BudgetComponent implements OnInit {
       envelopeSetAmountTotal += this.envelopesSetAmount[i];
      
     }
-    
-
     this.my_Envelope_Dougnnut_Chart = new Chart('doughnut_Envelope_Chart', {
       type: "doughnut",
       data: {
         labels: ['Total','Remaining'],
         datasets: [{
-          data: [envelopeAmountTotal, envelopeAmountTotal - envelopeSetAmountTotal],
-          backgroundColor: ['#01a9db','#234512'],
+          data: [envelopeSetAmountTotal, envelopeSetAmountTotal - envelopeAmountTotal ],
+          backgroundColor: ['#2A6735','#C12807'],
           label: "Envelopes Amount"
         }]
       },
@@ -163,12 +237,21 @@ export class BudgetComponent implements OnInit {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
+        this.envelopesName = [];
+        this.envelopesAmount = [];
+        this.envelopesSetAmount = [];
+
         for (let env of envelopes) {
+          
           this.envelopesName.push(env.name);
           this.envelopesAmount.push(env.amount);
           this.envelopesSetAmount.push(env.setAmount);
         }
         this.allocatedRefresh();
+        this.my_Envelope_Bar_Chart_Display();
+        this.my_Envelope_Dougnnut_Chart_Display();
+       
+
       });
   }
 
@@ -176,6 +259,18 @@ export class BudgetComponent implements OnInit {
     this.billService.getBills()
       .subscribe((bills: Bill[]) => {
         this.bills = bills;
+
+        this.billsColor = [];
+        this.billsNames = [];
+        this.billsAmount = [];
+
+        for (let bill of bills) {
+          this.billsAmount.push(bill.amount);
+          this.billsNames.push(bill.name);
+          this.billsColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+        }
+        this.my_Bill_Pie_Chart_Display()
+
         this.allocatedRefresh();
       });
   }
@@ -184,6 +279,16 @@ export class BudgetComponent implements OnInit {
     this.bankService.getPiggybanks()
       .subscribe((banks: Piggybank[]) => {
         this.banks = banks;
+        this.piggyBankColor = [];
+        this.piggyBankNames = [];
+        this.piggyBankAmount = [];
+
+        for (let bank of banks) {
+          this.piggyBankAmount.push(bank.amount);
+          this.piggyBankNames.push(bank.name);
+          this.piggyBankColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+        }
+        this.my_Piggybank_Pie_Chart_Display()
         this.allocatedRefresh();
       });
   }

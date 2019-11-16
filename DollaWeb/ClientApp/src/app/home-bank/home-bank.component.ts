@@ -28,9 +28,7 @@ export class HomeBankComponent implements OnInit {
     let bankDetails: NavigationExtras = {
       queryParams: {
         "bankID": this.bank.id,
-        "bankName": this.bank.name,
-        "bankAmount": this.bank.amount,
-        "bankIcon": this.bank.icon,
+      
         //can send the icon from here as well       
       }
     };
