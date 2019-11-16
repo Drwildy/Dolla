@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap">
+<div class="d-flex flex-wrap mt-5">
 
   <!-- Grid for Icon/Name/Amount-->
   <div class="container-fluid">
@@ -8,8 +8,6 @@
           <i class="{{myPiggyBank.icon}}"></i>
         </button>
       </div>
-
-
 
       <div class="col-7 col-sm-7 col-lg-7">{{myPiggyBank.name}}</div>
       <div class="col-2 col-sm-2 col-lg-2" id="amount">${{myPiggyBank.amount}}</div>
@@ -32,9 +30,11 @@
       </tr>
     </tbody>
   </table>
-  <div style="align-content:center">
+
+  <div style="width:90%">
     <canvas id="pie_Piggybank_Chart" name="barchartname"></canvas>
   </div>
+
   <div class="modal fade" id="editPiggyIcon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

@@ -119,6 +119,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
           intersect: false
         },
         legend: {
+          position:"left",
           display: false,
           
         },
@@ -155,11 +156,12 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
           text: "Overall Envelopes Status",
         },
         tooltips: {
-          mode: 'index',
+          mode: 'nearest',
           intersect: true
         },
         legend: {
-          position: 'top'
+          display:true,
+          position: 'left'
         },
         responsive: true,
         scales: {

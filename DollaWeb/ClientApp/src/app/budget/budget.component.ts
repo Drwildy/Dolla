@@ -88,8 +88,8 @@ export class BudgetComponent implements OnInit {
           intersect: false
         },
         legend: {
-          display:false,
-          position: 'bottom'
+          display:true,
+          position: 'left'
         },
         responsive: true,
       }
@@ -121,11 +121,11 @@ export class BudgetComponent implements OnInit {
 
         },
         tooltips: {
-          mode: 'index',
+          mode: 'nearest',
           intersect: false
         },
         legend: {
-          display:false,
+          display:true,
           position: 'bottom'
         },
         responsive: true,
@@ -145,13 +145,13 @@ export class BudgetComponent implements OnInit {
         labels: this.envelopesName,
         datasets: [
           {
-            label: 'Envelope Allowance',
+            label: 'Envelope Total',
             data: this.envelopesSetAmount, 
             backgroundColor: "#2A6735",
             borderWidth: 1,
           },
           {
-            label: "Envelope Expense",
+            label: "Envelope Accumulated",
             data: this.envelopesAmount,
             backgroundColor: "#C12807",
             borderWidth: 1,
@@ -171,7 +171,7 @@ export class BudgetComponent implements OnInit {
           
         },
         legend: {
-          display:false,
+          display:true,
           position: 'bottom'
         },
         responsive: true,
@@ -219,7 +219,7 @@ export class BudgetComponent implements OnInit {
       options: {
         responsive: true,
         legend: {
-          position: "bottom"
+          position: "left"
         },
         title: {
           display: true,
