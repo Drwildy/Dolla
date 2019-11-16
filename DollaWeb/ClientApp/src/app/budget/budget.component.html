@@ -2,7 +2,7 @@
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-8 h2">Monthly Budget</div>
-    <div id="salaryDisplay" class="col-4 h2 text-right" data-toggle="modal" data-target="#modalSalary">
+    <div id="salaryDisplay" class="col-4 h2 text-right" *ngIf="salary" data-toggle="modal" data-target="#modalSalary">
       <div *ngIf="salary.isSalary">{{allocated | currency}} / {{salary.salaryAmount | currency}} <fa-icon [icon]="editIcon" class="fa-xs"></fa-icon></div>
       <div *ngIf="!salary.isSalary">{{allocated | currency}} <fa-icon [icon]="editIcon" class="fa-xs"></fa-icon></div>
     </div>
@@ -22,22 +22,22 @@
     </li>
   </ul>
 
-  <div class="tab-content mt-3">
+  <div id="budgetContent" class="tab-content mt-3">
     <div class="tab-pane active" id="envelopes">
       <div *ngIf="envelopes && envelopes.length > 0">
-        <app-budget-moneybox *ngFor="let envelope of envelopes" [moneybox]="envelope"></app-budget-moneybox>
+        <app-budget-moneybox *ngFor="let envelope of envelopes" [envelope]="envelope" [bill]="" [bank]="" ></app-budget-moneybox>
       </div>
       <div *ngIf="!envelopes || envelopes.length == 0">No envelopes found</div>
     </div>
     <div class="tab-pane" id="bills">
       <div *ngIf="bills && bills.length > 0">
-        <app-budget-moneybox *ngFor="let bill of bills" [moneybox]="bill"></app-budget-moneybox>
+        <app-budget-moneybox *ngFor="let bill of bills" [bill]="bill" [envelope]="" [bank]="" ></app-budget-moneybox>
       </div>
       <div *ngIf="!bills || bills.length == 0">No bills found</div>
     </div>
     <div class="tab-pane" id="banks">
       <div *ngIf="banks && banks.length > 0">
-        <app-budget-moneybox *ngFor="let bank of banks" [moneybox]="bank"></app-budget-moneybox>
+        <app-budget-moneybox *ngFor="let bank of banks" [bank]="bank" [envelope]="" [bill]="" ></app-budget-moneybox>
       </div>
       <div *ngIf="!banks || banks.length == 0">No banks found</div>
     </div>
