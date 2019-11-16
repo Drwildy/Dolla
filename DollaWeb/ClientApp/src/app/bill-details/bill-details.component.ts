@@ -9,8 +9,8 @@ import { MonthPaid } from '../MonthPaid'
 import { forEach } from '@angular/router/src/utils/collection';
 import { Transaction } from '../transaction';
 import { TransactionService } from '../transaction.service';
-import { AddPaymentMethod } from '../addpaymentmethod';
-import { AddpaymentmethodService } from '../addpaymentmethod.service';
+import { PaymentMethod } from '../paymentmethod';
+import { PaymentMethodService } from '../paymentmethod.service';
 
 @Component({
   selector: 'app-bill-details',
@@ -32,7 +32,7 @@ export class BillDetailsComponent implements OnInit {
 
   public myBill: Bill;
   public myBillPayments: PaidBill[];
-  public paymentMethods: AddPaymentMethod[];
+  public paymentMethods: PaymentMethod[];
   public months: string[];
   public pastMonths: MonthPaid[];
   public editName: string;
@@ -41,7 +41,7 @@ export class BillDetailsComponent implements OnInit {
   public editDayDue: number;
   public iconClass: string;
 
-  public constructor(private route: ActivatedRoute, private billService: BillService, private payBillService: PaidBillService, private transactionService: TransactionService, private paymentMethodService: AddpaymentmethodService) {
+  public constructor(private route: ActivatedRoute, private billService: BillService, private payBillService: PaidBillService, private transactionService: TransactionService, private paymentMethodService: PaymentMethodService) {
 
 
     this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -195,7 +195,7 @@ export class BillDetailsComponent implements OnInit {
   }
   getPaymentMethods() {
     this.paymentMethodService.getPaymentMethod()
-      .subscribe((methods: AddPaymentMethod[]) => {
+      .subscribe((methods: PaymentMethod[]) => {
         this.paymentMethods = methods;
         console.log(this.paymentMethods);
       });
