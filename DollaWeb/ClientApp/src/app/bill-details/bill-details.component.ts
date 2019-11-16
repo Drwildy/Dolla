@@ -7,6 +7,10 @@ import { icon } from '@fortawesome/fontawesome-svg-core';
 import { PaidBill } from '../paidbill';
 import { MonthPaid } from '../MonthPaid'
 import { forEach } from '@angular/router/src/utils/collection';
+import { Transaction } from '../transaction';
+import { TransactionService } from '../transaction.service';
+import { AddPaymentMethod } from '../addpaymentmethod';
+import { AddpaymentmethodService } from '../addpaymentmethod.service';
 
 @Component({
   selector: 'app-bill-details',
@@ -18,15 +22,17 @@ export class BillDetailsComponent implements OnInit {
   public name: string;
   public color: string;
   public id: number;
+  public selPaymentID: number;
   public myBills: Array<Bill>;
   public newBills: Array<Bill>;
-
+  public errorPay: boolean;
 
 
 
 
   public myBill: Bill;
   public myBillPayments: PaidBill[];
+  public paymentMethods: AddPaymentMethod[];
   public months: string[];
   public pastMonths: MonthPaid[];
   public editName: string;
@@ -35,7 +41,7 @@ export class BillDetailsComponent implements OnInit {
   public editDayDue: number;
   public iconClass: string;
 
-  public constructor(private route: ActivatedRoute, private billService: BillService, private payBillService: PaidBillService) {
+  public constructor(private route: ActivatedRoute, private billService: BillService, private payBillService: PaidBillService, private transactionService: TransactionService, private paymentMethodService: AddpaymentmethodService) {
 
 
     this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -50,6 +56,7 @@ export class BillDetailsComponent implements OnInit {
       this.getBillbyId();
       this.getBillPayments();
     });
+    this.getPaymentMethods();
     //this.pastMonths.push()
     
 
@@ -186,14 +193,23 @@ export class BillDetailsComponent implements OnInit {
       });
     
   }
+  getPaymentMethods() {
+    this.paymentMethodService.getPaymentMethod()
+      .subscribe((methods: AddPaymentMethod[]) => {
+        this.paymentMethods = methods;
+        console.log(this.paymentMethods);
+      });
+  }
   getBillPayments() {
     this.payBillService.getPayments(this.id)
       .subscribe((bills: PaidBill[]) => {
         this.myBillPayments = bills;
+        console.log("Past Months");
+        console.log(this.myBillPayments);
         //console.log(bills);
         var d = new Date();
         var n = d.getMonth();
-        this.pastMonths = [{month:"", paid: false}] 
+        this.pastMonths = [{month:"", paid: false, amount: 0}] 
         for (var i = n - 1; i >= 0; i--) {
           let tempMonth: MonthPaid = new MonthPaid();
           tempMonth.paid = false;
@@ -202,12 +218,32 @@ export class BillDetailsComponent implements OnInit {
             if (this.myBillPayments[k].month == tempMonth.month) {
               tempMonth.paid = true;
             }
-            
+            //tempMonth.amount = this.myBillPayments[k].transferAmount;
           }
           this.pastMonths.push(tempMonth);
         }
+        console.log("Past Months");
         console.log(this.pastMonths);
       });
+  }
+  payBill(month) {
+    if (this.selPaymentID) {
+      this.errorPay = false;
+      let payBill: PaidBill = {
+        id: 0,
+        billId: this.myBill.id,
+        addPaymentMethodId: this.selPaymentID,
+        month: month
+      }
+      this.payBillService.addPayment(payBill).subscribe(
+        result => {
+          this.getBillPayments();
+        }
+      );
+    }
+    else {
+      this.errorPay = true;
+    }
   }
 
 

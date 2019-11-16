@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace DollaWeb.Models
 {
-    public class PaidBill
+    public class PaidBillT
     {
         [Key]
         public int Id { get; set; }
         [ForeignKey("Bill")]
         public int? BillId { get; set; }
         [ForeignKey("Transaction")]
-        public int? AddPaymentMethodId { get; set; }
+        public int? TransactionId { get; set; }
         public string Month { get; set; }
-        public virtual AddPaymentMethod AddPaymentMethod { get; set; } //This is needed to recongize the ForeignKey in the migration
+        public string ApplicationUserID { get; set; }
+        public double TransferAmount { get; set; }
+        public virtual Transaction Transaction { get; set; } //This is needed to recongize the ForeignKey in the migration
         public virtual Bill Bill { get; set; } //This is needed to recongize the ForeignKey in the migration
     }
 }
