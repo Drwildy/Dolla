@@ -1,24 +1,35 @@
-<div class="d-flex flex-wrap">
-  <div class="bottomborder">
+<div class="d-flex flex-wrap mt-5">
     <br /><br />
-          <div>
-            <div *ngIf="myBill" class="paid">
-              <i style="font-size:50px" class="{{myBill.icon}}"> </i>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-3">
+                <button class="transparentbutton" data-toggle="modal" data-target="#editBillModal">
+                  <i class="fas fa-edit"> </i>
+                </button>
+              </div>
+              <div *ngIf="myBill" class="paid col-sm-3">
+                <i style="font-size:50px" class="{{myBill.icon}}"> </i>
+                <p style="font-size:35px;"> {{myBill.name}} </p>
+                
+              </div>
+
+              <!--<div class="fontsize col-sm-3">
+                
+              </div>-->
+              <div style="text-align:right; vertical-align:text-bottom;" class="col-sm-6">
+                <span>Select a payment type.</span>
+                <br />
+                <span *ngIf="errorPay" style="color:red;">You must select a payment type!</span>
+                <select *ngIf="paymentMethods" class="form-control" [(ngModel)]="selPaymentID" name="selPayment" #selPayment="ngModel">
+                  <option *ngFor="let method of paymentMethods" [ngValue]="method.id">{{method.name}}</option>
+                </select>
+              </div>
             </div>
-            <div *ngIf="!myBill" class="unpaid">
-              <i style="font-size:50px" class="{{myBill.icon}}"></i>
+            <div class="row">
+              <div class="col-12">
+                Due Date:  {{myBill.dayDue}} of each month.
+              </div>
             </div>
-            <div>
-              <button class="right transparentbutton" data-toggle="modal" data-target="#editBillModal">
-                <i class="fas fa-edit"> </i>
-              </button>
-            </div>
-            
-            <p style="font-size:35px;"> {{myBill.name}} </p>
-            <div class="centeralign fontsize">
-              Due Date:  {{myBill.dayDue}} of each month.
-            </div>
-          </div>
 
   </div >
 
@@ -57,11 +68,12 @@
         </div>
       </div>
     </div>
-  <table>
+  <table class="table">
     <thead>
       <tr>
         <th>Month</th>
         <th>Paid</th>
+        <th>Pay Bill</th>
       </tr>
     </thead>
     <tbody>
@@ -72,6 +84,11 @@
         <td *ngIf="!month.month == ''">
           <span *ngIf="month.paid">Paid</span>
           <span *ngIf="!month.paid" style="color:red;">Unpaid</span>
+        </td>
+        <td *ngIf="!month.month == ''">
+          <button class="btn btn-primary" *ngIf="month.paid && paymentMethods.length > 0" disabled="disabled">Paid</button>
+          <button class="btn btn-primary" *ngIf="!month.paid && paymentMethods.length > 0" (click)="payBill(month.month)">Pay Bill</button>
+          <span style="color: red;" *ngIf="paymentMethods.length<=0">You must add a payment method to pay bills!</span>
         </td>
       </tr>
     </tbody>

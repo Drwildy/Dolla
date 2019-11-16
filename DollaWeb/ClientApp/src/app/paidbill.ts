@@ -2,7 +2,6 @@
 export class PaidBill {
   id: number;
   billId: number;
-  transactionId: number;
+  addPaymentMethodId: number;
   month: string;
-
 }

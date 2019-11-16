@@ -34,16 +34,17 @@ namespace DollaWeb.Controllers
 
         // GET: api/PaidBills/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerable<PaidBill>>> GetPaidBill(int id)
+        public async Task<ActionResult<IEnumerable<Object>>> GetPaidBill(int id)
         {
-            var paidBill = await _context.PaidBill.Where(x => x.BillId == id).ToListAsync();
+            var paidBills = await _context.PaidBill.Where(x => x.BillId == id).ToListAsync();
+            //var envelope = await _context.Envelope.Where(x => x.MoneyBoxType == 1).ToListAsync();
 
-            if (paidBill == null)
+            if (paidBills == null)
             {
                 return NotFound();
             }
 
-            return paidBill;
+            return paidBills;
         }
 
         // PUT: api/PaidBills/5

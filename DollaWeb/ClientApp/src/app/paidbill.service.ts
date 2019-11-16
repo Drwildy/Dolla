@@ -17,5 +17,8 @@ export class PaidBillService {
   getPayments(id: number): Observable<PaidBill[]> {
     return this.http.get<PaidBill[]>('/api/PaidBills/' + id);
   }
+  addPayment(paidBill: PaidBill): Observable<PaidBill> {
+    return this.http.post<PaidBill>('/api/PaidBills', paidBill);
+  }
 
 }
