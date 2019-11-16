@@ -13,6 +13,7 @@ export class HomeEnvelopesComponent implements OnInit {
   @Input() limit: number = 0; //0 means no limit
 
   envelopes: Envelope[];
+  totalAmount: number;
 
   constructor(private envelopeService: EnvelopeService) {
     envelopeService.dataChanged$.subscribe(item => this.refresh());
@@ -26,7 +27,7 @@ export class HomeEnvelopesComponent implements OnInit {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
-
+      
         //Enforce the limit of returned envelopes (used by overview to limit to top x)
         if (this.limit > 0 && this.envelopes.length > this.limit) {
           this.envelopes = this.envelopes.slice(0, 5);
