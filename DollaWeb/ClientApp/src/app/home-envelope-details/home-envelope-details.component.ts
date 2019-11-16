@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Envelope } from '../envelope';
 import { EnvelopeService } from '../envelope.service';
 import { Chart } from 'chart.js';
@@ -28,7 +28,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
 
 
   //receives query data from another component
-  constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef) {
+  constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef, private router: Router) {
     this.route.queryParams.subscribe(params => {
       this.envelopeID = params["envelopeID"]
     });
@@ -45,7 +45,9 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
         this.my_Dougnnut_Chart_Display();
       });
   }
-
+  goToBudget() {
+    this.router.navigate(["/budget"]);
+  }
   editEnvelopeIcon() {
     let editEnvelopeInfo: Envelope = this.myEnvelope;
     if (this.editEnvIcon != null) {
