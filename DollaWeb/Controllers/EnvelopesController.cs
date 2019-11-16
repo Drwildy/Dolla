@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DollaWeb.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class EnvelopesController : ControllerBase
@@ -29,7 +29,14 @@ namespace DollaWeb.Controllers
         [HttpGet("TestConnection")]
         public string TestConnection()
         {
-            return "Connected to Dolla";
+            try
+            {
+                return _context.Moneybox.Any() ? "Connected to Database" : "Not finding any moneyboxes - probably not connected";
+            }
+            catch (Exception e)
+            {
+                return "Connection failed: " + e.Message;
+            }
         }
 
         // GET: api/Envelopes

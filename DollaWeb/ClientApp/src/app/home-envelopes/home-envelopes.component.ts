@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Envelope } from '../envelope';
-import { User } from '../User';
 import { EnvelopeService } from '../envelope.service';
 
 

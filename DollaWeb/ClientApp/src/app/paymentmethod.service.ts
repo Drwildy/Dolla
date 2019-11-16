@@ -1,24 +1,24 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AddPaymentMethod} from './addpaymentmethod'
+import { PaymentMethod} from './paymentmethod'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AddpaymentmethodService {
+export class PaymentMethodService {
 
-  public dataChanged$: EventEmitter<AddPaymentMethod>;
+  public dataChanged$: EventEmitter<PaymentMethod>;
 
   constructor(private http: HttpClient) {
-    this.dataChanged$ = new EventEmitter<AddPaymentMethod>();
+    this.dataChanged$ = new EventEmitter<PaymentMethod>();
   }
 
-  createPaymentMethod(paymentMethod: AddPaymentMethod): Observable<AddPaymentMethod> {
-    return this.http.post<AddPaymentMethod>('/api/AddPaymentMethods', paymentMethod);
+  createPaymentMethod(paymentMethod: PaymentMethod): Observable<PaymentMethod> {
+    return this.http.post<PaymentMethod>('/api/AddPaymentMethods', paymentMethod);
   }
-  getPaymentMethod(): Observable<AddPaymentMethod[]> {
-    return this.http.get<AddPaymentMethod[]>('/api/AddPaymentMethods/');
+  getPaymentMethod(): Observable<PaymentMethod[]> {
+    return this.http.get<PaymentMethod[]>('/api/AddPaymentMethods/');
   }
 
   /*
