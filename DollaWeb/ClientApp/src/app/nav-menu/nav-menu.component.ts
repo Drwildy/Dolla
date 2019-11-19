@@ -88,7 +88,50 @@ export class NavMenuComponent
     this.isExpanded = !this.isExpanded;
   }
 
+  resetEnvelopeModal() {
+    this.envName = '';
+    this.setAmount = null;
+    this.selIconEnvelope = null
+  }
+  resetBillModal() {
+    this.billName = '';
+    this.billAmount = null;
+    this.dayDue = null;
+    this.selIconBill = null;
+  }
+  resetPiggyBankModal() {
+    this.piggyName = '';
+    this.selIconPiggy = null;
+  }
+  resetTransactionModal() {
+    this.selTransType = null;
 
+    this.depositDiv = false;
+    this.depToE = null;
+    this.depToP = null;
+    this.showPigD = false;
+    this.showEnvD = true;
+    this.depositAmount = null;
+
+    this.withdrawDiv = false;
+    this.withFromE = null;
+    this.withFromP = null;
+    this.showPigW = false;
+    this.showEnvW = true;
+    this.withdrawAmount = null
+
+    this.transferDiv = false;
+    this.showEnv = true;
+    this.showPig = false;
+    this.showEnvTo = true;
+    this.showPigTo = false;
+    this.transFromE = null;
+    this.transFromP = null;
+    this.transToE = null;
+    this.transToP = null;
+    this.transferAmount = null;
+
+  }
   addEnvelope()
   {
     let myEnvelope: Envelope =
@@ -106,7 +149,8 @@ export class NavMenuComponent
         result => {
           this.envelopeService.dataChanged$.emit();
         }
-      );
+    );
+    this.resetEnvelopeModal();
   }
 
   addBill()
@@ -128,7 +172,8 @@ export class NavMenuComponent
         result => {
           this.billService.dataChanged$.emit();
         }
-      );
+    );
+    this.resetBillModal();
   }
 
   addPiggybank()
@@ -149,7 +194,8 @@ export class NavMenuComponent
         result => {
           this.piggybankService.dataChanged$.emit();
         }
-      );
+    );
+    this.resetPiggyBankModal();
   }
   changeType(value: any) {
     console.log(value);
@@ -280,6 +326,7 @@ export class NavMenuComponent
         this.envelopeService.addMoney(toID, toInfo);
       this.transactionService.addTransaction(transaction);
     }
+    this.resetTransactionModal();
   }
 
   signOut()

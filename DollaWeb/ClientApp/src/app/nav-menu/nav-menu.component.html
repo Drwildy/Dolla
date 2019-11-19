@@ -33,11 +33,11 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <select class="form-control" *ngIf="showEnvD" [(ngModel)]="depToE" name="selWithFromE" #selDepFromE="ngModel">
+                  <select class="form-control" *ngIf="showEnvD" [(ngModel)]="depToE" name="selDepFromE" #selDepFromE="ngModel">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
 
-                  <select class="form-control" *ngIf="showPigD" [(ngModel)]="depToP" name="selWithFromP" #selDepFromP="ngModel">
+                  <select class="form-control" *ngIf="showPigD" [(ngModel)]="depToP" name="selDepFromP" #selDepFromP="ngModel">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
                 </div>
@@ -143,10 +143,6 @@
                 </div>
 
               </div>
-
-
-
-
             </ng-container>
 
             <br />
