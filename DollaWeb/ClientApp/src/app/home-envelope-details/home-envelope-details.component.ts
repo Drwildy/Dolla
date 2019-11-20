@@ -82,6 +82,10 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
+        /* This code here will render the bar chart.
+         *
+         * 
+        
         this.envelopesName = [];
         this.envelopesAmount = [];
         this.envelopesSetAmount = [];
@@ -92,7 +96,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
           this.envelopesSetAmount.push(env.setAmount);
         }
         this.my_Bar_Chart_Display();
-       
+       */
        
       });
   }

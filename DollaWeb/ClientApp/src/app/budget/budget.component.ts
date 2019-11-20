@@ -38,6 +38,10 @@ export class BudgetComponent implements OnInit {
 
   my_Bill_Pie_Chart: any;
 
+  myColor: any = ['#e6194B', '#3cb44b', '#ffe119', '#4363d8', '#f58231', '#911eb4', '#42d4f4', '#f032e6',
+                  '#bfef45', '#fabebe', '#469990', '#e6beff', '#9A6324', '#fffac8', '#800000', '#aaffc3',
+                  '#808000', '#ffd8b1', '#000075', '#a9a9a9', '#ffffff', '#000000']; 
+
   constructor(private envelopeService: EnvelopeService, private billService: BillService,
     private bankService: PiggybankService, private salaryService: SalaryService, private elementRef: ElementRef ) {
     envelopeService.dataChanged$.subscribe(item => this.envelopeRefresh());
@@ -195,8 +199,8 @@ export class BudgetComponent implements OnInit {
 
   my_Envelope_Dougnnut_Chart_Display() {
 
-    var envelopeAmountTotal = 29;
-    var envelopeSetAmountTotal = 23;
+    var envelopeAmountTotal = 0;
+    var envelopeSetAmountTotal = 0;
 
     for (let i = 0; i < this.envelopesAmount.length; i++) {
       envelopeAmountTotal += this.envelopesAmount[i];
@@ -211,7 +215,7 @@ export class BudgetComponent implements OnInit {
       data: {
         labels: ['Total','Remaining'],
         datasets: [{
-          data: [envelopeSetAmountTotal, envelopeSetAmountTotal - envelopeAmountTotal ],
+          data: [envelopeSetAmountTotal, envelopeAmountTotal],
           backgroundColor: ['#2A6735','#C12807'],
           label: "Envelopes Amount"
         }]
@@ -260,14 +264,14 @@ export class BudgetComponent implements OnInit {
       .subscribe((bills: Bill[]) => {
         this.bills = bills;
 
-        this.billsColor = [];
+        this.billsColor = this.myColor;
         this.billsNames = [];
         this.billsAmount = [];
 
         for (let bill of bills) {
           this.billsAmount.push(bill.amount);
           this.billsNames.push(bill.name);
-          this.billsColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+         // this.billsColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
         }
         this.my_Bill_Pie_Chart_Display()
 
@@ -279,14 +283,14 @@ export class BudgetComponent implements OnInit {
     this.bankService.getPiggybanks()
       .subscribe((banks: Piggybank[]) => {
         this.banks = banks;
-        this.piggyBankColor = [];
+        this.piggyBankColor = this.myColor;
         this.piggyBankNames = [];
         this.piggyBankAmount = [];
 
         for (let bank of banks) {
           this.piggyBankAmount.push(bank.amount);
           this.piggyBankNames.push(bank.name);
-          this.piggyBankColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
+        //  this.piggyBankColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
         }
         this.my_Piggybank_Pie_Chart_Display()
         this.allocatedRefresh();

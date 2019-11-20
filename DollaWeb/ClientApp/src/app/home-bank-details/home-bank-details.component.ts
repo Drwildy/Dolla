@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Piggybank } from '../piggybank';
 import { PiggybankService } from '../piggybank.service';
 import { Chart } from 'chart.js';
+import { CurrencyPipe, formatCurrency } from '@angular/common';
 
 @Component({
   selector: 'app-home-bank-details',
@@ -87,6 +88,10 @@ export class HomeBankDetailsComponent implements OnInit {
     this.piggybankService.getPiggybanks()
       .subscribe((banks: Piggybank[]) => {
         this.myPiggyBanks = banks;
+
+        /* This code will display piechart.
+         *
+         * 
         this.piggyBankColor = [];
         this.piggyBankNames = [];
         this.piggyBankAmount = [];
@@ -97,12 +102,14 @@ export class HomeBankDetailsComponent implements OnInit {
           this.piggyBankColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
         }
         this.my_Piggybank_Pie_Chart_Display()
-       
+       */
       });
   }
 
   my_Piggybank_Pie_Chart_Display() {
+    
     this.my_Piggybank_Pie_Chart = new Chart('pie_Piggybank_Chart', {
+      
       type: "pie",
       data: {
         labels: this.piggyBankNames,
