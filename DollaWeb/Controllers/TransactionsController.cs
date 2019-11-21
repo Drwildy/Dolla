@@ -33,6 +33,18 @@ namespace DollaWeb.Controllers
                 .ToListAsync();
         }
 
+        // GET: api/Transactions/envelopes
+        [HttpGet("envelopes{id}")]
+        public async Task<ActionResult<IEnumerable<Transaction>>> GetEnvelopeTransaction(string id)
+        {
+
+            var envId = Convert.ToInt32(id);
+            //var user = User.Identity.Name;
+            return await _context.Transaction.Where(t =>
+                t.ApplicationUserId == userManager.GetUserId(User) && (t.TransferFromId == envId || t.TransferToId == envId))
+                .ToListAsync();
+        }
+
         // GET: api/Transactions
         [HttpGet("{key}")]
         public async Task<ActionResult<IEnumerable<Transaction>>> FilterTransactions(string months)
