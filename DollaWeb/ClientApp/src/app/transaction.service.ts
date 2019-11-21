@@ -26,13 +26,16 @@ export class TransactionService {
   }
 
   filterTransactions(months: string): Observable<Transaction[]> {
-    //console.log("service.ts");
-    return this.http.get<Transaction[]>('/api/Transactions/', 
-    {
-      params: {
-        key: months
-      },
-    })
+      return this.http.get<Transaction[]>('/api/Transactions/',
+          {
+              params: {
+                  key: months
+              },
+          });
   }
+
+    getEnvelopeTransaction(id: string): Observable<Transaction[]> {
+        return this.http.get<Transaction[]>('/api/transactions/envelopes' + id);
+    }
   
 }

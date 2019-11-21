@@ -41,40 +41,35 @@
     </div>
 
     <!-- Graph Goes Here-->
-    
+
     <div>
       <canvas style="height:35%; width:35%" id="doughnut_chart" name="chartname"> </canvas>
     </div>
 
-    </div>
+  </div>
 
   <!-- Table change this to take transaction Data-->
   <table class="table table-striped table-hover">
     <tbody>
       <tr>
         <th scope="row"></th>
-        <td>Transactions</td>
+        <td>Transaction Type</td>
+        <td>Amount</td>
       </tr>
-      <tr>
-        <th scope="row">1</th>
-        <td>bidet</td>
-        <td>Memes</td>
-        <td>$1</td>
-        <td style="color:lawngreen">Deposit</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>bidet</td>
-        <td>Memes</td>
-        <td>$1</td>
-        <td style="color:lawngreen">Withdrawl</td>
+      <tr *ngFor="let data of eTrans">
+        <th scope="row"></th>
+        <td>{{data.type}}</td>
+        <td [ngClass]=" {'withdraw': data.type == 'Withdraw', 'deposit': data.type == 'Deposit', 'transfer': data.type == 'Transfer'}">${{data.transferAmount}}</td>
       </tr>
     </tbody>
   </table>
 
-  <canvas id="bar_chart" name="barchartname"> </canvas>
- 
-  
+
+  <div *ngIf="!eTrans || eTrans.length === 0" class="no-data-message text-center">
+    No Transactions found.  You can create some from the Widget in the Nav-menu
+  </div>
+
+  <canvas style="background-color:#F5F5F5" id="bar_chart" name="barchartname"> </canvas>
 
   <div class="modal fade" id="editEnvIcon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
