@@ -12,6 +12,10 @@ a.navbar-brand {
   background-color: #72BB53;
   border-color: #72BB53;
 }
+  .btn-primary:disabled {
+    background-color: #72BB64;
+    border-color: #72BB53;
+  }
 .btn-primary:hover {
   background-color: #72BB34; /* Green */
   border-color: #72BB53;

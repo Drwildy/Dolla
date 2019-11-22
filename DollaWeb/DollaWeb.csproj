@@ -86,10 +86,12 @@
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.spec.ts" />
     <None Remove="ClientApp\src\app\newpaymentmethod\newpaymentmethod.component.ts" />
     <None Remove="ClientApp\src\app\User.ts" />
+    <None Remove="ClientApp\src\app\validation.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\User.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\validation.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
