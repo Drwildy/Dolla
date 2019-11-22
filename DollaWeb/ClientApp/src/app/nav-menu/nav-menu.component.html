@@ -11,6 +11,9 @@
         <div class="modal-body">
           <div class="container-fluid">
             <h6>Select Transaction Type:</h6>
+            <div class="alert alert-warning" role="alert" *ngIf="validationMessage">
+              Message
+            </div>
             <select class="form-control" [(ngModel)]="selTransType" name="selTransT" #selTransT="ngModel" (change)="changeType($event.target.value)">
               <option value="Transfer">Transfer</option>
               <option value="Withdraw">Withdraw</option>
@@ -33,11 +36,11 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <select class="form-control" *ngIf="showEnvD" [(ngModel)]="depToE" name="selDepFromE" #selDepFromE="ngModel">
+                  <select class="form-control" *ngIf="showEnvD" [(ngModel)]="depToE" name="selDepFromE" #selDepFromE="ngModel" (change)="transactionValid()">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
 
-                  <select class="form-control" *ngIf="showPigD" [(ngModel)]="depToP" name="selDepFromP" #selDepFromP="ngModel">
+                  <select class="form-control" *ngIf="showPigD" [(ngModel)]="depToP" name="selDepFromP" #selDepFromP="ngModel" (change)="transactionValid()">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
                 </div>
@@ -45,7 +48,7 @@
               <div class="row">
                 <div class="col-12">
 
-                  <input type="number" class="form-control" placeholder="Amount to Deposit" [(ngModel)]="depositAmount" name="depositA" #depositA="ngModel" />
+                  <input type="number" class="form-control" placeholder="Amount to Deposit" [(ngModel)]="depositAmount" name="depositA" #depositA="ngModel" (keyup)="transactionValid()" />
                 </div>
 
               </div>
@@ -67,11 +70,11 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <select class="form-control" *ngIf="showEnvW" [(ngModel)]="withFromE" name="selWithFromE" #selWithFromE="ngModel">
+                  <select class="form-control" *ngIf="showEnvW" [(ngModel)]="withFromE" name="selWithFromE" #selWithFromE="ngModel" (change)="transactionValid()">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
 
-                  <select class="form-control" *ngIf="showPigW" [(ngModel)]="withFromP" name="selWithFromP" #selWithFromP="ngModel">
+                  <select class="form-control" *ngIf="showPigW" [(ngModel)]="withFromP" name="selWithFromP" #selWithFromP="ngModel" (change)="transactionValid()">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
                 </div>
@@ -79,7 +82,7 @@
               <div class="row">
                 <div class="col-12">
 
-                  <input type="number" class="form-control" placeholder="Amount to Withdraw" [(ngModel)]="withdrawAmount" name="withdrawA" #withdrawA="ngModel" />
+                  <input type="number" class="form-control" placeholder="Amount to Withdraw" [(ngModel)]="withdrawAmount" name="withdrawA" #withdrawA="ngModel" (keyup)="transactionValid()" />
                 </div>
 
               </div>
@@ -113,20 +116,20 @@
               </div>
               <div class="row">
                 <div class="col-6">
-                  <select class="form-control" *ngIf="showEnv" [(ngModel)]="transFromE" name="selTransFromE" #selTransFromE="ngModel">
+                  <select class="form-control" *ngIf="showEnv" [(ngModel)]="transFromE" name="selTransFromE" #selTransFromE="ngModel" (change)="transactionValid()">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
 
-                  <select class="form-control" *ngIf="showPig" [(ngModel)]="transFromP" name="selTransFromP" #selTransFromP="ngModel">
+                  <select class="form-control" *ngIf="showPig" [(ngModel)]="transFromP" name="selTransFromP" #selTransFromP="ngModel" (change)="transactionValid()">
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
                 </div>
                 <div class="col-6">
-                  <select class="form-control" *ngIf="showEnvTo" [(ngModel)]="transToE" name="selTransToE" #selTransToE="ngModel">
+                  <select class="form-control" *ngIf="showEnvTo" [(ngModel)]="transToE" name="selTransToE" #selTransToE="ngModel" (change)="transactionValid()">
                     <option [value]="envelope.id" *ngFor="let envelope of envelopes">${{envelope.amount}} - {{envelope.name}}</option>
                   </select>
 
-                  <select class="form-control" *ngIf="showPigTo" [(ngModel)]="transToP" name="selTransToP" #selTransToP="ngModel">
+                  <select class="form-control" *ngIf="showPigTo" [(ngModel)]="transToP" name="selTransToP" #selTransToP="ngModel" (change)="transactionValid()" >
                     <option [value]="pig.id" *ngFor="let pig of piggyBanks">${{pig.amount}} - {{pig.name}}</option>
                   </select>
                 </div>
@@ -139,7 +142,7 @@
               <div class="row">
                 <div class="col-12">
 
-                  <input type="number" class="form-control" placeholder="Amount to Transfer" [(ngModel)]="transferAmount" name="transferA" #transferA="ngModel" />
+                  <input type="number" class="form-control" placeholder="Amount to Transfer" [(ngModel)]="transferAmount" name="transferA" #transferA="ngModel" (keyup)="transactionValid()" />
                 </div>
 
               </div>
@@ -151,7 +154,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTransaction()">Confirm Transaction</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addTransaction()" [disabled]="!validTrans">Confirm Transaction</button>
         </div>
       </div>
     </div>
@@ -166,11 +169,11 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Name of Envelope" [(ngModel)]="envName" name="nameInput" #nameInput="ngModel" />
+          <input type="text" class="form-control" placeholder="Name of Envelope" [(ngModel)]="envName" name="nameInput" #nameInput="ngModel" (keyup)="envelopeValid()" />
           <br />
-          <input type="number" class="form-control" placeholder="Set Amount" [(ngModel)]="setAmount" name="setAmountInput" #setAmountInput="ngModel" />
+          <input type="number" class="form-control" placeholder="Set Amount" [(ngModel)]="setAmount" name="setAmountInput" #setAmountInput="ngModel" (keyup)="envelopeValid()" />
           <br />
-          <select class="form-control" [(ngModel)]="selIconEnvelope" name="selIconE" #selIconE="ngModel">
+          <select class="form-control" [(ngModel)]="selIconEnvelope" name="selIconE" #selIconE="ngModel" (change)="envelopeValid()">
             <option>--Select an icon--</option>
             <option value="fas fa-cog">Cog</option>
             <option value="fas fa-apple-alt">Apple</option>
@@ -179,7 +182,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEnvelope()">Add</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addEnvelope()" [disabled]="!validEnvelope">Add</button>
         </div>
       </div>
     </div>
@@ -194,13 +197,13 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Name of Bill" [(ngModel)]="billName" name="nameBillInput" #nameBillInput="ngModel" />
+          <input type="text" class="form-control" placeholder="Name of Bill" [(ngModel)]="billName" name="nameBillInput" #nameBillInput="ngModel" (keyup)="billValid()" />
           <br />
-          <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="billAmount" name="billAmountInput" #billAmountInput="ngModel" />
+          <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="billAmount" name="billAmountInput" #billAmountInput="ngModel" (keyup)="billValid()" />
           <br />
-          <input type="number" class="form-control" placeholder="Day Due" [(ngModel)]="dayDue" name="dayDueInput" #dayDueInput="ngModel" />
+          <input type="number" class="form-control" placeholder="Day Due" [(ngModel)]="dayDue" name="dayDueInput" #dayDueInput="ngModel" (keyup)="billValid()" />
           <br />
-          <select class="form-control" [(ngModel)]="selIconBill" name="selIconB" #selIconB="ngModel">
+          <select class="form-control" [(ngModel)]="selIconBill" name="selIconB" #selIconB="ngModel" (change)="billValid()" >
             <option>--Select an icon--</option>
             <option value="fas fa-cog">Cog</option>
             <option value="fas fa-apple-alt">Apple</option>
@@ -209,7 +212,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addBill()">Add</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addBill()" [disabled]="!validBill">Add</button>
         </div>
       </div>
     </div>
@@ -224,9 +227,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="text" class="form-control" placeholder="Name of Piggybank" [(ngModel)]="piggyName" name="namePiggyInput" #namePiggyInput="ngModel" />
+          <input type="text" class="form-control" placeholder="Name of Piggybank" [(ngModel)]="piggyName" name="namePiggyInput" #namePiggyInput="ngModel" (keyup)="piggyValid()" />
           <br />
-          <select class="form-control" [(ngModel)]="selIconPiggy" name="selIconP" #selIconP="ngModel">
+          <select class="form-control" [(ngModel)]="selIconPiggy" name="selIconP" #selIconP="ngModel" (change)="piggyValid()">
             <option selected value="fas fa-cog">Cog</option>
             <option value="fas fa-apple-alt">Apple</option>
             <option value="fas fa-sign-out-alt">Sign-out</option>
@@ -234,7 +237,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addPiggybank()">Add</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="addPiggybank()" [disabled]="!validPiggy">Add</button>
         </div>
       </div>
     </div>
