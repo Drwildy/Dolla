@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Transaction } from './transaction';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,11 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class TransactionService {
 
-  constructor(private http: HttpClient) { }
+  @Output() dataChanged$: EventEmitter<Transaction>;
+
+  constructor(private http: HttpClient) {
+    this.dataChanged$ = new EventEmitter();
+  }
 
   addTransaction(transaction: Transaction) {
     this.http.post('/api/Transactions', transaction)
-      .subscribe();
+      .subscribe(() => { this.dataChanged$.emit() });
   }
 
   /*
@@ -26,13 +30,15 @@ export class TransactionService {
   }
 
   filterTransactions(months: string): Observable<Transaction[]> {
-    //console.log("service.ts");
-    return this.http.get<Transaction[]>('/api/Transactions/', 
-    {
-      params: {
-        key: months
-      },
-    })
+      return this.http.get<Transaction[]>('/api/Transactions/',
+          {
+              params: {
+                  key: months
+              },
+          });
   }
-  
+
+  getEnvelopeTransaction(id: string): Observable<Transaction[]> {
+        return this.http.get<Transaction[]>('/api/transactions/envelopes' + id);
+  }
 }

@@ -5,6 +5,9 @@ import { ActivatedRoute } from "@angular/router";
 import { Piggybank } from '../piggybank';
 import { PiggybankService } from '../piggybank.service';
 import { Chart } from 'chart.js';
+import { CurrencyPipe, formatCurrency } from '@angular/common';
+import { TransactionService } from '../transaction.service';
+import { Transaction } from '../transaction';
 
 @Component({
   selector: 'app-home-bank-details',
@@ -32,8 +35,10 @@ export class HomeBankDetailsComponent implements OnInit {
 
   public my_Piggybank_Pie_Chart: any;
 
+  trans: Transaction[];
+
   //receives query params from components
-  constructor(private route: ActivatedRoute, private piggybankService: PiggybankService) {
+  constructor(private route: ActivatedRoute, private piggybankService: PiggybankService, private transactionService: TransactionService) {
     this.route.queryParams.subscribe(params => {
       this.piggyID = params['bankID'];
       //can add icon response here
@@ -76,17 +81,29 @@ export class HomeBankDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getPiggyBanksInfo();
+    this.refresh();
   }
 
   public piggyBankNames = [];
   public piggyBankAmount = [];
   public piggyBankColor = [];
 
+  refresh() {
+    this.transactionService.getTransaction()
+      .subscribe((allTrans: Transaction[]) => {
+        this.trans = allTrans.filter(t => t.transferFromId == this.id || t.transferToId == this.id);
+        console.log(this.trans);
+      });
+  }
 
   getPiggyBanksInfo() {
     this.piggybankService.getPiggybanks()
       .subscribe((banks: Piggybank[]) => {
         this.myPiggyBanks = banks;
+
+        /* This code will display piechart.
+         *
+         * 
         this.piggyBankColor = [];
         this.piggyBankNames = [];
         this.piggyBankAmount = [];
@@ -97,12 +114,14 @@ export class HomeBankDetailsComponent implements OnInit {
           this.piggyBankColor.push('#' + Math.floor(Math.random() * 16777215).toString(16));
         }
         this.my_Piggybank_Pie_Chart_Display()
-       
+       */
       });
   }
 
   my_Piggybank_Pie_Chart_Display() {
+    
     this.my_Piggybank_Pie_Chart = new Chart('pie_Piggybank_Chart', {
+      
       type: "pie",
       data: {
         labels: this.piggyBankNames,

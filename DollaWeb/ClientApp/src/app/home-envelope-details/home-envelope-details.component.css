@@ -44,3 +44,14 @@ p {
   font-size:20px;
 }
 
+.withdraw {
+  color: red
+}
+
+.deposit {
+  color: darkgreen
+}
+
+.transfer {
+  color: blueviolet
+}

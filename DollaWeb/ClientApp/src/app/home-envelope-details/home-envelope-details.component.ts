@@ -1,8 +1,10 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Envelope } from '../envelope';
 import { EnvelopeService } from '../envelope.service';
 import { Chart } from 'chart.js';
+import { Transaction } from '../transaction';
+import { TransactionService } from '../transaction.service';
 
 
 @Component({
@@ -26,17 +28,34 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   my_Bar_Chart: any;
   my_Dougnnut_Chart: any;
 
+  @Input() limit: number = 0; //0 means no limit
+  eTrans: Transaction[];
+
 
   //receives query data from another component
-  constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef, private router: Router) {
+    constructor(private route: ActivatedRoute, private envelopeService: EnvelopeService, private elementRef: ElementRef, private router: Router, private transactionService: TransactionService) {
     this.route.queryParams.subscribe(params => {
       this.envelopeID = params["envelopeID"]
     });
     this.id = this.envelopeID; 
     this.getEnvelopeByID();
-  
+
+      transactionService.dataChanged$.subscribe(() => this.refresh());
   }
 
+
+    refresh() {
+        console.log(this.envelopeID);
+        this.transactionService.getEnvelopeTransaction(this.envelopeID.toString())
+            .subscribe((eTrans: Transaction[]) => {
+                this.eTrans = eTrans
+
+                //Enforce the limit of returned banks (used by overview to limit to top x)
+                if (this.limit > 0 && this.eTrans.length > this.limit) {
+                    this.eTrans = this.eTrans.slice(0, 5);
+                }
+            });
+    }
 
   getEnvelopeByID() {
     this.envelopeService.getEnvelopeById(this.id)
@@ -69,7 +88,8 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
   }
    
   ngOnInit() {
-    this.chartDisplay();
+    this.refresh();
+    //this.chartDisplay();
   }
   // Variables for displaying charts. 
   public envelopes: Envelope[];
@@ -82,6 +102,10 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
     this.envelopeService.getEnvelopes()
       .subscribe((envelopes: Envelope[]) => {
         this.envelopes = envelopes;
+        /* This code here will render the bar chart.
+         *
+         * 
+        
         this.envelopesName = [];
         this.envelopesAmount = [];
         this.envelopesSetAmount = [];
@@ -92,7 +116,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
           this.envelopesSetAmount.push(env.setAmount);
         }
         this.my_Bar_Chart_Display();
-       
+       */
        
       });
   }
@@ -101,7 +125,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
     this.my_Dougnnut_Chart = new Chart('doughnut_chart', {
       type: "doughnut",
       data: {
-        labels: ['Total', 'Accumulated'],
+        labels: ['Total', 'Acc'],
         datasets: [
           {
             label: '',

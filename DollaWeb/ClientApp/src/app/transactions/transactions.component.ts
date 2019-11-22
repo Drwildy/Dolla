@@ -33,10 +33,13 @@ export class TransactionsComponent implements OnInit {
     // etc...
   ]);
 
+  lastMonthSetting: number = 0;
+
    constructor(private transactionService: TransactionService) {
     transactionService.getTransaction().forEach(t => {
       this.transactions = t;
     });
+     transactionService.dataChanged$.subscribe(() => this.refresh(this.lastMonthSetting));
   }
 
    getFromIcon(transaction: Transaction) {
@@ -64,6 +67,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   refresh(months: number) {
+    this.lastMonthSetting = months;
     this.transactionService.filterTransactions(months.toString())
       .subscribe((transactions: Transaction[]) => { this.transactions = transactions });
     //console.log("refresh(" + months + ")");
