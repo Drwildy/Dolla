@@ -38,8 +38,7 @@ export class TransactionService {
           });
   }
 
-    getEnvelopeTransaction(id: string): Observable<Transaction[]> {
+  getEnvelopeTransaction(id: string): Observable<Transaction[]> {
         return this.http.get<Transaction[]>('/api/transactions/envelopes' + id);
-    }
-  
+  }
 }
