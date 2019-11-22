@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Transaction } from './transaction';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,11 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class TransactionService {
 
-  constructor(private http: HttpClient) { }
+  @Output() dataChanged$: EventEmitter<Transaction>;
+
+  constructor(private http: HttpClient) {
+    this.dataChanged$ = new EventEmitter();
+  }
 
   addTransaction(transaction: Transaction) {
     this.http.post('/api/Transactions', transaction)
-      .subscribe();
+      .subscribe(() => { this.dataChanged$.emit() });
   }
 
   /*
