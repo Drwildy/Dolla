@@ -39,7 +39,8 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
     });
     this.id = this.envelopeID; 
     this.getEnvelopeByID();
-  
+
+      transactionService.dataChanged$.subscribe(() => this.refresh());
   }
 
 
