@@ -88,7 +88,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
    
   ngOnInit() {
     this.refresh();
-    this.chartDisplay();
+    //this.chartDisplay();
   }
   // Variables for displaying charts. 
   public envelopes: Envelope[];
@@ -124,7 +124,7 @@ export class HomeEnvelopeDetailsComponent implements OnInit {
     this.my_Dougnnut_Chart = new Chart('doughnut_chart', {
       type: "doughnut",
       data: {
-        labels: ['Total', 'Accumulated'],
+        labels: ['Total', 'Acc'],
         datasets: [
           {
             label: '',
