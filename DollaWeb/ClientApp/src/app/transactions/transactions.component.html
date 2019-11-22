@@ -1,8 +1,3 @@
-<!--
-<div class="d-flex flex-wrap" *ngIf="transactions.length > 0">
-  <app-transaction *ngFor="let transaction of transactions" [transaction]="transaction"> </app-transaction>
-</div>
--->
 <!-- Dropdown menu for future filtering of transactions -->
 <div class="dropdown show" style="display:inline;">
   <div class="h3 p-4" style="display: inline;">Transactions</div>
@@ -17,13 +12,11 @@
     <button type="button" class="dropdown-item" (click)="refresh(1)">This Month</button>
   </div>
 </div>
-<!-- Table template for transactions.  Details currently not working -->
-<!--
+<!-- Table template for transactions -->
 <div>
   <table class="table table-hover">
-    <tbody *ngFor="let data of transactions">
-      
-      <tr data-toggle="collapse" data-target="'#a' + data.id">
+    <tbody *ngFor="let data of transactions">    
+      <tr data-toggle="collapse" [attr.data-target]="'#a' + data.id">
         <td>
           <i class="fa">{{getFromIcon(data)}}</i> 
           <i class="fas fa-arrow-right px-4"></i> 
@@ -32,53 +25,17 @@
         <td>{{data.type}}</td>
         <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
       </tr>
-      
-      <tr id="'a' + data.id">
+      <!-- Details -->
+      <tr class="collapse" [id]="'a' + data.id">
         <td>
             <i class="fa">{{getFromIcon(data)}}</i> 
             {{data.type}}
             <i class="fas fa-arrow-right px-4"></i> 
             <i class="fa">{{getToIcon(data)}}</i>
         </td>
-        <td>{{data.transactionDate}}</td>
+        <td>{{data.transactionDate | date}}</td>
+        <td>{{data.transactionDate | date:'shortTime'}}</td>
       </tr>
     </tbody>
   </table>
 </div>
--->
-<div *ngFor="let data of transactions">
-  <table class="table table-hover">
-    <tbody data-toggle="collapse" data-target="#a">
-      <!-- data-target and id are not binding -->
-      <tr>
-        <td>
-          <i class="fa">{{getFromIcon(data)}}</i> 
-          <i class="fas fa-arrow-right px-4"></i> 
-          <i class="fa">{{getToIcon(data)}}</i>
-        </td>
-        <td>{{data.type}}</td>
-        <td>{{"$".concat(data.transferAmount.toFixed(2))}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <table class="table table-hover">
-    <tbody class="collapse" id="a">
-      <!-- data-target and id are not binding -->
-      <tr>
-        <td>
-            <i class="fa">{{getFromIcon(data)}}</i> 
-            {{data.type}}
-            <i class="fas fa-arrow-right px-4"></i> 
-            <i class="fa">{{getToIcon(data)}}</i>
-        </td>
-        <td>{{data.transactionDate}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<!--
-<div *ngIf="transactions.length === 0" class="no-data-message text-center">
-  No Transactions found.  You can create some from the budget page
-</div>
--->
